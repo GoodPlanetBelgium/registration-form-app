@@ -17,8 +17,6 @@ const SchoolPicker = () => {
 
   const [school, setSchool] = useState()
 
-  console.log(school)
-
   const { data, loading, isError } = useSchools(postcode)
 
   const onChangeSchool = e => {
@@ -43,7 +41,7 @@ const SchoolPicker = () => {
               <InputLabel id='school-select'>School</InputLabel>
               <Select
                 labelId='school-select'
-                value={school.Id}
+                value={school?.Id || ''}
                 label='School'
                 onChange={onChangeSchool}
               >
