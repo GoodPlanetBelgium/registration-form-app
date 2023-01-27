@@ -6,3 +6,11 @@ export interface School {
   ShippingPostalCode: string
   GP_Account_Type__c: string
 }
+
+export interface Project {
+  Id: string
+  Name: string
+  Code: string
+  RegistrationsStartDate: string
+  RegistrationsEndDate: string
+}
