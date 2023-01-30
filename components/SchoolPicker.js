@@ -4,20 +4,25 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
-import CircularProgress from '@mui/material/CircularProgress'
 import Chip from '@mui/material/Chip'
-import useSchools from '../lib/useSchools'
 import { Box } from '@mui/system'
+import Loading from './Loading'
+import useFetch from '../lib/useFetch'
 
 const SchoolPicker = () => {
   const [postcode, setPostcode] = useState('')
   const onChangePostcode = e => {
+    setSchool(null)
     setPostcode(e.target.value.replace(/\D/g, '').substring(0, 4))
   }
 
   const [school, setSchool] = useState()
 
-  const { data, loading, isError } = useSchools(postcode)
+  const { data, isLoading, error } = useFetch(
+    postcode && postcode.length === 4
+      ? `/api/schools?postcode=${postcode}`
+      : null
+  )
 
   const onChangeSchool = e => {
     setSchool(data?.records.find(({ Id }) => Id === e.target.value))
@@ -31,9 +36,9 @@ const SchoolPicker = () => {
         onChange={onChangePostcode}
         value={postcode}
       />
-      {!!data?.records.length ? (
-        loading ? (
-          <CircularProgress />
+      {!!data?.records?.length ? (
+        isLoading ? (
+          <Loading />
         ) : (
           <>
             <Chip sx={{ mx: 2 }} label={`${data.totalSize} gevonden`} />

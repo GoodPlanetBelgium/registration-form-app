@@ -7,7 +7,7 @@ export interface School {
   GP_Account_Type__c: string
 }
 
-export interface Project {
+export interface Initiative {
   Id: string
   Name: string
   Code: string

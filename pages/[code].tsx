@@ -5,12 +5,20 @@ import SchoolPicker from '../components/SchoolPicker'
 import React from 'react'
 import { useRouter } from 'next/router'
 import useInitiative from '../lib/useInitiative'
+import Loading from '../components/Loading'
+import Error from '../components/Error'
+import useFetch from '../lib/useFetch'
 
 const Form: NextPage = () => {
   const router = useRouter()
   const { code } = router.query
-  const { data: initiative, isLoading, isError } = useInitiative(code)
-  console.log(initiative)
+  const {
+    data: initiative,
+    isLoading,
+    error
+  } = useFetch(code ? `/api/initiative/${code}` : null)
+  if (!code || isLoading) return <Loading />
+  if (error) return <Error message={error.message} />
   return (
     <>
       <Head>
