@@ -1,12 +1,13 @@
 import React from 'react'
-import { GetStaticPropsContext, NextPage } from 'next'
+import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import useFetch from '../lib/useFetch'
+import dayjs from 'dayjs'
+import { Alert } from '@mui/material'
 
 import Loading from '../components/Loading'
 import Error from '../components/Error'
 import Layout from '../components/Layout'
-import SchoolPicker from '../components/SchoolPicker'
 import useTranslations from '../lib/translations'
 
 const Form: NextPage = () => {
@@ -20,9 +21,20 @@ const Form: NextPage = () => {
   } = useFetch(code ? `/api/initiative/${code}` : null)
   if (!code || isLoading) return <Loading />
   if (error) return <Error message={error.message} />
+
   return (
     <Layout title={t('title', { name: initiative.Name })}>
-      <SchoolPicker />
+      {initiative.C_Registrations_Status__c !== 'open' ? (
+        <Alert severity='warning'>
+          {t(`status.${initiative.C_Registrations_Status__c}`, {
+            date: dayjs(initiative.C_Registrations_Start__c).format(
+              'DD-MM-YYYY HH:mm'
+            )
+          })}
+        </Alert>
+      ) : (
+        <h1>OPEN</h1>
+      )}
     </Layout>
   )
 }

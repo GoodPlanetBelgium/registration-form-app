@@ -14,7 +14,12 @@ const translations: translationsType = {
         'Gelieve een geldige URL in te geven om naar het juiste inschrijvingsformulier te gaan.'
     },
     Form: {
-      title: 'Inschrijvingen: {name}'
+      title: 'Inschrijvingen: {name}',
+      'status.pending':
+        'Inschrijven voor dit project is pas mogelijk vanaf {date}.',
+      'status.closed': 'Inschrijven voor dit project is niet meer mogelijk.',
+      'status.unavailable':
+        'Inschrijven voor dit project is niet mogelijk of de startdatum is nog niet ingesteld.'
     }
   },
   fr: {
