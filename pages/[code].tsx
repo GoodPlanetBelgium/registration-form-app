@@ -8,9 +8,11 @@ import { Alert } from '@mui/material'
 import Loading from '../components/Loading'
 import Error from '../components/Error'
 import Layout from '../components/Layout'
-import useTranslations from '../lib/translations'
+import useTranslations from '../lib/useTranslations'
+import Form from '../components/Form'
+import fields from '../lib/formSchema'
 
-const Form: NextPage = () => {
+const Initiative: NextPage = () => {
   const router = useRouter()
   const { code } = router.query
   const t = useTranslations('Form')
@@ -33,10 +35,10 @@ const Form: NextPage = () => {
           })}
         </Alert>
       ) : (
-        <h1>OPEN</h1>
+        <Form fields={fields} />
       )}
     </Layout>
   )
 }
 
-export default Form
+export default Initiative

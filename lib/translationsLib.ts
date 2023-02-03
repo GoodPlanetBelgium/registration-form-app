@@ -19,7 +19,14 @@ const translations: translationsType = {
         'Inschrijven voor dit project is pas mogelijk vanaf {date}.',
       'status.closed': 'Inschrijven voor dit project is niet meer mogelijk.',
       'status.unavailable':
-        'Inschrijven voor dit project is niet mogelijk of de startdatum is nog niet ingesteld.'
+        'Inschrijven voor dit project is niet mogelijk of de startdatum is nog niet ingesteld.',
+      'field.required': 'Verplicht veld.',
+      'field.invalid': 'Dit is geen geldige waarde',
+      'field.invalidEmail': 'Dit is geen geldig emailadres',
+      'field.school': 'School',
+      'field.name': 'Naam',
+      'field.email': 'Emailadres',
+      submit: 'Verzenden'
     }
   },
   fr: {

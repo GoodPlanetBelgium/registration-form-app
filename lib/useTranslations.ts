@@ -1,6 +1,11 @@
 import { useRouter } from 'next/router'
 import translations from './translationsLib'
 
+type TranslationType = (
+  id: string,
+  params?: { [key: string]: string }
+) => string
+
 const useTranslations =
   (category: string) =>
   (id: string, params?: { [key: string]: string }): string => {
@@ -22,3 +27,4 @@ const useTranslations =
   }
 
 export default useTranslations
+export type { TranslationType }

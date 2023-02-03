@@ -2,7 +2,7 @@ import React from 'react'
 import { NextPage } from 'next'
 
 import Layout from '../components/Layout'
-import useTranslations from '../lib/translations'
+import useTranslations from '../lib/useTranslations'
 
 const Home: NextPage = () => {
   const t = useTranslations('Index')
