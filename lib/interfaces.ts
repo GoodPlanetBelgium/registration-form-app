@@ -1,4 +1,4 @@
-export interface School {
+export interface Account {
   Id: string
   Name: string
   ShippingStreet: string

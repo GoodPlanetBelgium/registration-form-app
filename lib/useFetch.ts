@@ -1,10 +1,10 @@
 import { useEffect, useRef, useReducer } from 'react'
-import { Initiative, School } from './interfaces'
+import { Initiative, Account } from './interfaces'
 
 interface State {
   isLoading: boolean
   error: any
-  data: School[] | Initiative
+  data: Account[] | Initiative
 }
 
 enum ActionType {

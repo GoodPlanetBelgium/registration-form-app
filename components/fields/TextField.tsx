@@ -1,19 +1,12 @@
-import { TextField as Field, StandardTextFieldProps } from '@mui/material'
-
-interface TextFieldProps {
-  name: string
-  label: string
-  type: string
-  fullWidth?: boolean
-  formik: any
-}
+import { TextField as Field } from '@mui/material'
+import { FieldProps } from './fields'
 
 const TextField = ({
   formik,
   name,
   fullWidth = true,
   ...props
-}: TextFieldProps) => (
+}: FieldProps) => (
   <Field
     id={name}
     name={name}
