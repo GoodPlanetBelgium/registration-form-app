@@ -6,10 +6,9 @@ type TranslationType = (
   params?: { [key: string]: string }
 ) => string
 
-const useTranslations =
-  (category: string) =>
-  (id: string, params?: { [key: string]: string }): string => {
-    const { locale } = useRouter()
+const useTranslations = (category: string) => {
+  const { locale } = useRouter()
+  return (id: string, params?: { [key: string]: string }): string => {
     if (!locale || !category || !id) {
       throw new Error(
         'Translations: Make sure locale, category and id are defined.'
@@ -25,6 +24,7 @@ const useTranslations =
     }
     return result
   }
+}
 
 export default useTranslations
 export type { TranslationType }

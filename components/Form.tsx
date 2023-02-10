@@ -13,22 +13,31 @@ const Form = ({ fields }: FormProps) => {
   const t = useTranslations('Form')
   const formik = useFormik({
     initialValues: fields(t).reduce(
-      (x, obj) => ({ [obj.name]: obj.initialValue }),
+      (obj, item) => ({ ...obj, [item.name]: item.initialValue }),
       {}
     ),
     validationSchema: Yup.object().shape(
-      fields(t).reduce((x, obj) => ({ [obj.name]: obj.validation }), {})
+      fields(t).reduce(
+        (obj, item) => ({ ...obj, [item.name]: item.validation }),
+        {}
+      )
     ),
     onSubmit: values => console.log(values)
   })
+  console.log(formik.values)
   return (
-    <form onSubmit={formik.handleSubmit}>
-      {fields(t).map(({ type, ...props }, i) => {
-        if (type === 'text' || type === 'email') {
+    <form onSubmit={formik.handleSubmit} noValidate>
+      {fields(t).map((props, i) => {
+        if (props.type === 'text' || props.type === 'email') {
           return <TextField key={i} formik={formik} {...props} />
         }
       })}
-      <Button color='primary' variant='contained' type='submit'>
+      <Button
+        color='primary'
+        variant='contained'
+        type='submit'
+        sx={{ margin: '1rem 0' }}
+      >
         {t('submit')}
       </Button>
     </form>
