@@ -24,6 +24,7 @@ const translations: translationsType = {
       'field.invalid': 'Dit is geen geldige waarde',
       'field.invalidEmail': 'Dit is geen geldig emailadres',
       'field.school': 'School',
+      'field.postcode': 'Postcode',
       'field.name': 'Naam',
       'field.email': 'Emailadres',
       submit: 'Verzenden'
@@ -31,11 +32,26 @@ const translations: translationsType = {
   },
   fr: {
     Index: {
-      title: "Formulaire d'inscription des projets GoodPlanet.",
+      title: "Formulaire d'inscription de GoodPlanet pour les projets.",
       description:
-        "Veuillez saisir une URL valide pour accéder au formulaire d'inscription approprié."
+        "Veuillez entrer une URL valide pour accéder au formulaire d'inscription approprié."
     },
-    Form: {}
+    Form: {
+      title: 'Inscriptions: {name}',
+      'status.pending':
+        "L'inscription à ce projet n'est possible qu'à partir de {date}.",
+      'status.closed': "L'inscription à ce projet n'est plus possible.",
+      'status.unavailable':
+        "L'inscription à ce projet n'est pas possible ou la date de début n'a pas encore été définie.",
+      'field.required': 'Champ obligatoire.',
+      'field.invalid': "Ce n'est pas une valeur valide.",
+      'field.invalidEmail': "Ce n'est pas une adresse email valide.",
+      'field.school': 'École',
+      'field.postcode': 'Code postal',
+      'field.name': 'Nom',
+      'field.email': 'Adresse email',
+      submit: 'Soumettre'
+    }
   }
 }
 
