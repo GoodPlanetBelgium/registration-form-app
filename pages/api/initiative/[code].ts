@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { School } from '../../../lib/interfaces'
+import { Account } from '../../../lib/interfaces'
 import salesforceAPI from '../../../lib/salesforceAPI'
 
 type Data = {
   error?: string
-  records?: School[]
+  records?: Account[]
 }
 
 export default async function handler (
