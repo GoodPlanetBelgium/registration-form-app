@@ -1,12 +1,13 @@
 import { Button } from '@mui/material'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { fieldType } from '../lib/formSchema'
+import { FieldType } from '../lib/formSchema'
 import useTranslations, { TranslationType } from '../lib/useTranslations'
+import SalesForceAccountField from './fields/SalesForceAccountField'
 import TextField from './fields/TextField'
 
 interface FormProps {
-  fields: (translate: TranslationType) => fieldType[]
+  fields: (translate: TranslationType) => FieldType[]
 }
 
 const Form = ({ fields }: FormProps) => {
@@ -24,12 +25,15 @@ const Form = ({ fields }: FormProps) => {
     ),
     onSubmit: values => console.log(values)
   })
-  console.log(formik.values)
   return (
     <form onSubmit={formik.handleSubmit} noValidate>
-      {fields(t).map((props, i) => {
-        if (props.type === 'text' || props.type === 'email') {
-          return <TextField key={i} formik={formik} {...props} />
+      {fields(t).map(({ type, ...props }, i) => {
+        const extendedProps = { formik, type, ...props }
+        if (type === 'text' || type === 'email') {
+          return <TextField key={i} {...extendedProps} />
+        }
+        if (type === 'account') {
+          return <SalesForceAccountField key={i} {...extendedProps} />
         }
       })}
       <Button

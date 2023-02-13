@@ -86,7 +86,7 @@ const SalesForceAccountField = ({
           <br />
           <b>School:</b> {school.Name}
           <br />
-          <b>Adres:</b> {school.ShippingStreet} {school.ShippingPostCode}{' '}
+          <b>Adres:</b> {school.ShippingStreet} {school.ShippingPostalCode}{' '}
           {school.ShippingCity}
           <br />
           <b>Type:</b> {school.GP_Account_Type__c}

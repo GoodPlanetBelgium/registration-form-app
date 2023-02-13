@@ -1,22 +1,28 @@
 import * as Yup from 'yup'
 import { TranslationType } from './useTranslations'
 
-interface fieldType {
+interface FieldType {
   name: string
   initialValue: string
   validation: any
-  type: 'text' | 'email'
+  type: 'text' | 'email' | 'account'
   label: string
 }
 
-const fields = (t: TranslationType): fieldType[] => [
+interface FormValues {
+  accountId: string
+  name: string
+  email: string
+}
+
+const fields = (t: TranslationType): FieldType[] => [
   {
     name: 'accountId',
     initialValue: '',
     validation: Yup.string()
       .required(t('field.required'))
       .matches(/[a-zA-Z0-9]{18}/, t('field.invalid')),
-    type: 'text',
+    type: 'account',
     label: t('field.school')
   },
   {
@@ -38,4 +44,4 @@ const fields = (t: TranslationType): fieldType[] => [
 ]
 
 export default fields
-export type { fieldType }
+export type { FieldType, FormValues }
