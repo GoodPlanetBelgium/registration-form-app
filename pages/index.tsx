@@ -1,5 +1,5 @@
 import React from 'react'
-import { NextPage } from 'next'
+import { GetStaticProps, NextPage } from 'next'
 
 import Layout from '../components/Layout'
 import useTranslations from '../lib/useTranslations'
@@ -12,5 +12,7 @@ const Home: NextPage = () => {
     </Layout>
   )
 }
+
+Home.getInitialProps = async () => {}
 
 export default Home
