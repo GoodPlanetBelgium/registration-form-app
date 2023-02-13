@@ -1,10 +1,10 @@
 import { useEffect, useRef, useReducer } from 'react'
 import { Initiative, Account } from './interfaces'
 
-interface State {
+export interface FetchResult {
   isLoading: boolean
-  error: any
-  data: Account[] | Initiative
+  error?: any
+  data: any
 }
 
 enum ActionType {
@@ -27,7 +27,7 @@ const useFetch = (url: string | null) => {
     data: []
   }
 
-  const [state, dispatch] = useReducer((state: State, action: Action) => {
+  const [state, dispatch] = useReducer((state: FetchResult, action: Action) => {
     switch (action.type) {
       case ActionType.FETCHING:
         return { ...initialState, isLoading: true }

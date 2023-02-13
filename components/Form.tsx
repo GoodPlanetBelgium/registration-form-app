@@ -8,9 +8,10 @@ import TextField from './fields/TextField'
 
 interface FormProps {
   fields: (translate: TranslationType) => FieldType[]
+  onSubmit(values: { [key: string]: string }): Promise<Response>
 }
 
-const Form = ({ fields }: FormProps) => {
+const Form = ({ fields, onSubmit }: FormProps) => {
   const t = useTranslations('Form')
   const formik = useFormik({
     initialValues: fields(t).reduce(
@@ -23,7 +24,7 @@ const Form = ({ fields }: FormProps) => {
         {}
       )
     ),
-    onSubmit: values => console.log(values)
+    onSubmit
   })
   return (
     <form onSubmit={formik.handleSubmit} noValidate>

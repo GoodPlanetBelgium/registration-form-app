@@ -1,7 +1,7 @@
 import React from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import useFetch from '../lib/useFetch'
+import useFetch, { FetchResult } from '../lib/useFetch'
 import dayjs from 'dayjs'
 import { Alert } from '@mui/material'
 
@@ -11,8 +11,9 @@ import Layout from '../components/Layout'
 import useTranslations from '../lib/useTranslations'
 import Form from '../components/Form'
 import fields from '../lib/formSchema'
+import { Initiative } from '../lib/interfaces'
 
-const Initiative: NextPage = () => {
+const InitiativePage: NextPage = () => {
   const router = useRouter()
   const { code } = router.query
   const t = useTranslations('Form')
@@ -20,9 +21,21 @@ const Initiative: NextPage = () => {
     data: initiative,
     isLoading,
     error
-  } = useFetch(code ? `/api/initiative/${code}` : null)
+  }: Omit<FetchResult, 'data'> & { data: Initiative } = useFetch(
+    code ? `/api/initiative/${code}` : null
+  )
   if (!code || isLoading) return <Loading />
   if (error) return <Error message={error.message} />
+
+  const onSubmit = async (values: {
+    [key: string]: string
+  }): Promise<Response> => {
+    const result = await fetch('/api/initiative/sign-up', {
+      method: 'POST',
+      body: JSON.stringify({ initiativeId: initiative.Id, ...values })
+    })
+    return result
+  }
 
   return (
     <Layout title={t('title', { name: initiative.Name })}>
@@ -35,10 +48,10 @@ const Initiative: NextPage = () => {
           })}
         </Alert>
       ) : (
-        <Form fields={fields} />
+        <Form fields={fields} onSubmit={onSubmit} />
       )}
     </Layout>
   )
 }
 
-export default Initiative
+export default InitiativePage
