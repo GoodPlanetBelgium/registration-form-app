@@ -13,6 +13,6 @@ const Home: NextPage = () => {
   )
 }
 
-Home.getInitialProps = async () => {}
+Home.getInitialProps = async () => ({})
 
 export default Home
