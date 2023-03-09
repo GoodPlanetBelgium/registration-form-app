@@ -1,0 +1,41 @@
+{
+  "Account": {
+    "Id": "0011n00002cYiFTAA0",
+    "URL": "https://goodplanetbelgium.lightning.force.com/lightning/r/Account/0011n00002cYiFTAA0/view",
+    "Name": "CEFA - INSTITUT NOTRE-DAME - SEMINAIRE",
+    "ShippingStreet": "Rue Piconrue 6",
+    "ShippingCity": "BASTOGNE",
+    "ShippingState": "Luxembourg",
+    "ShippingPostalCode": "6600",
+    "ShippingCountry": "Belgium",
+    "Phone": "+32 61/24.06.30",
+    "Language": "French"
+  },
+  "Contact": {
+    "Id": "0031n00002T3ucSAAR",
+    "URL": "https://goodplanetbelgium.lightning.force.com/lightning/r/Contact/0031n00002T3ucSAAR/view",
+    "Name": "Adam",
+    "Phone": "+32 61/24.06.30",
+    "Email": "email@example.com",
+    "Function": "Headmaster"
+  },
+  "Workshops": [
+    {
+      "Id": "0011n00002cYiFTAA1",
+      "Werktijd_Code": 999,
+      "Workshop_Duration": 120,
+      "Start_Date": "2023-02-01T00:00:00.000+0000",
+      "End_Date": "2023-02-28T00:00:00.000+0000",
+      "Weekday_Preference": "Monday",
+      "Group_Name": "1B",
+      "Group_Size": 29,
+      "Contact": {
+        "Id": "0031n00002T3ucSAAR",
+        "URL": "https://goodplanetbelgium.lightning.force.com/lightning/r/Contact/0031n00002T3ucSAAR/view",
+        "Name": "Paul",
+        "Email": "email@example.com"
+      },
+      "Remarks": ""
+    }
+  ]
+}
