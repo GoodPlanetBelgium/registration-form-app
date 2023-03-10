@@ -17,7 +17,7 @@ export default async function handler (
     res.status(400).json({ error: 'code should be a string' })
     return
   }
-  const endpoint = `/services/data/v56.0/sobjects/CO_Initiative__c/C_Code__c/${code.toUpperCase()}`
+  const endpoint = `/services/apexrest/Initiative/${code.toUpperCase()}`
   const data = await salesforceAPI('GET', endpoint)
   res.status(200).json(data)
 }

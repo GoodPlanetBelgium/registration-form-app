@@ -1,6 +1,3 @@
-import { FormikProps } from 'formik'
-import { FormValues } from '../../lib/formSchema'
-
 interface FieldProps {
   name: string
   label: string

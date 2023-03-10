@@ -2,7 +2,6 @@ import React from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import useFetch, { FetchResult } from '../lib/useFetch'
-import dayjs from 'dayjs'
 import { Alert } from '@mui/material'
 
 import Loading from '../components/Loading'
@@ -12,6 +11,7 @@ import useTranslations from '../lib/useTranslations'
 import Form from '../components/Form'
 import fields from '../lib/formSchema'
 import { Initiative } from '../lib/interfaces'
+import getStatus from '../lib/getStatus'
 
 const InitiativePage: NextPage = () => {
   const router = useRouter()
@@ -37,14 +37,14 @@ const InitiativePage: NextPage = () => {
     return result
   }
 
+  const { status, earliestOpen } = getStatus(initiative)
+
   return (
     <Layout title={t('title', { name: initiative.Name })}>
-      {initiative.C_Registrations_Status__c !== 'open' ? (
+      {status !== 'open' ? (
         <Alert severity='warning'>
-          {t(`status.${initiative.C_Registrations_Status__c}`, {
-            date: dayjs(initiative.C_Registrations_Start__c).format(
-              'DD-MM-YYYY HH:mm'
-            )
+          {t(`status.${status}`, {
+            date: earliestOpen.format('DD-MM-YYYY HH:mm')
           })}
         </Alert>
       ) : (
