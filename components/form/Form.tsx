@@ -1,9 +1,10 @@
 import { Button } from '@mui/material'
-import { Field, Form, Formik, FormikProps, useFormik } from 'formik'
+import { Field, Form, Formik } from 'formik'
 import { Initiative } from '../../lib/interfaces'
 import useTranslations from '../../lib/useTranslations'
 import SalesForceAccountField from '../fields/SalesForceAccountField'
-import TextField from '../fields/TextField'
+import WorkshopField from '../fields/WorkshopField'
+import ContactSubForm from './ContactSubForm'
 import { FormValues, initialValues, validationSchema } from './schema'
 
 interface FormProps {
@@ -16,39 +17,41 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
 
   return (
     <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema(t)}
+      initialValues={initialValues(initiative)}
+      validationSchema={validationSchema(t, initiative)}
       onSubmit={onSubmit}
     >
-      {({ isValid }) => (
-        <Form>
-          <Field
-            name='accountId'
-            label={t('field.school')}
-            component={SalesForceAccountField}
-          />
-          <Field
-            name='applicant.name'
-            label={t('field.name')}
-            component={TextField}
-          />
-          <Field
-            name='applicant.email'
-            label={t('field.email')}
-            type='email'
-            component={TextField}
-          />
-          <Button
-            color='primary'
-            variant='contained'
-            type='submit'
-            sx={{ margin: '1rem 0' }}
-            disabled={!isValid}
-          >
-            {t('submit')}
-          </Button>
-        </Form>
-      )}
+      {({ isValid, values, errors }) => {
+        console.log(values, errors)
+        return (
+          <Form>
+            <Field
+              name='accountId'
+              label={t('field.school')}
+              component={SalesForceAccountField}
+            />
+            <ContactSubForm nameSpace='applicant' />
+            {Object.keys(values.workshops).map((workshopId, i) => (
+              <Field
+                key={i}
+                name={`workshops.${workshopId}`}
+                initiative={initiative}
+                workshopId={workshopId}
+                component={WorkshopField}
+              />
+            ))}
+            <Button
+              color='primary'
+              variant='contained'
+              type='submit'
+              sx={{ margin: '1rem 0' }}
+              disabled={!isValid}
+            >
+              {t('submit')}
+            </Button>
+          </Form>
+        )
+      }}
     </Formik>
   )
 }

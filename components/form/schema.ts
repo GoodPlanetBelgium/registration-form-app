@@ -1,51 +1,69 @@
 import * as Yup from 'yup'
+import { Initiative } from '../../lib/interfaces'
 import { TranslationType } from '../../lib/useTranslations'
 
 interface Contact {
-  name: ''
-  email: ''
+  name: string
+  email: string
 }
 
 interface Registration {
-  workshopId: ''
-  groupName: ''
+  groupName: string
   groupContact: Contact
 }
 
 interface FormValues {
   accountId: string
   applicant: Contact
-  registrations: Registration[]
+  workshops: {
+    [workshopId: string]: Registration[]
+  }
 }
 
-const validationSchema = (t: TranslationType) =>
+const contactSchema = (t: TranslationType) =>
+  Yup.object({
+    name: Yup.string().required(t('field.required')),
+    email: Yup.string()
+      .email(t('field.invalidEmail'))
+      .required(t('field.required'))
+  })
+
+const validationSchema = (t: TranslationType, initiative: Initiative) =>
   Yup.object({
     accountId: Yup.string()
       .required(t('field.required'))
       .matches(/[a-zA-Z0-9]{18}/, t('field.invalid')),
-    applicant: Yup.object({
-      name: Yup.string().required(t('field.required')),
-      email: Yup.string()
-        .email(t('field.invalidEmail'))
-        .required(t('field.required'))
-    })
-    // registrations: Yup.array()
-    //   .of(
-    //     Yup.object().shape({
-    //       groupName: Yup.string().required(t('field.required'))
-    //     })
-    //   )
-    //   .required(t('field.required'))
+    applicant: contactSchema(t),
+    workshops: Yup.object().shape(
+      initiative.Workshops__r.records.reduce(
+        (obj, workshop) => ({
+          ...obj,
+          [workshop.Id]: Yup.array().of(
+            Yup.object().shape({
+              groupName: Yup.string().required(t('field.required')),
+              groupContact: contactSchema(t)
+            })
+          )
+        }),
+        {}
+      )
+    )
   })
 
-const initialValues: FormValues = {
+const initialValues = (initiative: Initiative) => ({
   accountId: '',
   applicant: {
     name: '',
     email: ''
   },
-  registrations: []
-}
+  workshops: initiative.Workshops__r.records.reduce(
+    (obj, workshop) => ({
+      ...obj,
+      [workshop.Id]: []
+    }),
+    {}
+  )
+})
 
 export { initialValues, validationSchema }
-export type { FormValues }
+export type { FormValues, Contact, Registration }
