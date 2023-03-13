@@ -1,7 +1,7 @@
 interface FieldProps {
   name: string
   label: string
-  type: string
+  type?: string
   fullWidth?: boolean
   formik: any
 }

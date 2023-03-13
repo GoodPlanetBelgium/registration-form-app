@@ -8,10 +8,10 @@ import Loading from '../components/Loading'
 import Error from '../components/Error'
 import Layout from '../components/Layout'
 import useTranslations from '../lib/useTranslations'
-import Form from '../components/Form'
-import fields from '../lib/formSchema'
+import Form from '../components/form/Form'
 import { Initiative } from '../lib/interfaces'
 import getStatus from '../lib/getStatus'
+import { FormValues } from '../components/form/schema'
 
 const InitiativePage: NextPage = () => {
   const router = useRouter()
@@ -27,9 +27,8 @@ const InitiativePage: NextPage = () => {
   if (!code || isLoading) return <Loading />
   if (error) return <Error message={error.message} />
 
-  const onSubmit = async (values: {
-    [key: string]: string
-  }): Promise<Response> => {
+  const onSubmit = async (values: FormValues): Promise<Response> => {
+    console.log(values)
     const result = await fetch('/api/initiative/sign-up', {
       method: 'POST',
       body: JSON.stringify({ initiativeId: initiative.Id, ...values })
@@ -48,7 +47,7 @@ const InitiativePage: NextPage = () => {
           })}
         </Alert>
       ) : (
-        <Form fields={fields} onSubmit={onSubmit} />
+        <Form onSubmit={onSubmit} />
       )}
     </Layout>
   )

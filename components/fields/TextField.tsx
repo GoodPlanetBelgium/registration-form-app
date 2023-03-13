@@ -1,4 +1,5 @@
 import { TextField as Field } from '@mui/material'
+import { getIn } from 'formik'
 import { FieldProps } from './fields'
 
 const TextField = ({
@@ -13,10 +14,10 @@ const TextField = ({
     fullWidth={fullWidth}
     margin='normal'
     {...(({ label, type }) => ({ label, type }))(props)}
-    value={formik.values[name]}
+    value={getIn(formik.values, name)}
     onChange={formik.handleChange}
-    error={formik.touched[name] && Boolean(formik.errors[name])}
-    helperText={formik.touched[name] && formik.errors[name]}
+    error={getIn(formik.touched, name) && Boolean(getIn(formik.errors, name))}
+    helperText={getIn(formik.touched, name) && getIn(formik.errors, name)}
   />
 )
 
