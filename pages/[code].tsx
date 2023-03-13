@@ -47,7 +47,7 @@ const InitiativePage: NextPage = () => {
           })}
         </Alert>
       ) : (
-        <Form onSubmit={onSubmit} />
+        <Form onSubmit={onSubmit} initiative={initiative} />
       )}
     </Layout>
   )

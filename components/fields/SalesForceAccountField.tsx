@@ -12,25 +12,30 @@ import {
   TextField,
   Typography
 } from '@mui/material'
-import { ChangeEvent, useState } from 'react'
+import { FieldProps } from 'formik'
+import { ChangeEvent, FC, useState } from 'react'
 import { Account } from '../../lib/interfaces'
 import useFetch from '../../lib/useFetch'
 import useTranslations from '../../lib/useTranslations'
 import Loading from '../Loading'
-import { FieldProps } from './fields'
 
-const SalesForceAccountField = ({
-  formik,
-  name,
+interface SFFieldProps {
+  label: string
+  fullWidth?: boolean
+}
+
+const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
+  field: { name, value },
+  form: { touched, errors, setFieldValue },
   label,
   fullWidth = true
-}: FieldProps) => {
+}) => {
   const t = useTranslations('Form')
   const [postcode, setPostcode] = useState('')
   const [account, setAccount] = useState<Account | null>(null)
 
   const onChangePostcode = (e: ChangeEvent<HTMLInputElement>): void => {
-    formik.setFieldValue(name, '')
+    setFieldValue(name, '')
     setAccount(null)
     setPostcode(e.target.value.replace(/\D/g, '').substring(0, 4))
   }
@@ -46,11 +51,11 @@ const SalesForceAccountField = ({
   )
 
   const onChangeAccount = (e: SelectChangeEvent<HTMLInputElement>) => {
-    formik.setFieldValue(name, e.target.value)
+    setFieldValue(name, e.target.value)
     setAccount(data?.records.find(({ Id }: Account) => Id === e.target.value))
   }
 
-  const error = formik.touched[name] && formik.errors[name]
+  const error = touched[name] && errors[name]
 
   return (
     <>
@@ -85,7 +90,7 @@ const SalesForceAccountField = ({
                 <InputLabel id='account-select'>{label}</InputLabel>
                 <Select
                   labelId='account-select'
-                  value={formik.values[name]}
+                  value={value}
                   label={label}
                   onChange={onChangeAccount}
                   error={Boolean(error)}
@@ -127,7 +132,7 @@ const SalesForceAccountField = ({
       </Paper>
       {Boolean(error) && (
         <FormHelperText error sx={{ ml: 2 }}>
-          {error}
+          {typeof error === 'string' ? error : null}
         </FormHelperText>
       )}
     </>
