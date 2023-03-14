@@ -1,5 +1,12 @@
-import { Button, Paper, TextField, Typography } from '@mui/material'
+import {
+  Button,
+  FormHelperText,
+  Paper,
+  TextField,
+  Typography
+} from '@mui/material'
 import { Field, Form, Formik } from 'formik'
+import { useState } from 'react'
 import { Initiative } from '../../lib/interfaces'
 import useTranslations from '../../lib/useTranslations'
 import CheckboxField from '../fields/CheckboxField'
@@ -16,11 +23,25 @@ interface FormProps {
 const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
   const t = useTranslations('Form')
 
+  const [countError, setCountError] = useState('')
+  const beforeSubmit = (values: FormValues) => {
+    let count = 0
+    initiative.Workshops__r.records.forEach(
+      w => (count = count + values.workshops[w.Id].length)
+    )
+    if (count > 0) {
+      onSubmit(values)
+    } else {
+      setCountError('sub.workshop.field.required')
+      setTimeout(() => setCountError(''), 5000)
+    }
+  }
+
   return (
     <Formik
       initialValues={initialValues(initiative)}
       validationSchema={validationSchema(t, initiative)}
-      onSubmit={onSubmit}
+      onSubmit={beforeSubmit}
     >
       {({ isValid, values, errors }) => {
         // console.log(values, errors)
@@ -61,6 +82,9 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
             >
               {t('submit')}
             </Button>
+            {countError && (
+              <FormHelperText error>{t(countError)}</FormHelperText>
+            )}
           </Form>
         )
       }}

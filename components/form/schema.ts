@@ -1,5 +1,5 @@
 import * as Yup from 'yup'
-import { Initiative } from '../../lib/interfaces'
+import { Initiative, Workshop } from '../../lib/interfaces'
 import { TranslationType } from '../../lib/useTranslations'
 
 interface Contact {
@@ -28,28 +28,46 @@ const contactSchema = (t: TranslationType) =>
       .required(t('field.required'))
   })
 
-const validationSchema = (t: TranslationType, initiative: Initiative) =>
-  Yup.object({
+const registrationsSchema = (
+  t: TranslationType,
+  id: string,
+  initiative: Initiative
+) => {
+  const workshop = initiative.Workshops__r.records.find(
+    w => w.Id === id
+  ) as Workshop
+  return Yup.array()
+    .of(
+      Yup.object().shape({
+        groupName: Yup.string().required(t('field.required')),
+        groupContact: contactSchema(t)
+      })
+    )
+    .min(
+      workshop.C_Required_For_Registration__c ? 1 : 0,
+      t('sub.workshop.field.workshopRequired')
+    )
+}
+
+const validationSchema = (t: TranslationType, initiative: Initiative) => {
+  const workshopIds = initiative.Workshops__r.records.map(w => w.Id)
+  return Yup.object({
     accountId: Yup.string()
       .required(t('field.required'))
       .matches(/[a-zA-Z0-9]{18}/, t('field.invalid')),
     applicant: contactSchema(t),
     workshops: Yup.object().shape(
-      initiative.Workshops__r.records.reduce(
-        (obj, workshop) => ({
+      workshopIds.reduce(
+        (obj, id) => ({
           ...obj,
-          [workshop.Id]: Yup.array().of(
-            Yup.object().shape({
-              groupName: Yup.string().required(t('field.required')),
-              groupContact: contactSchema(t)
-            })
-          )
+          [id]: registrationsSchema(t, id, initiative)
         }),
         {}
       )
     ),
     agreed: Yup.bool().oneOf([true], t('field.required'))
   })
+}
 
 const initialValues = (initiative: Initiative) => ({
   accountId: '',
