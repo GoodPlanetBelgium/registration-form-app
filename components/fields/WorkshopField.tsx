@@ -13,6 +13,7 @@ import { FieldArray } from 'formik'
 import { FieldProps } from 'formik'
 import { FC } from 'react'
 import { Initiative } from '../../lib/interfaces'
+import useTranslations from '../../lib/useTranslations'
 import RegistrationSubForm from '../form/RegistrationSubForm'
 import { Registration } from '../form/schema'
 
@@ -31,15 +32,16 @@ const WorkshopField: FC<Props & FieldProps> = ({
   const workshop = initiative.Workshops__r.records.find(
     w => w.Id === workshopId
   )
+  const t = useTranslations('Form')
   return (
-    <Accordion>
+    <Accordion defaultExpanded={true}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography>{workshop?.Name}</Typography>
+        <Typography variant='h6'>{workshop?.Name}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <FieldArray name={field.name}>
           {({ push, remove }) => (
-            <Box sx={{ my: 2 }}>
+            <Box>
               <Stack spacing={2}>
                 {registrations.map((registration, i) => (
                   <Paper key={i} sx={{ p: 1 }}>
@@ -50,7 +52,7 @@ const WorkshopField: FC<Props & FieldProps> = ({
                       sx={{ my: 1 }}
                       onClick={() => remove(i)}
                     >
-                      ## REMOVE REGISTRATION
+                      {t('sub.workshop.remove')}
                     </Button>
                   </Paper>
                 ))}
@@ -63,7 +65,7 @@ const WorkshopField: FC<Props & FieldProps> = ({
                   push({ groupName: '', groupContact: { name: '', email: '' } })
                 }
               >
-                ## ADD REGISTRATION
+                {t('sub.workshop.add')}
               </Button>
             </Box>
           )}

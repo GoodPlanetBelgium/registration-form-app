@@ -5,20 +5,17 @@ import { FC } from 'react'
 interface TextFieldProps {
   type?: string
   label: string
-  fullWidth?: boolean
 }
 
 const TextField: FC<TextFieldProps & FieldProps> = ({
   field: { name, value },
   form: { handleChange, touched, errors },
   type = 'text',
-  label,
-  fullWidth = true
+  label
 }) => (
   <Field
     id={name}
     name={name}
-    fullWidth={fullWidth}
     margin='normal'
     type={type}
     label={label}
@@ -26,6 +23,7 @@ const TextField: FC<TextFieldProps & FieldProps> = ({
     onChange={handleChange}
     error={getIn(touched, name) && Boolean(getIn(errors, name))}
     helperText={getIn(touched, name) && getIn(errors, name)}
+    sx={{ mx: 1 }}
   />
 )
 

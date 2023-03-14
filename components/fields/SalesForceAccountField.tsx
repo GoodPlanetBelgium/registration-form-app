@@ -60,16 +60,15 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
   return (
     <>
       <Paper
-        variant='outlined'
         sx={{
-          mt: 2,
-          mb: 1,
+          my: 2,
           p: 2,
           borderColor: error ? 'error.main' : 'grey.400'
         }}
       >
         <Typography
-          color={Boolean(error) ? 'error' : 'text.secondary'}
+          variant='h6'
+          color={Boolean(error) ? 'error' : 'text.primary'}
           sx={{ mb: 2 }}
         >
           {label}

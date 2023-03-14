@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+import { Button, Paper, Typography } from '@mui/material'
 import { Field, Form, Formik } from 'formik'
 import { Initiative } from '../../lib/interfaces'
 import useTranslations from '../../lib/useTranslations'
@@ -30,7 +30,13 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
               label={t('field.school')}
               component={SalesForceAccountField}
             />
-            <ContactSubForm nameSpace='applicant' />
+            <Paper sx={{ p: 2 }}>
+              <Typography variant='h6'>{t('sub.contact.title')}</Typography>
+              <Typography color='text.secondary'>
+                {t('sub.contact.subtitle')}
+              </Typography>
+              <ContactSubForm nameSpace='applicant' />
+            </Paper>
             {Object.keys(values.workshops).map((workshopId, i) => (
               <Field
                 key={i}
