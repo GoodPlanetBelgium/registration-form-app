@@ -1,10 +1,10 @@
 import dayjs, { Dayjs } from 'dayjs'
-import { Initiative, status } from './interfaces'
+import { Initiative, Status } from './interfaces'
 
 const getStatus = (
   initiative: Initiative
-): { status: status; earliestOpen: Dayjs } => {
-  let status: status = 'unavailable'
+): { status: Status; earliestOpen: Dayjs } => {
+  let status: Status = 'unavailable'
   let earliestOpen = dayjs().add(99, 'years')
   initiative.Workshops__r.records.forEach(workshop => {
     const start = dayjs(workshop.C_Registrations_Start__c)
