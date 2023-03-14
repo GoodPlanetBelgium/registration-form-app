@@ -3,6 +3,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Alert,
   Box,
   Button,
   Paper,
@@ -11,8 +12,9 @@ import {
 } from '@mui/material'
 import { FieldArray } from 'formik'
 import { FieldProps } from 'formik'
+import { useRouter } from 'next/router'
 import { FC } from 'react'
-import { Initiative } from '../../lib/interfaces'
+import { Initiative, Workshop } from '../../lib/interfaces'
 import useTranslations from '../../lib/useTranslations'
 import RegistrationSubForm from '../form/RegistrationSubForm'
 import { Registration } from '../form/schema'
@@ -31,14 +33,26 @@ const WorkshopField: FC<Props & FieldProps> = ({
   const { name } = field
   const workshop = initiative.Workshops__r.records.find(
     w => w.Id === workshopId
-  )
+  ) as Workshop
   const t = useTranslations('Form')
+  const router = useRouter()
   return (
     <Accordion defaultExpanded={true}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography variant='h6'>{workshop?.Name}</Typography>
       </AccordionSummary>
       <AccordionDetails>
+        <Alert severity='info'>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: workshop[
+                `${router.locale?.toUpperCase()}_Info__c` as
+                  | 'NL_Info__c'
+                  | 'FR_Info__c'
+              ].replace('<br>', '')
+            }}
+          />
+        </Alert>
         <FieldArray name={field.name}>
           {({ push, remove }) => (
             <Box>

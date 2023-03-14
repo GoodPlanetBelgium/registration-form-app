@@ -1,7 +1,8 @@
-import { Button, Paper, Typography } from '@mui/material'
+import { Button, Paper, TextField, Typography } from '@mui/material'
 import { Field, Form, Formik } from 'formik'
 import { Initiative } from '../../lib/interfaces'
 import useTranslations from '../../lib/useTranslations'
+import CheckboxField from '../fields/CheckboxField'
 import SalesForceAccountField from '../fields/SalesForceAccountField'
 import WorkshopField from '../fields/WorkshopField'
 import ContactSubForm from './ContactSubForm'
@@ -22,7 +23,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
       onSubmit={onSubmit}
     >
       {({ isValid, values, errors }) => {
-        console.log(values, errors)
+        // console.log(values, errors)
         return (
           <Form>
             <Field
@@ -46,12 +47,17 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
                 component={WorkshopField}
               />
             ))}
+            <Field
+              name='agreed'
+              label={t('field.agreed')}
+              component={CheckboxField}
+            />
             <Button
               color='primary'
               variant='contained'
               type='submit'
               sx={{ margin: '1rem 0' }}
-              disabled={!isValid}
+              // disabled={!isValid}
             >
               {t('submit')}
             </Button>

@@ -128,12 +128,12 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
             </CardContent>
           </Card>
         ) : null}
+        {Boolean(error) && (
+          <FormHelperText error sx={{ ml: 2 }}>
+            {typeof error === 'string' ? error : null}
+          </FormHelperText>
+        )}
       </Paper>
-      {Boolean(error) && (
-        <FormHelperText error sx={{ ml: 2 }}>
-          {typeof error === 'string' ? error : null}
-        </FormHelperText>
-      )}
     </>
   )
 }

@@ -33,6 +33,8 @@ const translations: translationsType = {
       'sub.workshop.remove': 'Verwijderen',
       'sub.workshop.add': 'Inschrijving toevoegen',
       'sub.workshop.field.groupName': 'Klas naam',
+      'field.agreed':
+        'Ik verklaar aan alle voorwaarden te voldoen om de inschrijvingen te kunnen voltooien.',
       submit: 'Verzenden'
     }
   },
