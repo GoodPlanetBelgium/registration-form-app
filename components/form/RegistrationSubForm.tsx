@@ -16,7 +16,10 @@ const RegistrationSubForm = ({ nameSpace }: Props) => {
         label={t('sub.workshop.field.groupName')}
         component={TextField}
       />
-      <ContactSubForm nameSpace={`${nameSpace}.groupContact`} />
+      <ContactSubForm
+        nameSpace={`${nameSpace}.groupContact`}
+        fields={['name', 'email']}
+      />
     </>
   )
 }

@@ -5,6 +5,8 @@ import { TranslationType } from '../../lib/useTranslations'
 interface Contact {
   name: string
   email: string
+  phone?: string
+  role?: string
 }
 
 interface Registration {
@@ -21,13 +23,12 @@ interface FormValues {
   }
 }
 
-const contactSchema = (t: TranslationType) =>
-  Yup.object({
-    name: Yup.string().required(t('field.required')),
-    email: Yup.string()
-      .email(t('field.invalidEmail'))
-      .required(t('field.required'))
-  })
+const contactSchema = (t: TranslationType) => ({
+  name: Yup.string().required(t('field.required')),
+  email: Yup.string()
+    .email(t('field.invalidEmail'))
+    .required(t('field.required'))
+})
 
 const registrationsSchema = (
   t: TranslationType,
@@ -41,7 +42,7 @@ const registrationsSchema = (
     .of(
       Yup.object().shape({
         groupName: Yup.string().required(t('field.required')),
-        groupContact: contactSchema(t)
+        groupContact: Yup.object(contactSchema(t))
       })
     )
     .min(
@@ -57,7 +58,11 @@ const validationSchema = (t: TranslationType, initiative: Initiative) => {
       .required(t('field.required'))
       .matches(/[a-zA-Z0-9]{18}/, t('field.invalid')),
     educationType: Yup.array().of(Yup.string()).min(1),
-    applicant: contactSchema(t),
+    applicant: Yup.object({
+      ...contactSchema(t),
+      phone: Yup.string().required(t('field.required')),
+      role: Yup.string().required(t('field.required'))
+    }),
     workshops: Yup.object().shape(
       workshopIds.reduce(
         (obj, id) => ({
@@ -76,7 +81,9 @@ const initialValues = (initiative: Initiative) => ({
   educationType: [],
   applicant: {
     name: '',
-    email: ''
+    email: '',
+    phone: '',
+    role: ''
   },
   workshops: initiative.Workshops__r.records.reduce(
     (obj, workshop) => ({

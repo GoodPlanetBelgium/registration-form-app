@@ -47,9 +47,11 @@ const translations: translationsType = {
       'field.postcode': 'Postcode',
       'field.name': 'Naam',
       'field.email': 'Emailadres',
+      'field.phone': 'Telefoonnummer',
+      'field.role': 'Functie',
       'sub.contact.title': 'Aanvrager',
       'sub.contact.subtitle':
-        'De contactpersoons. Dit kan de leerkracht zijn van één van de aanvragende klassen, een coördinator of directie.',
+        'De contactpersoon. Dit kan de leerkracht zijn van één van de aanvragende klassen, een coördinator of directie.',
       'sub.workshop.remove': 'Verwijderen',
       'sub.workshop.add': 'Inschrijving toevoegen',
       'sub.workshop.field.groupName': 'Klas naam',
