@@ -24,6 +24,8 @@ const translations: translationsType = {
       'field.invalid': 'Dit is geen geldige waarde',
       'field.invalidEmail': 'Dit is geen geldig emailadres',
       'field.school': 'School',
+      'field.noAccountRecords':
+        'Met deze postcode werden er geen scholen gevonden die voldoen aan de voorwaarden voor dit project.',
       'field.postcode': 'Postcode',
       'field.name': 'Naam',
       'field.email': 'Emailadres',

@@ -24,7 +24,7 @@ const useFetch = (url: string | null) => {
   const initialState = {
     isLoading: true,
     error: null,
-    data: []
+    data: null
   }
 
   const [state, dispatch] = useReducer((state: FetchResult, action: Action) => {

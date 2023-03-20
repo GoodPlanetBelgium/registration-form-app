@@ -8,7 +8,13 @@ export interface Account {
   ShippingStreet: string
   ShippingCity: string
   ShippingPostalCode: string
-  GP_Account_Type__c: string
+  C_School_Type__c:
+    | 'Nursery_School'
+    | 'Primary_School'
+    | 'Nursery_And_Primary_School'
+    | 'Secondary_School'
+    | 'Higher_Education'
+    | 'Adult_Education'
 }
 
 export interface Workshop {
@@ -24,9 +30,9 @@ export interface Workshop {
 export interface Initiative {
   Id: string
   Name: string
-  C_Registrations_restrict_by_Account_Type__c: string
-  C_Registrations_Postcodes__c: string
-  C_Registrations_Region__c: 'Flanders' | 'Wallonia' | 'Brussels'
+  C_Registrations_restrict_by_School_Type__c: string | undefined
+  C_Registrations_Postcodes__c: string | undefined
+  C_Registrations_Region__c: 'Flanders' | 'Wallonia' | 'Brussels' | undefined
   NL_Info__c: string
   FR_Info__c: string
   Workshops__r: {

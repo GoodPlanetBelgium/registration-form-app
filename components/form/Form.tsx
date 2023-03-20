@@ -1,10 +1,4 @@
-import {
-  Button,
-  FormHelperText,
-  Paper,
-  TextField,
-  Typography
-} from '@mui/material'
+import { Button, FormHelperText, Paper, Typography } from '@mui/material'
 import { Field, Form, Formik } from 'formik'
 import { useState } from 'react'
 import { Initiative } from '../../lib/interfaces'
@@ -50,6 +44,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
             <Field
               name='accountId'
               label={t('field.school')}
+              initiative={initiative}
               component={SalesForceAccountField}
             />
             <Paper sx={{ p: 2 }}>

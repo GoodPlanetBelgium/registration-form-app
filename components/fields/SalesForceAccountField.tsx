@@ -1,4 +1,5 @@
 import {
+  Alert,
   Card,
   CardContent,
   Chip,
@@ -14,21 +15,21 @@ import {
 } from '@mui/material'
 import { FieldProps } from 'formik'
 import { ChangeEvent, FC, useState } from 'react'
-import { Account } from '../../lib/interfaces'
+import { Account, Initiative } from '../../lib/interfaces'
 import useFetch from '../../lib/useFetch'
 import useTranslations from '../../lib/useTranslations'
 import Loading from '../Loading'
 
 interface SFFieldProps {
   label: string
-  fullWidth?: boolean
+  initiative: Initiative
 }
 
 const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
   field: { name, value },
   form: { touched, errors, setFieldValue },
   label,
-  fullWidth = true
+  initiative
 }) => {
   const t = useTranslations('Form')
   const [postcode, setPostcode] = useState('')
@@ -46,9 +47,15 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
     error: fetchError
   } = useFetch(
     postcode && postcode.length === 4
-      ? `/api/schools?postcode=${postcode}`
+      ? `/api/schools?postcode=${postcode}${
+          initiative.C_Registrations_restrict_by_School_Type__c
+            ? `&schoolType=${initiative.C_Registrations_restrict_by_School_Type__c}`
+            : ''
+        }`
       : null
   )
+
+  console.log(data)
 
   const onChangeAccount = (e: SelectChangeEvent<HTMLInputElement>) => {
     setFieldValue(name, e.target.value)
@@ -79,39 +86,45 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
           value={postcode}
           error={Boolean(error)}
         />
-        {!!data?.records?.length ? (
-          isLoading ? (
-            <Loading />
+        {data ? (
+          !!data?.records?.length ? (
+            isLoading ? (
+              <Loading />
+            ) : (
+              <>
+                <Chip sx={{ mx: 2 }} label={`${data.totalSize} gevonden`} />
+                <FormControl sx={{ mt: 2 }} fullWidth>
+                  <InputLabel id='account-select'>{label}</InputLabel>
+                  <Select
+                    labelId='account-select'
+                    value={value}
+                    label={label}
+                    onChange={onChangeAccount}
+                    error={Boolean(error)}
+                  >
+                    {data.records.map(
+                      ({
+                        Id,
+                        Name,
+                        ShippingStreet,
+                        ShippingPostalCode,
+                        ShippingCity,
+                        C_School_Type__c
+                      }: Account) => (
+                        <MenuItem value={Id} key={Id}>
+                          {Name}, {ShippingStreet} {ShippingPostalCode}{' '}
+                          {ShippingCity} - {C_School_Type__c}
+                        </MenuItem>
+                      )
+                    )}
+                  </Select>
+                </FormControl>
+              </>
+            )
           ) : (
-            <>
-              <Chip sx={{ mx: 2 }} label={`${data.totalSize} gevonden`} />
-              <FormControl sx={{ mt: 2 }} fullWidth={fullWidth}>
-                <InputLabel id='account-select'>{label}</InputLabel>
-                <Select
-                  labelId='account-select'
-                  value={value}
-                  label={label}
-                  onChange={onChangeAccount}
-                  error={Boolean(error)}
-                >
-                  {data.records.map(
-                    ({
-                      Id,
-                      Name,
-                      ShippingStreet,
-                      ShippingPostalCode,
-                      ShippingCity,
-                      GP_Account_Type__c
-                    }: Account) => (
-                      <MenuItem value={Id} key={Id}>
-                        {Name}, {ShippingStreet} {ShippingPostalCode}{' '}
-                        {ShippingCity} - {GP_Account_Type__c}
-                      </MenuItem>
-                    )
-                  )}
-                </Select>
-              </FormControl>
-            </>
+            <Alert sx={{ my: 2 }} severity='warning'>
+              {t('field.noAccountRecords')}
+            </Alert>
           )
         ) : null}
         {account ? (
@@ -124,7 +137,7 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
               <b>Adres:</b> {account.ShippingStreet}{' '}
               {account.ShippingPostalCode} {account.ShippingCity}
               <br />
-              <b>Type:</b> {account.GP_Account_Type__c}
+              <b>Type:</b> {account.C_School_Type__c}
             </CardContent>
           </Card>
         ) : null}
