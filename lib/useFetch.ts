@@ -4,7 +4,7 @@ import { Initiative, Account } from './interfaces'
 export interface FetchResult {
   isLoading: boolean
   error?: any
-  data: any
+  result: any
 }
 
 enum ActionType {
@@ -24,7 +24,7 @@ const useFetch = (url: string | null) => {
   const initialState = {
     isLoading: true,
     error: null,
-    data: null
+    result: null
   }
 
   const [state, dispatch] = useReducer((state: FetchResult, action: Action) => {
@@ -32,7 +32,7 @@ const useFetch = (url: string | null) => {
       case ActionType.FETCHING:
         return { ...initialState, isLoading: true }
       case ActionType.FETCHED:
-        return { ...initialState, isLoading: false, data: action.payload }
+        return { ...initialState, isLoading: false, result: action.payload }
       case ActionType.FETCH_ERROR:
         return { ...initialState, isLoading: false, error: action.payload }
       default:

@@ -1,5 +1,6 @@
 import {
   Alert,
+  Box,
   Card,
   CardContent,
   Chip,
@@ -13,12 +14,13 @@ import {
   TextField,
   Typography
 } from '@mui/material'
-import { FieldProps } from 'formik'
+import { Field, FieldProps } from 'formik'
 import { ChangeEvent, FC, useState } from 'react'
 import { Account, Initiative } from '../../lib/interfaces'
 import useFetch from '../../lib/useFetch'
 import useTranslations from '../../lib/useTranslations'
 import Loading from '../Loading'
+import TypeOfEducationField from './TypeOfEducationField'
 
 interface SFFieldProps {
   label: string
@@ -42,9 +44,11 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
   }
 
   const {
-    data,
-    isLoading,
-    error: fetchError
+    result,
+    isLoading
+  }: {
+    result: { data: { totalSize: number; records: Account[] } }
+    isLoading: boolean
   } = useFetch(
     postcode && postcode.length === 4
       ? `/api/schools?postcode=${postcode}${
@@ -55,11 +59,13 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
       : null
   )
 
-  console.log(data)
+  const data = result?.data
 
   const onChangeAccount = (e: SelectChangeEvent<HTMLInputElement>) => {
     setFieldValue(name, e.target.value)
-    setAccount(data?.records.find(({ Id }: Account) => Id === e.target.value))
+    setAccount(
+      data.records.find(({ Id }: Account) => Id === e.target.value) || null
+    )
   }
 
   const error = touched[name] && errors[name]
@@ -130,14 +136,21 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
         {account ? (
           <Card sx={{ m: 2 }}>
             <CardContent>
-              <b>SalesForce ID:</b> {account.Id}
+              <b>{t('field.school')}:</b> {account.Name}
               <br />
-              <b>School:</b> {account.Name}
-              <br />
-              <b>Adres:</b> {account.ShippingStreet}{' '}
+              <b>{t('field.address')}:</b> {account.ShippingStreet}{' '}
               {account.ShippingPostalCode} {account.ShippingCity}
               <br />
-              <b>Type:</b> {account.C_School_Type__c}
+              <b>{t('field.schoolType')}:</b>{' '}
+              {t(`field.schoolTypeList.${account.C_School_Type__c}`)}
+              <Box>
+                <Field
+                  name='educationType'
+                  label={t('field.educationType')}
+                  account={account}
+                  component={TypeOfEducationField}
+                />
+              </Box>
             </CardContent>
           </Card>
         ) : null}

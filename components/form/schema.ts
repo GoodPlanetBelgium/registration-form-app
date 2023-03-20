@@ -14,6 +14,7 @@ interface Registration {
 
 interface FormValues {
   accountId: string
+  educationType: string[]
   applicant: Contact
   workshops: {
     [workshopId: string]: Registration[]
@@ -55,6 +56,7 @@ const validationSchema = (t: TranslationType, initiative: Initiative) => {
     accountId: Yup.string()
       .required(t('field.required'))
       .matches(/[a-zA-Z0-9]{18}/, t('field.invalid')),
+    educationType: Yup.array().of(Yup.string()).min(1),
     applicant: contactSchema(t),
     workshops: Yup.object().shape(
       workshopIds.reduce(
@@ -71,6 +73,7 @@ const validationSchema = (t: TranslationType, initiative: Initiative) => {
 
 const initialValues = (initiative: Initiative) => ({
   accountId: '',
+  educationType: [],
   applicant: {
     name: '',
     email: ''

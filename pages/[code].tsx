@@ -17,15 +17,20 @@ const InitiativePage: NextPage = () => {
   const router = useRouter()
   const { code } = router.query
   const t = useTranslations('Form')
+
   const {
-    data: initiative,
+    result,
     isLoading,
     error
-  }: Omit<FetchResult, 'data'> & { data: Initiative } = useFetch(
+  }: // error
+  { result: { data: Initiative }; isLoading: boolean; error?: any } = useFetch(
     code ? `/api/initiative/${code}` : null
   )
+
   if (!code || isLoading) return <Loading />
   if (error) return <Error message={error.message} />
+
+  const { data: initiative } = result
 
   const onSubmit = async (values: FormValues): Promise<Response> => {
     console.log(values)

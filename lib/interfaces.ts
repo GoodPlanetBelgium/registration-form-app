@@ -15,6 +15,17 @@ export interface Account {
     | 'Secondary_School'
     | 'Higher_Education'
     | 'Adult_Education'
+  C_Type_of_Education__c:
+    | 'A-Stroom'
+    | 'B-Stroom'
+    | 'General'
+    | 'Technical'
+    | 'Art'
+    | 'Professional'
+    | 'Parttime'
+    | 'Specialized'
+    | 'Non-native_Entrants_Education'
+  GP_Language__c: 'Dutch' | 'French' | 'German' | 'English'
 }
 
 export interface Workshop {
@@ -38,4 +49,16 @@ export interface Initiative {
   Workshops__r: {
     records: Workshop[]
   }
+}
+
+export interface PickListValues {
+  controllerValues: {
+    [key: string]: number
+  }
+  defaultValue: string | number | null
+  values: {
+    label: string
+    validFor: number[]
+    value: string
+  }[]
 }
