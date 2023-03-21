@@ -1,4 +1,6 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import AddIcon from '@mui/icons-material/Add'
+import DeleteIcon from '@mui/icons-material/Delete'
 import {
   Accordion,
   AccordionDetails,
@@ -6,14 +8,15 @@ import {
   Alert,
   Box,
   Button,
-  Paper,
-  Stack,
+  IconButton,
+  Tab,
+  Tabs,
   Typography
 } from '@mui/material'
 import { FieldArray } from 'formik'
 import { FieldProps } from 'formik'
 import { useRouter } from 'next/router'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Initiative, Workshop } from '../../lib/interfaces'
 import useTranslations from '../../lib/useTranslations'
 import RegistrationSubForm from '../form/RegistrationSubForm'
@@ -36,8 +39,9 @@ const WorkshopField: FC<Props & FieldProps> = ({
   ) as Workshop
   const t = useTranslations('Form')
   const router = useRouter()
+  const [activeTab, setActiveTab] = useState(0)
   return (
-    <Accordion defaultExpanded={true}>
+    <Accordion disableGutters defaultExpanded sx={{ my: 3 }}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography variant='h6'>{workshop?.Name}</Typography>
       </AccordionSummary>
@@ -56,29 +60,43 @@ const WorkshopField: FC<Props & FieldProps> = ({
         <FieldArray name={field.name}>
           {({ push, remove }) => (
             <Box>
-              <Stack spacing={2}>
-                {registrations.map((registration, i) => (
-                  <Paper key={i} sx={{ p: 1 }}>
-                    <RegistrationSubForm nameSpace={`${name}[${i}]`} />
-                    <Button
-                      color='primary'
-                      variant='contained'
-                      sx={{ my: 1 }}
-                      onClick={() => remove(i)}
-                    >
-                      {t('sub.workshop.remove')}
-                    </Button>
-                  </Paper>
-                ))}
-              </Stack>
-              <Button
-                color='primary'
-                variant='contained'
-                sx={{ my: 1 }}
-                onClick={() => push(registrationInitialValues)}
-              >
-                {t('sub.workshop.add')}
-              </Button>
+              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs
+                  value={activeTab}
+                  onChange={(e, newTab: number) => {
+                    setActiveTab(newTab)
+                  }}
+                >
+                  {registrations.map((registration, i) => (
+                    <Tab
+                      key={i}
+                      label={registration.groupName || `#${i + 1}`}
+                    />
+                  ))}
+                  <IconButton
+                    onClick={() => push(registrationInitialValues)}
+                    size='large'
+                    title={t('sub.workshop.add')}
+                  >
+                    <AddIcon />
+                  </IconButton>
+                </Tabs>
+              </Box>
+              {registrations.map((registration, i) => (
+                <Box
+                  key={i}
+                  sx={{ display: activeTab !== i ? 'none' : 'block', py: 3 }}
+                >
+                  <RegistrationSubForm nameSpace={`${name}[${i}]`} />
+                  <IconButton
+                    onClick={() => remove(i)}
+                    size='large'
+                    title={t('sub.workshop.remove')}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Box>
+              ))}
             </Box>
           )}
         </FieldArray>

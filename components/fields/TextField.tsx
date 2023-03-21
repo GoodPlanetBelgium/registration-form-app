@@ -18,7 +18,6 @@ const TextField: FC<TextFieldProps & FieldProps> = ({
   <Field
     id={name}
     name={name}
-    // margin='normal'
     type={type}
     inputProps={type === 'number' ? { min: 0 } : {}}
     label={label}

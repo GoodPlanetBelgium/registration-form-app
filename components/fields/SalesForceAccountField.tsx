@@ -72,19 +72,17 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
     e: SyntheticEvent<Element>,
     account: Account | null
   ) => {
-    console.log(account)
     setFieldValue(name, account?.Id, true)
     setAccount(account)
   }
 
   const error = touched[name] && errors[name]
-  console.log(touched[name], errors[name])
 
   return (
     <>
       <Paper
         sx={{
-          my: 2,
+          my: 3,
           p: 2,
           borderColor: error ? 'error.main' : 'grey.400'
         }}

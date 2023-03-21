@@ -39,7 +39,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
       onSubmit={beforeSubmit}
     >
       {({ isValid, values, errors }) => {
-        console.log(values, errors)
+        // console.log(values, errors)
         return (
           <Form noValidate>
             <Field
@@ -48,7 +48,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
               initiative={initiative}
               component={SalesForceAccountField}
             />
-            <Paper sx={{ p: 2 }}>
+            <Paper sx={{ p: 2, my: 3 }}>
               <Typography variant='h6'>{t('sub.contact.title')}</Typography>
               <Typography color='text.secondary'>
                 {t('sub.contact.subtitle')}
