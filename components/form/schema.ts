@@ -3,10 +3,11 @@ import { Initiative, Workshop } from '../../lib/interfaces'
 import { TranslationType } from '../../lib/useTranslations'
 
 interface Contact {
-  name: string
+  firstName: string
+  lastName: string
   email: string
   phone?: string
-  role?: string
+  role: string
 }
 
 interface Registration {
@@ -24,7 +25,8 @@ interface FormValues {
 }
 
 const contactSchema = (t: TranslationType) => ({
-  name: Yup.string().required(t('field.required')),
+  firstName: Yup.string().required(t('field.required')),
+  lastName: Yup.string().required(t('field.required')),
   email: Yup.string()
     .email(t('field.invalidEmail'))
     .required(t('field.required'))
@@ -84,7 +86,8 @@ const initialValues = (initiative: Initiative) => ({
   accountId: '',
   educationType: [],
   applicant: {
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
     role: ''
@@ -103,7 +106,7 @@ const initialValues = (initiative: Initiative) => ({
 const registrationInitialValues = {
   groupName: '',
   groupSize: '',
-  groupContact: { name: '', email: '' },
+  groupContact: { firstName: '', lastName: '', email: '', role: '' },
   dayOfWeekPreference: '',
   monthPreference: ''
 }

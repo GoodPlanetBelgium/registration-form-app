@@ -29,7 +29,7 @@ const RegistrationSubForm = ({ nameSpace }: Props) => {
       />
       <ContactSubForm
         nameSpace={`${nameSpace}.groupContact`}
-        fields={['name', 'email']}
+        fields={['firstName', 'lastName', 'email']}
       />
       <Field
         name={`${nameSpace}.dayOfWeekPreference`}

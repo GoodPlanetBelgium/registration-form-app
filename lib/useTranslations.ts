@@ -9,7 +9,7 @@ type TranslationType = (
 const useTranslations = (category: string) => {
   const { locale } = useRouter()
   return (id: string, params?: { [param: string]: string }) => {
-    if (!locale || !category) {
+    if (!locale || !category || !id) {
       throw new Error(
         'Translations: Make sure locale, category and id are defined.'
       )
@@ -21,6 +21,11 @@ const useTranslations = (category: string) => {
           result = result.replace(`{${key}}`, params[key])
         }
       })
+    }
+    if (!result) {
+      throw new Error(
+        `Translations: Not found, ID: ${locale}.${category}.${id} `
+      )
     }
     return result
   }

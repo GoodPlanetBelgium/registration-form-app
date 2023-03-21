@@ -3,7 +3,7 @@ import React, { FC, ReactElement } from 'react'
 import useTranslations from '../../lib/useTranslations'
 import TextField from '../fields/TextField'
 
-type FieldType = 'name' | 'email' | 'phone' | 'role'
+type FieldType = 'firstName' | 'lastName' | 'email' | 'phone' | 'role'
 interface Props {
   nameSpace: string
   fields: FieldType[]
@@ -13,10 +13,17 @@ const ContactSubForm = ({ nameSpace, fields }: Props) => {
   const t = useTranslations('Form')
 
   const FieldComponents: { [key in FieldType]: ReactElement } = {
-    name: (
+    firstName: (
       <Field
-        name={`${nameSpace}.name`}
-        label={t('field.name')}
+        name={`${nameSpace}.firstName`}
+        label={t('field.firstName')}
+        component={TextField}
+      />
+    ),
+    lastName: (
+      <Field
+        name={`${nameSpace}.lastName`}
+        label={t('field.lastName')}
         component={TextField}
       />
     ),
