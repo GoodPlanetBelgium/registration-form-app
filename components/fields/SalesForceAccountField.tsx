@@ -100,7 +100,9 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
               <>
                 <Chip sx={{ mx: 2 }} label={`${data.totalSize} gevonden`} />
                 <FormControl sx={{ mt: 2 }} fullWidth>
-                  <InputLabel id='account-select'>{label}</InputLabel>
+                  <InputLabel id='account-select' error={Boolean(error)}>
+                    {label}
+                  </InputLabel>
                   <Select
                     labelId='account-select'
                     value={value}

@@ -3,7 +3,7 @@ import { FieldProps, getIn } from 'formik'
 import { FC } from 'react'
 
 interface TextFieldProps {
-  type?: string
+  type?: 'text' | 'number'
   label: string
 }
 
@@ -18,6 +18,7 @@ const TextField: FC<TextFieldProps & FieldProps> = ({
     name={name}
     margin='normal'
     type={type}
+    inputProps={type === 'number' ? { min: 0 } : {}}
     label={label}
     value={value}
     onChange={handleChange}

@@ -17,7 +17,7 @@ import { FC } from 'react'
 import { Initiative, Workshop } from '../../lib/interfaces'
 import useTranslations from '../../lib/useTranslations'
 import RegistrationSubForm from '../form/RegistrationSubForm'
-import { Registration } from '../form/schema'
+import { Registration, registrationInitialValues } from '../form/schema'
 
 interface Props {
   initiative: Initiative
@@ -75,9 +75,7 @@ const WorkshopField: FC<Props & FieldProps> = ({
                 color='primary'
                 variant='contained'
                 sx={{ my: 1 }}
-                onClick={() =>
-                  push({ groupName: '', groupContact: { name: '', email: '' } })
-                }
+                onClick={() => push(registrationInitialValues)}
               >
                 {t('sub.workshop.add')}
               </Button>

@@ -42,7 +42,10 @@ const registrationsSchema = (
     .of(
       Yup.object().shape({
         groupName: Yup.string().required(t('field.required')),
-        groupContact: Yup.object(contactSchema(t))
+        groupSize: Yup.number().required(t('field.required')),
+        groupContact: Yup.object(contactSchema(t)),
+        dayOfWeekPreference: Yup.string().required(t('field.required')),
+        monthPreference: Yup.string().required(t('field.required'))
       })
     )
     .min(
@@ -95,5 +98,13 @@ const initialValues = (initiative: Initiative) => ({
   agreed: false
 })
 
-export { initialValues, validationSchema }
+const registrationInitialValues = {
+  groupName: '',
+  groupSize: '',
+  groupContact: { name: '', email: '' },
+  dayOfWeekPreference: '',
+  monthPreference: ''
+}
+
+export { initialValues, registrationInitialValues, validationSchema }
 export type { FormValues, Contact, Registration }

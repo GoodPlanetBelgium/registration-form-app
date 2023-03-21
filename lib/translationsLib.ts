@@ -1,7 +1,7 @@
 interface translationsType {
-  [key: string]: {
-    [key: string]: {
-      [key: string]: string
+  [locale: string]: {
+    [category: string]: {
+      [id: string]: string
     }
   }
 }
@@ -55,6 +55,9 @@ const translations: translationsType = {
       'sub.workshop.remove': 'Verwijderen',
       'sub.workshop.add': 'Inschrijving toevoegen',
       'sub.workshop.field.groupName': 'Klas naam',
+      'sub.workshop.field.groupSize': 'Aantal leerlingen',
+      'sub.workshop.field.dayOfWeekPreference': 'Voorkeursdag',
+      'sub.workshop.field.monthPreference': 'Voorkeursmaand',
       'sub.workshop.field.workshopRequired':
         'Minimum één inschrijving vereist voor deze workshop.',
       'sub.workshop.field.required':
@@ -62,6 +65,25 @@ const translations: translationsType = {
       'field.agreed':
         'Ik verklaar aan alle voorwaarden te voldoen om de inschrijvingen te kunnen voltooien.',
       submit: 'Verzenden'
+    },
+    Days: {
+      monday: 'maandag',
+      tuesday: 'dinsdag',
+      wednesday: 'woensdag',
+      thursday: 'donderdag',
+      friday: 'vrijdag'
+    },
+    Months: {
+      september: 'september',
+      october: 'oktober',
+      november: 'november',
+      december: 'december',
+      january: 'januari',
+      february: 'februari',
+      march: 'maart',
+      april: 'april',
+      may: 'mei',
+      june: 'juni'
     }
   },
   fr: {
