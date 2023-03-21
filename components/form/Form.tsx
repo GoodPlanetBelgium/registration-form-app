@@ -41,7 +41,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
       {({ isValid, values, errors }) => {
         // console.log(values, errors)
         return (
-          <Form>
+          <Form noValidate>
             <Field
               name='accountId'
               label={t('field.school')}
