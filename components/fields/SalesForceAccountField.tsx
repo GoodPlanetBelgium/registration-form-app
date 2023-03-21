@@ -1,5 +1,6 @@
 import {
   Alert,
+  Autocomplete,
   Box,
   Card,
   CardContent,
@@ -15,7 +16,13 @@ import {
   Typography
 } from '@mui/material'
 import { Field, FieldProps } from 'formik'
-import { ChangeEvent, FC, useState } from 'react'
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  FC,
+  SyntheticEvent,
+  useState
+} from 'react'
 import { Account, Initiative } from '../../lib/interfaces'
 import useFetch from '../../lib/useFetch'
 import useTranslations from '../../lib/useTranslations'
@@ -29,7 +36,7 @@ interface SFFieldProps {
 
 const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
   field: { name, value },
-  form: { touched, errors, setFieldValue },
+  form: { touched, errors, setFieldValue, setFieldTouched },
   label,
   initiative
 }) => {
@@ -61,14 +68,17 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
 
   const data = result?.data
 
-  const onChangeAccount = (e: SelectChangeEvent<HTMLInputElement>) => {
-    setFieldValue(name, e.target.value)
-    setAccount(
-      data.records.find(({ Id }: Account) => Id === e.target.value) || null
-    )
+  const onChangeAccount = (
+    e: SyntheticEvent<Element>,
+    account: Account | null
+  ) => {
+    console.log(account)
+    setFieldValue(name, account?.Id, true)
+    setAccount(account)
   }
 
   const error = touched[name] && errors[name]
+  console.log(touched[name], errors[name])
 
   return (
     <>
@@ -86,48 +96,45 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
         >
           {label}
         </Typography>
-        <TextField
-          label={t('field.postcode')}
-          onChange={onChangePostcode}
-          value={postcode}
-          error={Boolean(error)}
-        />
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <TextField
+            label={t('field.postcode')}
+            onChange={onChangePostcode}
+            value={postcode}
+            error={Boolean(error)}
+          />
+          {!!data?.records?.length && (
+            <Chip
+              sx={{ mx: 2 }}
+              label={t('field.school.numberFound', { n: data.totalSize })}
+            />
+          )}
+        </Box>
         {data ? (
           !!data?.records?.length ? (
             isLoading ? (
               <Loading />
             ) : (
-              <>
-                <Chip sx={{ mx: 2 }} label={`${data.totalSize} gevonden`} />
-                <FormControl sx={{ mt: 2 }} fullWidth>
-                  <InputLabel id='account-select' error={Boolean(error)}>
-                    {label}
-                  </InputLabel>
-                  <Select
-                    labelId='account-select'
-                    value={value}
-                    label={label}
-                    onChange={onChangeAccount}
-                    error={Boolean(error)}
-                  >
-                    {data.records.map(
-                      ({
-                        Id,
-                        Name,
-                        ShippingStreet,
-                        ShippingPostalCode,
-                        ShippingCity,
-                        C_School_Type__c
-                      }: Account) => (
-                        <MenuItem value={Id} key={Id}>
-                          {Name}, {ShippingStreet} {ShippingPostalCode}{' '}
-                          {ShippingCity} - {C_School_Type__c}
-                        </MenuItem>
-                      )
-                    )}
-                  </Select>
-                </FormControl>
-              </>
+              <Autocomplete
+                disablePortal
+                fullWidth
+                sx={{ mt: 2 }}
+                options={data.records}
+                getOptionLabel={({
+                  Id,
+                  Name,
+                  ShippingStreet,
+                  ShippingPostalCode,
+                  ShippingCity,
+                  C_School_Type__c
+                }) =>
+                  `${Name}, ${ShippingStreet} ${ShippingPostalCode} ${ShippingCity} - ${t(
+                    `field.schoolTypeList.${C_School_Type__c}`
+                  )}`
+                }
+                onChange={onChangeAccount}
+                renderInput={params => <TextField {...params} label={label} />}
+              />
             )
           ) : (
             <Alert sx={{ my: 2 }} severity='warning'>
@@ -135,6 +142,11 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
             </Alert>
           )
         ) : null}
+        {Boolean(error) && (
+          <FormHelperText error sx={{ ml: 2 }}>
+            {typeof error === 'string' ? error : null}
+          </FormHelperText>
+        )}
         {account ? (
           <Card sx={{ m: 2 }}>
             <CardContent>
@@ -156,11 +168,6 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
             </CardContent>
           </Card>
         ) : null}
-        {Boolean(error) && (
-          <FormHelperText error sx={{ ml: 2 }}>
-            {typeof error === 'string' ? error : null}
-          </FormHelperText>
-        )}
       </Paper>
     </>
   )

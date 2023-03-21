@@ -24,6 +24,7 @@ const translations: translationsType = {
       'field.invalid': 'Dit is geen geldige waarde',
       'field.invalidEmail': 'Dit is geen geldig emailadres',
       'field.school': 'School',
+      'field.school.numberFound': '{n} scholen gevonden',
       'field.schoolType': 'Onderwijsniveau',
       'field.schoolTypeList.Nursery_School': 'Kleuteronderwijs',
       'field.schoolTypeList.Primary_School': 'Lageronderwijs',

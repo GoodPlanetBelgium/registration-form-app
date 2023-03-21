@@ -39,7 +39,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
       onSubmit={beforeSubmit}
     >
       {({ isValid, values, errors }) => {
-        // console.log(values, errors)
+        console.log(values, errors)
         return (
           <Form noValidate>
             <Field
