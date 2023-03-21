@@ -62,6 +62,7 @@ const translations: translationsType = {
         'Minimum één inschrijving vereist voor deze workshop.',
       'sub.workshop.field.required':
         'Minimum één inschrijving in totaal vereist.',
+      'field.remark': 'Opmerking bij de inschrijving',
       'field.agreed':
         'Ik verklaar aan alle voorwaarden te voldoen om de inschrijvingen te kunnen voltooien.',
       submit: 'Verzenden'

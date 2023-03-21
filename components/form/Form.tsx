@@ -5,6 +5,7 @@ import { Initiative } from '../../lib/interfaces'
 import useTranslations from '../../lib/useTranslations'
 import CheckboxField from '../fields/CheckboxField'
 import SalesForceAccountField from '../fields/SalesForceAccountField'
+import TextField from '../fields/TextField'
 import WorkshopField from '../fields/WorkshopField'
 import ContactSubForm from './ContactSubForm'
 import { FormValues, initialValues, validationSchema } from './schema'
@@ -66,6 +67,12 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
                 component={WorkshopField}
               />
             ))}
+            <Field
+              name='remarkByApplicant'
+              label={t('field.remark')}
+              component={TextField}
+              multiline
+            />
             <Field
               name='agreed'
               label={t('field.agreed')}

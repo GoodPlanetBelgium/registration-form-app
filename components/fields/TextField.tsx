@@ -5,13 +5,15 @@ import { FC } from 'react'
 interface TextFieldProps {
   type?: 'text' | 'number'
   label: string
+  multiline?: boolean
 }
 
 const TextField: FC<TextFieldProps & FieldProps> = ({
   field: { name, value },
   form: { handleChange, touched, errors },
   type = 'text',
-  label
+  label,
+  multiline = false
 }) => (
   <Field
     id={name}
@@ -25,6 +27,8 @@ const TextField: FC<TextFieldProps & FieldProps> = ({
     error={getIn(touched, name) && Boolean(getIn(errors, name))}
     helperText={getIn(touched, name) && getIn(errors, name)}
     sx={{ mx: 1 }}
+    multiline={multiline}
+    fullWidth={multiline}
   />
 )
 

@@ -75,6 +75,7 @@ const validationSchema = (t: TranslationType, initiative: Initiative) => {
         {}
       )
     ),
+    remark: Yup.string(),
     agreed: Yup.bool().oneOf([true], t('field.required'))
   })
 }
@@ -95,6 +96,7 @@ const initialValues = (initiative: Initiative) => ({
     }),
     {}
   ),
+  remark: '',
   agreed: false
 })
 
