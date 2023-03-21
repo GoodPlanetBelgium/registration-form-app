@@ -1,7 +1,8 @@
-import { Field } from 'formik'
+import { Field, getIn, useFormikContext } from 'formik'
 import useTranslations, {
   useTranslationsCategory
 } from '../../lib/useTranslations'
+import CheckboxField from '../fields/CheckboxField'
 import SelectField from '../fields/SelectField'
 import TextField from '../fields/TextField'
 import ContactSubForm from './ContactSubForm'
@@ -14,6 +15,7 @@ const RegistrationSubForm = ({ nameSpace }: Props) => {
   const t = useTranslations('Form')
   const days = useTranslationsCategory('Days')
   const months = useTranslationsCategory('Months')
+  const { values } = useFormikContext()
   return (
     <>
       <Field
@@ -27,10 +29,18 @@ const RegistrationSubForm = ({ nameSpace }: Props) => {
         component={TextField}
         type='number'
       />
-      <ContactSubForm
-        nameSpace={`${nameSpace}.groupContact`}
-        fields={['firstName', 'lastName', 'email']}
+      <Field
+        name={`${nameSpace}.copyApplicant`}
+        label={t('sub.workshop.field.copyApplicant')}
+        onChange={console.log}
+        component={CheckboxField}
       />
+      {!Boolean(getIn(values, `${nameSpace}.copyApplicant`)) ? (
+        <ContactSubForm
+          nameSpace={`${nameSpace}.groupContact`}
+          fields={['firstName', 'lastName', 'email']}
+        />
+      ) : null}
       <Field
         name={`${nameSpace}.dayOfWeekPreference`}
         label={t('sub.workshop.field.dayOfWeekPreference')}

@@ -24,13 +24,13 @@ const SelectField: FC<SelectFieldProps & FieldProps> = ({
 }) => {
   const error = getIn(touched, name) && getIn(errors, name)
   return (
-    <FormControl sx={{ my: 2, mx: 1, minWidth: 245 }}>
+    <FormControl sx={{ m: 1, minWidth: 245 }}>
       <InputLabel id={`${name}-label`} error={Boolean(error)}>
         {label}
       </InputLabel>
       <Select
         labelId={`${name}-label`}
-        id={name}
+        name={name}
         value={value}
         label={label}
         onChange={handleChange}

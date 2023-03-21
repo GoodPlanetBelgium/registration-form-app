@@ -57,6 +57,8 @@ const translations: translationsType = {
       'sub.workshop.add': 'Inschrijving toevoegen',
       'sub.workshop.field.groupName': 'Klas naam',
       'sub.workshop.field.groupSize': 'Aantal leerlingen',
+      'sub.workshop.field.copyApplicant':
+        'Leerkracht is dezelfde persoon als de aanvrager.',
       'sub.workshop.field.dayOfWeekPreference': 'Voorkeursdag',
       'sub.workshop.field.monthPreference': 'Voorkeursmaand',
       'sub.workshop.field.workshopRequired':

@@ -7,14 +7,16 @@ import {
   FormControl,
   FormControlLabel,
   FormGroup,
+  FormHelperText,
   FormLabel,
   InputLabel,
   MenuItem,
   OutlinedInput,
   Select,
-  SelectChangeEvent
+  SelectChangeEvent,
+  Typography
 } from '@mui/material'
-import { FieldArray, FieldProps } from 'formik'
+import { FieldArray, FieldProps, getIn } from 'formik'
 import { FC } from 'react'
 import { Account, PickListValues } from '../../lib/interfaces'
 import useFetch from '../../lib/useFetch'
@@ -57,8 +59,15 @@ const TypeOfEducationField: FC<TOEFieldProps & FieldProps> = ({
     }
   }
 
+  const error = getIn(touched, name) && getIn(errors, name)
+
   return (
-    <FormControl sx={{ mt: 2 }} component='fieldset' variant='standard'>
+    <FormControl
+      sx={{ mt: 2 }}
+      component='fieldset'
+      variant='standard'
+      error={Boolean(error)}
+    >
       <FormLabel component='legend'>{label}</FormLabel>
       <FormGroup row>
         {picklist.map((option, i) => (
@@ -71,10 +80,19 @@ const TypeOfEducationField: FC<TOEFieldProps & FieldProps> = ({
                 name={option.value}
               />
             }
-            label={t(`field.schoolEducationType.${option.value}`)}
+            label={
+              <Typography color={Boolean(error) ? 'error' : 'text.primary'}>
+                {t(`field.schoolEducationType.${option.value}`)}
+              </Typography>
+            }
           />
         ))}
       </FormGroup>
+      {Boolean(error) && (
+        <FormHelperText error>
+          {typeof error === 'string' ? error : null}
+        </FormHelperText>
+      )}
     </FormControl>
   )
 }

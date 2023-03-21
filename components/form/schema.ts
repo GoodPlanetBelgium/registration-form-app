@@ -12,7 +12,11 @@ interface Contact {
 
 interface Registration {
   groupName: string
+  groupSize: number
+  copyApplicant: boolean
   groupContact: Contact
+  dayOfWeekPreference: string
+  monthPreference: string
 }
 
 interface FormValues {
@@ -27,6 +31,7 @@ interface FormValues {
 const contactSchema = (t: TranslationType) => ({
   firstName: Yup.string().required(t('field.required')),
   lastName: Yup.string().required(t('field.required')),
+  // role: Yup.string().required(t('field.required')),
   email: Yup.string()
     .email(t('field.invalidEmail'))
     .required(t('field.required'))
@@ -45,7 +50,11 @@ const registrationsSchema = (
       Yup.object().shape({
         groupName: Yup.string().required(t('field.required')),
         groupSize: Yup.number().required(t('field.required')),
-        groupContact: Yup.object(contactSchema(t)),
+        copyApplicant: Yup.boolean(),
+        groupContact: Yup.object().when('copyApplicant', {
+          is: false,
+          then: Yup.object(contactSchema(t))
+        }),
         dayOfWeekPreference: Yup.string().required(t('field.required')),
         monthPreference: Yup.string().required(t('field.required'))
       })
@@ -62,11 +71,10 @@ const validationSchema = (t: TranslationType, initiative: Initiative) => {
     accountId: Yup.string()
       .required(t('field.required'))
       .matches(/[a-zA-Z0-9]{18}/, t('field.invalid')),
-    educationType: Yup.array().of(Yup.string()).min(1),
+    educationType: Yup.array().of(Yup.string()).min(1, t('field.required')),
     applicant: Yup.object({
       ...contactSchema(t),
-      phone: Yup.string().required(t('field.required')),
-      role: Yup.string().required(t('field.required'))
+      phone: Yup.string().required(t('field.required'))
     }),
     workshops: Yup.object().shape(
       workshopIds.reduce(
@@ -106,6 +114,7 @@ const initialValues = (initiative: Initiative) => ({
 const registrationInitialValues = {
   groupName: '',
   groupSize: '',
+  copyApplicant: false,
   groupContact: { firstName: '', lastName: '', email: '', role: '' },
   dayOfWeekPreference: '',
   monthPreference: ''

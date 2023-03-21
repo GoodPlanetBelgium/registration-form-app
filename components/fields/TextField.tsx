@@ -18,7 +18,7 @@ const TextField: FC<TextFieldProps & FieldProps> = ({
   <Field
     id={name}
     name={name}
-    margin='normal'
+    // margin='normal'
     type={type}
     inputProps={type === 'number' ? { min: 0 } : {}}
     label={label}
@@ -26,7 +26,7 @@ const TextField: FC<TextFieldProps & FieldProps> = ({
     onChange={handleChange}
     error={getIn(touched, name) && Boolean(getIn(errors, name))}
     helperText={getIn(touched, name) && getIn(errors, name)}
-    sx={{ mx: 1 }}
+    sx={{ m: 1 }}
     multiline={multiline}
     fullWidth={multiline}
   />
