@@ -88,7 +88,7 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
         }}
       >
         <Typography
-          variant='h6'
+          variant='h2'
           color={Boolean(error) ? 'error' : 'text.primary'}
           sx={{ mb: 2 }}
         >

@@ -16,10 +16,10 @@ const Layout = ({ title, children }: LayoutProps) => (
 
     <AppBar position='absolute' color='default'>
       <Toolbar>
-        <Typography variant='h6'>{title}</Typography>
+        <Typography variant='h1'>{title}</Typography>
       </Toolbar>
     </AppBar>
-    <Box sx={{ m: 12 }}>{children}</Box>
+    <Box sx={{ mt: 10, mx: { xs: 2, sm: 4, md: 8, lg: 16 } }}>{children}</Box>
   </>
 )
 

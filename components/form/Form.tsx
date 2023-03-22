@@ -49,7 +49,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
               component={SalesForceAccountField}
             />
             <Paper sx={{ p: 2, my: 3 }}>
-              <Typography variant='h6'>{t('sub.contact.title')}</Typography>
+              <Typography variant='h2'>{t('sub.contact.title')}</Typography>
               <Typography color='text.secondary'>
                 {t('sub.contact.subtitle')}
               </Typography>

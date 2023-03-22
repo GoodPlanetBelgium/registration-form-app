@@ -39,11 +39,11 @@ const WorkshopField: FC<Props & FieldProps> = ({
   ) as Workshop
   const t = useTranslations('Form')
   const router = useRouter()
-  const [activeTab, setActiveTab] = useState(0)
+  const [activeTab, setActiveTab] = useState<number | false>(0)
   return (
     <Accordion disableGutters defaultExpanded sx={{ my: 3 }}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant='h6'>{workshop?.Name}</Typography>
+        <Typography variant='h2'>{workshop?.Name}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Alert severity='info'>
@@ -57,15 +57,18 @@ const WorkshopField: FC<Props & FieldProps> = ({
             }}
           />
         </Alert>
+        <h3>{t('sub.workshop.registrationsTitle')}</h3>
         <FieldArray name={field.name}>
           {({ push, remove }) => (
             <Box>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs
-                  value={activeTab}
+                  value={!registrations.length ? false : activeTab}
                   onChange={(e, newTab: number) => {
+                    console.log(newTab)
                     setActiveTab(newTab)
                   }}
+                  scrollButtons='auto'
                 >
                   {registrations.map((registration, i) => (
                     <Tab
@@ -73,13 +76,12 @@ const WorkshopField: FC<Props & FieldProps> = ({
                       label={registration.groupName || `#${i + 1}`}
                     />
                   ))}
-                  <IconButton
+                  <Tab
                     onClick={() => push(registrationInitialValues)}
-                    size='large'
                     title={t('sub.workshop.add')}
-                  >
-                    <AddIcon />
-                  </IconButton>
+                    icon={<AddIcon sx={{ color: 'primary.contrastText' }} />}
+                    sx={{ backgroundColor: 'primary.main' }}
+                  />
                 </Tabs>
               </Box>
               {registrations.map((registration, i) => (
@@ -88,13 +90,24 @@ const WorkshopField: FC<Props & FieldProps> = ({
                   sx={{ display: activeTab !== i ? 'none' : 'block', py: 3 }}
                 >
                   <RegistrationSubForm nameSpace={`${name}[${i}]`} />
-                  <IconButton
-                    onClick={() => remove(i)}
-                    size='large'
+                  <Button
+                    onClick={() => {
+                      setActiveTab(
+                        !registrations.length
+                          ? false
+                          : i === registrations.length - 1
+                          ? i - 1
+                          : i
+                      )
+                      remove(i)
+                    }}
+                    variant='contained'
+                    sx={{ m: 1, display: 'block' }}
                     title={t('sub.workshop.remove')}
+                    // size='large'
                   >
                     <DeleteIcon />
-                  </IconButton>
+                  </Button>
                 </Box>
               ))}
             </Box>

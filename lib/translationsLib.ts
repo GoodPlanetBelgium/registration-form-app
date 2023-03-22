@@ -54,6 +54,7 @@ const translations: translationsType = {
       'sub.contact.title': 'Aanvrager',
       'sub.contact.subtitle':
         'De contactpersoon. Dit kan de leerkracht zijn van één van de aanvragende klassen, een coördinator of directie.',
+      'sub.workshop.registrationsTitle': 'Inschrijvingen',
       'sub.workshop.remove': 'Verwijderen',
       'sub.workshop.add': 'Inschrijving toevoegen',
       'sub.workshop.field.groupName': 'Klas naam',
