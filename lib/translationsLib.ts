@@ -57,11 +57,16 @@ const translations: translationsType = {
       'sub.workshop.registrationsTitle': 'Inschrijvingen',
       'sub.workshop.remove': 'Verwijderen',
       'sub.workshop.add': 'Inschrijving toevoegen',
+      'sub.workshop.clickToAdd':
+        'Klik hierboven op + om een inschrijving toe te voegen.',
+      'sub.workshop.groupTitle': 'Klas',
       'sub.workshop.field.groupName': 'Klas naam',
       'sub.workshop.field.groupSize': 'Aantal leerlingen',
+      'sub.workshop.contactTitle': 'Leerkracht of contactpersoon voor de klas',
       'sub.workshop.field.copyApplicant':
         'Leerkracht is dezelfde persoon als de aanvrager.',
       'sub.workshop.field.dayOfWeekPreference': 'Voorkeursdag',
+      'sub.workshop.preferencesTitle': 'Voorkeuren',
       'sub.workshop.field.monthPreference': 'Voorkeursmaand',
       'sub.workshop.field.workshopRequired':
         'Minimum één inschrijving vereist voor deze workshop.',

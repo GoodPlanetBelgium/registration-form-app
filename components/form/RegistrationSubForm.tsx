@@ -1,3 +1,4 @@
+import { Box, Divider } from '@mui/material'
 import { Field, getIn, useFormikContext } from 'formik'
 import useTranslations, {
   useTranslationsCategory
@@ -5,6 +6,7 @@ import useTranslations, {
 import CheckboxField from '../fields/CheckboxField'
 import SelectField from '../fields/SelectField'
 import TextField from '../fields/TextField'
+import Section from '../Section'
 import ContactSubForm from './ContactSubForm'
 
 interface Props {
@@ -18,47 +20,53 @@ const RegistrationSubForm = ({ nameSpace }: Props) => {
   const { values } = useFormikContext()
   return (
     <>
-      <Field
-        name={`${nameSpace}.groupName`}
-        label={t('sub.workshop.field.groupName')}
-        component={TextField}
-      />
-      <Field
-        name={`${nameSpace}.groupSize`}
-        label={t('sub.workshop.field.groupSize')}
-        component={TextField}
-        type='number'
-      />
-      <Field
-        name={`${nameSpace}.copyApplicant`}
-        label={t('sub.workshop.field.copyApplicant')}
-        onChange={console.log}
-        component={CheckboxField}
-      />
-      {!Boolean(getIn(values, `${nameSpace}.copyApplicant`)) ? (
-        <ContactSubForm
-          nameSpace={`${nameSpace}.groupContact`}
-          fields={['firstName', 'lastName', 'email']}
+      <Section label={t('sub.workshop.groupTitle')}>
+        <Field
+          name={`${nameSpace}.groupName`}
+          label={t('sub.workshop.field.groupName')}
+          component={TextField}
         />
-      ) : null}
-      <Field
-        name={`${nameSpace}.dayOfWeekPreference`}
-        label={t('sub.workshop.field.dayOfWeekPreference')}
-        component={SelectField}
-        options={Object.keys(days).map(day => ({
-          value: day,
-          label: days[day]
-        }))}
-      />
-      <Field
-        name={`${nameSpace}.monthPreference`}
-        label={t('sub.workshop.field.monthPreference')}
-        component={SelectField}
-        options={Object.keys(months).map(day => ({
-          value: day,
-          label: months[day]
-        }))}
-      />
+        <Field
+          name={`${nameSpace}.groupSize`}
+          label={t('sub.workshop.field.groupSize')}
+          component={TextField}
+          type='number'
+        />
+      </Section>
+      <Section label={t('sub.workshop.contactTitle')}>
+        <Field
+          name={`${nameSpace}.copyApplicant`}
+          label={t('sub.workshop.field.copyApplicant')}
+          onChange={console.log}
+          component={CheckboxField}
+        />
+        {!getIn(values, `${nameSpace}.copyApplicant`) && (
+          <ContactSubForm
+            nameSpace={`${nameSpace}.groupContact`}
+            fields={['firstName', 'lastName', 'email']}
+          />
+        )}
+      </Section>
+      <Section label={t('sub.workshop.preferencesTitle')}>
+        <Field
+          name={`${nameSpace}.dayOfWeekPreference`}
+          label={t('sub.workshop.field.dayOfWeekPreference')}
+          component={SelectField}
+          options={Object.keys(days).map(day => ({
+            value: day,
+            label: days[day]
+          }))}
+        />
+        <Field
+          name={`${nameSpace}.monthPreference`}
+          label={t('sub.workshop.field.monthPreference')}
+          component={SelectField}
+          options={Object.keys(months).map(day => ({
+            value: day,
+            label: months[day]
+          }))}
+        />
+      </Section>
     </>
   )
 }

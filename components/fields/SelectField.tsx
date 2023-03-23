@@ -24,7 +24,7 @@ const SelectField: FC<SelectFieldProps & FieldProps> = ({
 }) => {
   const error = getIn(touched, name) && getIn(errors, name)
   return (
-    <FormControl sx={{ m: 1, minWidth: 245 }}>
+    <FormControl sx={{ mr: 2, mb: 2, minWidth: 245 }}>
       <InputLabel id={`${name}-label`} error={Boolean(error)}>
         {label}
       </InputLabel>

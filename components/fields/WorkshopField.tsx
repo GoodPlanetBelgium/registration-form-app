@@ -41,12 +41,12 @@ const WorkshopField: FC<Props & FieldProps> = ({
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<number | false>(0)
   return (
-    <Accordion disableGutters defaultExpanded sx={{ my: 3 }}>
+    <Accordion disableGutters defaultExpanded sx={{ borderRadius: 1 }}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography variant='h2'>{workshop?.Name}</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Alert severity='info'>
+        <Alert severity='info' icon={false} variant='standard' sx={{ m: 0 }}>
           <div
             dangerouslySetInnerHTML={{
               __html: workshop[
@@ -64,10 +64,7 @@ const WorkshopField: FC<Props & FieldProps> = ({
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs
                   value={!registrations.length ? false : activeTab}
-                  onChange={(e, newTab: number) => {
-                    console.log(newTab)
-                    setActiveTab(newTab)
-                  }}
+                  onChange={(e, newTab: number) => setActiveTab(newTab)}
                   scrollButtons='auto'
                 >
                   {registrations.map((registration, i) => (
@@ -87,29 +84,38 @@ const WorkshopField: FC<Props & FieldProps> = ({
               {registrations.map((registration, i) => (
                 <Box
                   key={i}
-                  sx={{ display: activeTab !== i ? 'none' : 'block', py: 3 }}
+                  sx={{ display: activeTab !== i ? 'none' : 'block', mt: 2 }}
                 >
                   <RegistrationSubForm nameSpace={`${name}[${i}]`} />
-                  <Button
-                    onClick={() => {
-                      setActiveTab(
-                        !registrations.length
-                          ? false
-                          : i === registrations.length - 1
-                          ? i - 1
-                          : i
-                      )
-                      remove(i)
-                    }}
-                    variant='contained'
-                    sx={{ m: 1, display: 'block' }}
-                    title={t('sub.workshop.remove')}
-                    // size='large'
-                  >
-                    <DeleteIcon />
-                  </Button>
+                  <Box sx={{ m: 2 }}>
+                    <Button
+                      onClick={() => {
+                        setActiveTab(
+                          !registrations.length
+                            ? false
+                            : i === registrations.length - 1
+                            ? i - 1
+                            : i
+                        )
+                        remove(i)
+                      }}
+                      variant='outlined'
+                      color='warning'
+                      sx={{ mt: 1 }}
+                      title={t('sub.workshop.remove')}
+                      size='large'
+                    >
+                      <DeleteIcon sx={{ mr: 1 }} />
+                      <span>{t('sub.workshop.remove')}</span>
+                    </Button>
+                  </Box>
                 </Box>
               ))}
+              {!registrations.length && (
+                <Alert sx={{ mt: 2 }} severity='warning'>
+                  {t('sub.workshop.clickToAdd')}
+                </Alert>
+              )}
             </Box>
           )}
         </FieldArray>

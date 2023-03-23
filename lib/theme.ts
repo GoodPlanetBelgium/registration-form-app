@@ -33,6 +33,36 @@ export const themeOptions: ThemeOptions = {
     h3: {
       fontSize: '1.5rem',
       fontWeight: 300
+    },
+    h4: {
+      fontSize: '1.2rem'
+    }
+  },
+  components: {
+    MuiPaper: {
+      defaultProps: {
+        elevation: 3
+      },
+      styleOverrides: {
+        root: {
+          padding: '1rem 2rem',
+          margin: '2rem 0'
+        }
+      }
+    },
+    MuiAccordionSummary: {
+      styleOverrides: {
+        root: {
+          padding: 0
+        }
+      }
+    },
+    MuiAccordionDetails: {
+      styleOverrides: {
+        root: {
+          padding: 0
+        }
+      }
     }
   }
 }

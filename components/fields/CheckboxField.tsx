@@ -19,7 +19,7 @@ const CheckboxField: FC<CheckboxFieldProps & FieldProps> = ({
 }) => {
   const error = touched[name] && errors[name]
   return (
-    <FormGroup sx={{ mx: 1 }}>
+    <FormGroup sx={{ mr: 2, mb: 1 }}>
       <FormControlLabel
         control={<Checkbox id={name} checked={value} onChange={handleChange} />}
         label={
@@ -29,7 +29,7 @@ const CheckboxField: FC<CheckboxFieldProps & FieldProps> = ({
         }
       />
       {Boolean(error) && (
-        <FormHelperText error>
+        <FormHelperText error sx={{ ml: 2, mt: 0 }}>
           {typeof error === 'string' ? error : null}
         </FormHelperText>
       )}

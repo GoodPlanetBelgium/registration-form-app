@@ -80,93 +80,81 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
 
   return (
     <>
-      <Paper
-        sx={{
-          my: 3,
-          p: 2,
-          borderColor: error ? 'error.main' : 'grey.400'
-        }}
-      >
-        <Typography
-          variant='h2'
-          color={Boolean(error) ? 'error' : 'text.primary'}
-          sx={{ mb: 2 }}
-        >
-          {label}
-        </Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <TextField
-            label={t('field.postcode')}
-            onChange={onChangePostcode}
-            value={postcode}
-            error={Boolean(error)}
+      <Typography variant='h2' sx={{ mb: 2 }}>
+        {label}
+      </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <TextField
+          label={t('field.postcode')}
+          onChange={onChangePostcode}
+          value={postcode}
+          error={Boolean(error)}
+        />
+        {!!data?.records?.length && (
+          <Chip
+            sx={{ mx: 2 }}
+            label={t('field.school.numberFound', { n: data.totalSize })}
           />
-          {!!data?.records?.length && (
-            <Chip
-              sx={{ mx: 2 }}
-              label={t('field.school.numberFound', { n: data.totalSize })}
-            />
-          )}
-        </Box>
-        {data ? (
-          !!data?.records?.length ? (
-            isLoading ? (
-              <Loading />
-            ) : (
-              <Autocomplete
-                disablePortal
-                fullWidth
-                sx={{ mt: 2 }}
-                options={data.records}
-                getOptionLabel={({
-                  Id,
-                  Name,
-                  ShippingStreet,
-                  ShippingPostalCode,
-                  ShippingCity,
-                  C_School_Type__c
-                }) =>
-                  `${Name}, ${ShippingStreet} ${ShippingPostalCode} ${ShippingCity} - ${t(
-                    `field.schoolTypeList.${C_School_Type__c}`
-                  )}`
-                }
-                onChange={onChangeAccount}
-                renderInput={params => <TextField {...params} label={label} />}
-              />
-            )
-          ) : (
-            <Alert sx={{ my: 2 }} severity='warning'>
-              {t('field.noAccountRecords')}
-            </Alert>
-          )
-        ) : null}
-        {Boolean(error) && (
-          <FormHelperText error sx={{ ml: 2 }}>
-            {typeof error === 'string' ? error : null}
-          </FormHelperText>
         )}
-        {account ? (
-          <Card sx={{ m: 2 }}>
-            <CardContent>
-              <b>{t('field.school')}:</b> {account.Name}
-              <br />
-              <b>{t('field.address')}:</b> {account.ShippingStreet}{' '}
-              {account.ShippingPostalCode} {account.ShippingCity}
-              <br />
-              <b>{t('field.schoolType')}:</b>{' '}
-              {t(`field.schoolTypeList.${account.C_School_Type__c}`)}
-              <Box>
-                <Field
-                  name='educationType'
-                  label={t('field.educationType')}
-                  account={account}
-                  component={TypeOfEducationField}
-                />
-              </Box>
-            </CardContent>
-          </Card>
-        ) : null}
-      </Paper>
+      </Box>
+      {data ? (
+        !!data?.records?.length ? (
+          isLoading ? (
+            <Loading />
+          ) : (
+            <Autocomplete
+              disablePortal
+              fullWidth
+              sx={{ mt: 2 }}
+              options={data.records}
+              getOptionLabel={({
+                Id,
+                Name,
+                ShippingStreet,
+                ShippingPostalCode,
+                ShippingCity,
+                C_School_Type__c
+              }) =>
+                `${Name}, ${ShippingStreet} ${ShippingPostalCode} ${ShippingCity} - ${t(
+                  `field.schoolTypeList.${C_School_Type__c}`
+                )}`
+              }
+              onChange={onChangeAccount}
+              renderInput={params => <TextField {...params} label={label} />}
+            />
+          )
+        ) : (
+          <Alert sx={{ my: 2 }} severity='warning'>
+            {t('field.noAccountRecords')}
+          </Alert>
+        )
+      ) : null}
+      {Boolean(error) && (
+        <FormHelperText error sx={{ ml: 2 }}>
+          {typeof error === 'string' ? error : null}
+        </FormHelperText>
+      )}
+      {account ? (
+        <Card sx={{ m: 2 }}>
+          <CardContent>
+            <b>{t('field.school')}:</b> {account.Name}
+            <br />
+            <b>{t('field.address')}:</b> {account.ShippingStreet}{' '}
+            {account.ShippingPostalCode} {account.ShippingCity}
+            <br />
+            <b>{t('field.schoolType')}:</b>{' '}
+            {t(`field.schoolTypeList.${account.C_School_Type__c}`)}
+            <Box>
+              <Field
+                name='educationType'
+                label={t('field.educationType')}
+                account={account}
+                component={TypeOfEducationField}
+              />
+            </Box>
+          </CardContent>
+        </Card>
+      ) : null}
     </>
   )
 }

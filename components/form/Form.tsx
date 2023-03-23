@@ -9,6 +9,7 @@ import TextField from '../fields/TextField'
 import WorkshopField from '../fields/WorkshopField'
 import ContactSubForm from './ContactSubForm'
 import { FormValues, initialValues, validationSchema } from './schema'
+import SendIcon from '@mui/icons-material/Send'
 
 interface FormProps {
   initiative: Initiative
@@ -42,15 +43,19 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
         // console.log(values, errors)
         return (
           <Form noValidate>
-            <Field
-              name='accountId'
-              label={t('field.school')}
-              initiative={initiative}
-              component={SalesForceAccountField}
-            />
-            <Paper sx={{ p: 2, my: 3 }}>
-              <Typography variant='h2'>{t('sub.contact.title')}</Typography>
-              <Typography color='text.secondary'>
+            <Paper>
+              <Field
+                name='accountId'
+                label={t('field.school')}
+                initiative={initiative}
+                component={SalesForceAccountField}
+              />
+            </Paper>
+            <Paper>
+              <Typography sx={{ py: 1 }} variant='h2'>
+                {t('sub.contact.title')}
+              </Typography>
+              <Typography sx={{ mb: 2 }} color='text.secondary'>
                 {t('sub.contact.subtitle')}
               </Typography>
               <ContactSubForm
@@ -81,11 +86,11 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
             <Button
               color='primary'
               variant='contained'
+              size='large'
               type='submit'
-              sx={{ margin: '1rem 0' }}
-              // disabled={!isValid}
+              sx={{ my: 2 }}
             >
-              {t('submit')}
+              <SendIcon sx={{ mr: 1 }} /> {t('submit')}
             </Button>
             {countError && (
               <FormHelperText error>{t(countError)}</FormHelperText>

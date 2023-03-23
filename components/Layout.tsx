@@ -1,6 +1,8 @@
 import Head from 'next/head'
-import { AppBar, Box, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material'
 import { ReactNode } from 'react'
+import Image from 'next/image'
+import logo from '../public/goodplanet_logo_white.svg'
 
 type LayoutProps = {
   title: string
@@ -13,13 +15,19 @@ const Layout = ({ title, children }: LayoutProps) => (
       <title>{title}</title>
       <link rel='icon' href='/favicon.ico' />
     </Head>
-
-    <AppBar position='absolute' color='default'>
-      <Toolbar>
-        <Typography variant='h1'>{title}</Typography>
-      </Toolbar>
+    <AppBar position='fixed' sx={{ m: 0, p: 0 }}>
+      <Container maxWidth='md'>
+        <Toolbar sx={{ py: 2 }}>
+          <Image src={logo} alt='GoodPlanet logo' width={48} />
+          <Typography variant='h1' component='div' sx={{ ml: 2 }}>
+            {title}
+          </Typography>
+        </Toolbar>
+      </Container>
     </AppBar>
-    <Box sx={{ mt: 10, mx: { xs: 2, sm: 4, md: 8, lg: 16 } }}>{children}</Box>
+    <Container maxWidth='md' sx={{ py: 12 }}>
+      {children}
+    </Container>
   </>
 )
 

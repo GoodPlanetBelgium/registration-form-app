@@ -53,7 +53,7 @@ const InitiativePage: NextPage = () => {
         </Alert>
       ) : (
         <>
-          <Alert severity='info'>
+          <Alert severity='info' icon={false}>
             <div
               dangerouslySetInnerHTML={{
                 __html: initiative[
