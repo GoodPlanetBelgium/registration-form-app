@@ -31,7 +31,7 @@ interface FormValues {
 const contactSchema = (t: TranslationType) => ({
   firstName: Yup.string().required(t('field.required')),
   lastName: Yup.string().required(t('field.required')),
-  // role: Yup.string().required(t('field.required')),
+  role: Yup.string().required(t('field.required')),
   email: Yup.string()
     .email(t('field.invalidEmail'))
     .required(t('field.required'))

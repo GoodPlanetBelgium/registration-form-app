@@ -7,4 +7,16 @@ declare global {
       thisArg?: any
     ): number
   }
+
+  namespace NodeJS {
+    interface ProcessEnv {
+      SALESFORCE_API_HOST: string
+      SALESFORCE_CONSUMER_KEY: string
+      SALESFORCE_CONSUMER_SECRET: string
+      REDIS_URL: string
+      REDIS_EXPIRY: number
+      SCHOOL_CONTACT_RECORD_TYPE_ID: string
+      SCHOOL_ACCOUNT_RECORD_TYPE_ID: string
+    }
+  }
 }

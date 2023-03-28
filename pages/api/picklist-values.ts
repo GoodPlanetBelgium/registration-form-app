@@ -2,8 +2,23 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { PickListValues } from '../../lib/interfaces'
 import salesforceAPI from '../../lib/salesforceAPI'
 
+interface Request extends NextApiRequest {
+  query: {
+    sObject: 'Account' | 'Contact'
+    field: string
+  }
+}
+
+const { SCHOOL_CONTACT_RECORD_TYPE_ID, SCHOOL_ACCOUNT_RECORD_TYPE_ID } =
+  process.env
+
+const recordTypeId = {
+  Account: SCHOOL_ACCOUNT_RECORD_TYPE_ID,
+  Contact: SCHOOL_CONTACT_RECORD_TYPE_ID
+}
+
 export default async function handler (
-  req: NextApiRequest,
+  req: Request,
   res: NextApiResponse<{ data?: PickListValues; error?: string }>
 ) {
   console.log(req.query)
@@ -15,7 +30,7 @@ export default async function handler (
       .send({ error: 'Please provide correct values for sObject and field.' })
     return
   }
-  const endpoint = `services/data/v56.0/ui-api/object-info/${sObject}/picklist-values/0120Y000000yjaEQAQ/${field}`
+  const endpoint = `services/data/v56.0/ui-api/object-info/${sObject}/picklist-values/${recordTypeId[sObject]}/${field}`
   const data: PickListValues = await salesforceAPI('GET', endpoint)
   res.status(200).json({ data })
 }

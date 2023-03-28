@@ -43,7 +43,7 @@ const RegistrationSubForm = ({ nameSpace }: Props) => {
         {!getIn(values, `${nameSpace}.copyApplicant`) && (
           <ContactSubForm
             nameSpace={`${nameSpace}.groupContact`}
-            fields={['firstName', 'lastName', 'email']}
+            fields={['firstName', 'lastName', 'email', 'role']}
           />
         )}
       </Section>

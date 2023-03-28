@@ -51,6 +51,13 @@ const translations: translationsType = {
       'field.email': 'Emailadres',
       'field.phone': 'Telefoonnummer',
       'field.role': 'Functie',
+      'field.role.Headmaster': 'Directeur',
+      'field.role.Teacher': 'Leerkracht',
+      'field.role.Maintenance': '? tr Maintanance',
+      'field.role.Administration': 'Secretariaat',
+      'field.role.Vice_Headmaster': 'Onderdirecteur',
+      'field.role.Coordinator': 'Coördinator',
+      'field.role.Other': 'Anders',
       'sub.contact.title': 'Aanvrager',
       'sub.contact.subtitle':
         'De contactpersoon. Dit kan de leerkracht zijn van één van de aanvragende klassen, een coördinator of directie.',
