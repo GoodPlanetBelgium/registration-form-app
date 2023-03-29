@@ -46,6 +46,8 @@ const translations: translationsType = {
       'field.noAccountRecords':
         'Met deze postcode werden er geen scholen gevonden die voldoen aan de voorwaarden voor dit project.',
       'field.postcode': 'Postcode',
+      'field.postcode.invalid':
+        'Dit project is niet beschikbaar voor deze postcode.',
       'field.firstName': 'Voornaam',
       'field.lastName': 'Achternaam',
       'field.email': 'Emailadres',

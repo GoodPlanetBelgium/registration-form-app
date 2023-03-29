@@ -21,6 +21,7 @@ import {
   ChangeEventHandler,
   FC,
   SyntheticEvent,
+  useEffect,
   useState
 } from 'react'
 import { Account, Initiative } from '../../lib/interfaces'
@@ -43,12 +44,32 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
   const t = useTranslations('Form')
   const [postcode, setPostcode] = useState('')
   const [account, setAccount] = useState<Account | null>(null)
+  const [inputError, setInputError] = useState(false)
 
   const onChangePostcode = (e: ChangeEvent<HTMLInputElement>): void => {
     setFieldValue(name, '')
     setAccount(null)
     setPostcode(e.target.value.replace(/\D/g, '').substring(0, 4))
   }
+
+  const validPostcodes = (initiative.C_Registrations_Postcodes__c || '')
+    .replace(/[^\d,*]/g, '')
+    .split(',')
+
+  useEffect(() => {
+    if (postcode && postcode.length === 4) {
+      setInputError(
+        !validPostcodes.find(
+          validPostcode =>
+            (validPostcode.includes('*') &&
+              validPostcode.charAt(0) === postcode.charAt(0)) ||
+            validPostcode === postcode
+        )
+      )
+    } else {
+      setInputError(false)
+    }
+  }, [postcode, validPostcodes])
 
   const {
     result,
@@ -57,7 +78,7 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
     result: { data: { totalSize: number; records: Account[] } }
     isLoading: boolean
   } = useFetch(
-    postcode && postcode.length === 4
+    postcode && postcode.length === 4 && !inputError
       ? `/api/schools?postcode=${postcode}${
           initiative.C_Registrations_restrict_by_School_Type__c
             ? `&schoolType=${initiative.C_Registrations_restrict_by_School_Type__c}`
@@ -76,7 +97,11 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
     setAccount(account)
   }
 
-  const error = touched[name] && errors[name]
+  const error =
+    (touched[name] && errors[name]) ||
+    (inputError && t('field.postcode.invalid'))
+
+  console.log(isLoading, data)
 
   return (
     <>
@@ -89,6 +114,7 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
           onChange={onChangePostcode}
           value={postcode}
           error={Boolean(error)}
+          autoComplete='off'
         />
         {!!data?.records?.length && (
           <Chip
@@ -97,38 +123,34 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
           />
         )}
       </Box>
-      {data ? (
-        !!data?.records?.length ? (
-          isLoading ? (
-            <Loading />
-          ) : (
-            <Autocomplete
-              disablePortal
-              fullWidth
-              sx={{ mt: 2 }}
-              options={data.records}
-              getOptionLabel={({
-                Id,
-                Name,
-                ShippingStreet,
-                ShippingPostalCode,
-                ShippingCity,
-                C_School_Type__c
-              }) =>
-                `${Name}, ${ShippingStreet} ${ShippingPostalCode} ${ShippingCity} - ${t(
-                  `field.schoolTypeList.${C_School_Type__c}`
-                )}`
-              }
-              onChange={onChangeAccount}
-              renderInput={params => <TextField {...params} label={label} />}
-            />
-          )
+      {isLoading && <Loading />}
+      {!!data &&
+        (!!data?.records?.length ? (
+          <Autocomplete
+            disablePortal
+            fullWidth
+            sx={{ mt: 2 }}
+            options={data.records}
+            getOptionLabel={({
+              Id,
+              Name,
+              ShippingStreet,
+              ShippingPostalCode,
+              ShippingCity,
+              C_School_Type__c
+            }) =>
+              `${Name}, ${ShippingStreet} ${ShippingPostalCode} ${ShippingCity} - ${t(
+                `field.schoolTypeList.${C_School_Type__c}`
+              )}`
+            }
+            onChange={onChangeAccount}
+            renderInput={params => <TextField {...params} label={label} />}
+          />
         ) : (
           <Alert sx={{ my: 2 }} severity='warning'>
             {t('field.noAccountRecords')}
           </Alert>
-        )
-      ) : null}
+        ))}
       {Boolean(error) && (
         <FormHelperText error sx={{ ml: 2 }}>
           {typeof error === 'string' ? error : null}
