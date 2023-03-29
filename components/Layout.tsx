@@ -3,6 +3,7 @@ import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material'
 import { ReactNode } from 'react'
 import Image from 'next/image'
 import logo from '../public/goodplanet_logo_white.svg'
+import LanguageSwitch from './LanguageSwitch'
 
 type LayoutProps = {
   title: string
@@ -19,9 +20,10 @@ const Layout = ({ title, children }: LayoutProps) => (
       <Container maxWidth='md'>
         <Toolbar sx={{ py: 2 }}>
           <Image src={logo} alt='GoodPlanet logo' width={48} />
-          <Typography variant='h1' component='div' sx={{ ml: 2 }}>
+          <Typography variant='h1' component='div' sx={{ ml: 2, flexGrow: 1 }}>
             {title}
           </Typography>
+          <LanguageSwitch />
         </Toolbar>
       </Container>
     </AppBar>
