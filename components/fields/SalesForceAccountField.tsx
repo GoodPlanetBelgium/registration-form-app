@@ -2,28 +2,13 @@ import {
   Alert,
   Autocomplete,
   Box,
-  Card,
-  CardContent,
   Chip,
-  FormControl,
   FormHelperText,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  SelectChangeEvent,
   TextField,
   Typography
 } from '@mui/material'
 import { Field, FieldProps } from 'formik'
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  FC,
-  SyntheticEvent,
-  useEffect,
-  useState
-} from 'react'
+import { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from 'react'
 import { Account, Initiative } from '../../lib/interfaces'
 import useFetch from '../../lib/useFetch'
 import useTranslations from '../../lib/useTranslations'
@@ -98,10 +83,8 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
   }
 
   const error =
-    (touched[name] && errors[name]) ||
-    (inputError && t('field.postcode.invalid'))
-
-  console.log(isLoading, data)
+    (inputError && t('field.postcode.invalid')) ||
+    (touched[name] && errors[name])
 
   return (
     <>
@@ -156,27 +139,25 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
           {typeof error === 'string' ? error : null}
         </FormHelperText>
       )}
-      {account ? (
-        <Card sx={{ m: 2 }}>
-          <CardContent>
-            <b>{t('field.school')}:</b> {account.Name}
-            <br />
-            <b>{t('field.address')}:</b> {account.ShippingStreet}{' '}
-            {account.ShippingPostalCode} {account.ShippingCity}
-            <br />
-            <b>{t('field.schoolType')}:</b>{' '}
-            {t(`field.schoolTypeList.${account.C_School_Type__c}`)}
-            <Box>
-              <Field
-                name='educationType'
-                label={t('field.educationType')}
-                account={account}
-                component={TypeOfEducationField}
-              />
-            </Box>
-          </CardContent>
-        </Card>
-      ) : null}
+      {!!account && (
+        <Box sx={{ p: 2 }}>
+          <b>{t('field.school')}:</b> {account.Name}
+          <br />
+          <b>{t('field.address')}:</b> {account.ShippingStreet}{' '}
+          {account.ShippingPostalCode} {account.ShippingCity}
+          <br />
+          <b>{t('field.schoolType')}:</b>{' '}
+          {t(`field.schoolTypeList.${account.C_School_Type__c}`)}
+          <Box>
+            <Field
+              name='educationType'
+              label={t('field.educationType')}
+              account={account}
+              component={TypeOfEducationField}
+            />
+          </Box>
+        </Box>
+      )}
     </>
   )
 }
