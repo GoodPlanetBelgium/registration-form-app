@@ -43,7 +43,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
         // console.log(values, errors)
         return (
           <Form noValidate>
-            <Paper>
+            <Paper sx={{ p: '1rem 2rem', m: '2rem 0' }}>
               <Field
                 name='accountId'
                 label={t('field.school')}
@@ -51,7 +51,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
                 component={SalesForceAccountField}
               />
             </Paper>
-            <Paper>
+            <Paper sx={{ p: '1rem 2rem', m: '2rem 0' }}>
               <Typography sx={{ py: 1 }} variant='h2'>
                 {t('sub.contact.title')}
               </Typography>

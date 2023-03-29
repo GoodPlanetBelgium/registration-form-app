@@ -41,7 +41,11 @@ const WorkshopField: FC<Props & FieldProps> = ({
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<number | false>(0)
   return (
-    <Accordion disableGutters defaultExpanded sx={{ borderRadius: 1 }}>
+    <Accordion
+      disableGutters
+      defaultExpanded
+      sx={{ borderRadius: 1, p: '1rem 2rem', m: '2rem 0' }}
+    >
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography variant='h2'>{workshop?.Name}</Typography>
       </AccordionSummary>

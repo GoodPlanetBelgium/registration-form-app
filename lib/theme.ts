@@ -39,17 +39,6 @@ export const themeOptions: ThemeOptions = {
     }
   },
   components: {
-    MuiPaper: {
-      defaultProps: {
-        elevation: 3
-      },
-      styleOverrides: {
-        root: {
-          padding: '1rem 2rem',
-          margin: '2rem 0'
-        }
-      }
-    },
     MuiAccordionSummary: {
       styleOverrides: {
         root: {
