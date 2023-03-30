@@ -39,7 +39,24 @@ const WorkshopField: FC<Props & FieldProps> = ({
   ) as Workshop
   const t = useTranslations('Form')
   const router = useRouter()
-  const [activeTab, setActiveTab] = useState<number | false>(0)
+  const [activeTab, setActiveTab] = useState<number | false>(false)
+
+  const addRegistration = (push: (obj: any) => void) => () => {
+    push(registrationInitialValues)
+    setActiveTab(registrations.length)
+  }
+
+  const removeRegistration = (remove: (i: number) => void, i: number) => () => {
+    setActiveTab(
+      !registrations.length || registrations.length === 1
+        ? false
+        : i === registrations.length - 1
+        ? i - 1
+        : i
+    )
+    remove(i)
+  }
+
   return (
     <Accordion
       disableGutters
@@ -67,7 +84,7 @@ const WorkshopField: FC<Props & FieldProps> = ({
             <Box>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs
-                  value={!registrations.length ? false : activeTab}
+                  value={activeTab}
                   onChange={(e, newTab: number) => setActiveTab(newTab)}
                   scrollButtons='auto'
                 >
@@ -77,12 +94,6 @@ const WorkshopField: FC<Props & FieldProps> = ({
                       label={registration.groupName || `#${i + 1}`}
                     />
                   ))}
-                  <Tab
-                    onClick={() => push(registrationInitialValues)}
-                    title={t('sub.workshop.add')}
-                    icon={<AddIcon sx={{ color: 'primary.contrastText' }} />}
-                    sx={{ backgroundColor: 'primary.main' }}
-                  />
                 </Tabs>
               </Box>
               {registrations.map((registration, i) => (
@@ -93,32 +104,39 @@ const WorkshopField: FC<Props & FieldProps> = ({
                   <RegistrationSubForm nameSpace={`${name}[${i}]`} />
                   <Box sx={{ m: 2 }}>
                     <Button
-                      onClick={() => {
-                        setActiveTab(
-                          !registrations.length
-                            ? false
-                            : i === registrations.length - 1
-                            ? i - 1
-                            : i
-                        )
-                        remove(i)
-                      }}
+                      onClick={removeRegistration(remove, i)}
                       variant='outlined'
                       color='warning'
-                      sx={{ mt: 1 }}
                       title={t('sub.workshop.remove')}
                       size='large'
+                      sx={{ mr: 2 }}
                     >
                       <DeleteIcon sx={{ mr: 1 }} />
                       <span>{t('sub.workshop.remove')}</span>
+                    </Button>
+                    <Button
+                      onClick={addRegistration(push)}
+                      variant='contained'
+                      color='success'
+                      size='large'
+                    >
+                      <AddIcon />
+                      <span>{t('sub.workshop.add')}</span>
                     </Button>
                   </Box>
                 </Box>
               ))}
               {!registrations.length && (
-                <Alert sx={{ mt: 2 }} severity='warning'>
-                  {t('sub.workshop.clickToAdd')}
-                </Alert>
+                <Button
+                  onClick={addRegistration(push)}
+                  variant='contained'
+                  color='success'
+                  size='large'
+                  sx={{ m: 2 }}
+                >
+                  <AddIcon />
+                  <span>{t('sub.workshop.add')}</span>
+                </Button>
               )}
             </Box>
           )}

@@ -66,8 +66,6 @@ const translations: translationsType = {
       'sub.workshop.registrationsTitle': 'Inschrijvingen',
       'sub.workshop.remove': 'Verwijderen',
       'sub.workshop.add': 'Inschrijving toevoegen',
-      'sub.workshop.clickToAdd':
-        'Klik hierboven op + om een inschrijving toe te voegen.',
       'sub.workshop.groupTitle': 'Klas',
       'sub.workshop.field.groupName': 'Klas naam',
       'sub.workshop.field.groupSize': 'Aantal leerlingen',
