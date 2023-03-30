@@ -15,6 +15,8 @@ specifiers:
   eslint-config-next: 13.1.5
   formik: ^2.2.9
   ioredis: ^5.3.0
+  libphonenumber-js: ^1.10.24
+  mui-tel-input: ^3.1.1
   next: 13.1.5
   react: 18.2.0
   react-dom: 18.2.0
@@ -31,6 +33,8 @@ dependencies:
   dayjs: 1.11.7
   formik: 2.2.9_react@18.2.0
   ioredis: 5.3.0
+  libphonenumber-js: 1.10.24
+  mui-tel-input: 3.1.1_pht22kiaujpoq7nmpt7dw6t4hq
   next: 13.1.5_pjwopsidmaokadturxaafygjp4
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -2324,6 +2328,10 @@ packages:
       type-check: 0.4.0
     dev: true
 
+  /libphonenumber-js/1.10.24:
+    resolution: {integrity: sha512-3Dk8f5AmrcWqg+oHhmm9hwSTqpWHBdSqsHmjCJGroULFubi0+x7JEIGmRZCuL3TI8Tx39xaKqfnhsDQ4ALa/Nw==}
+    dev: false
+
   /lines-and-columns/1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
     dev: false
@@ -2415,6 +2423,28 @@ packages:
   /ms/2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
+
+  /mui-tel-input/3.1.1_pht22kiaujpoq7nmpt7dw6t4hq:
+    resolution: {integrity: sha512-7JO3rCZUGbZBbIzWb8VPYop+VbqQAUfNZ7UOUT1IunC2ZX+0pJbdcS1jA522FqmiD5lOzTvFKdJiJKci7vd7JQ==}
+    peerDependencies:
+      '@emotion/react': ^11.5.0
+      '@emotion/styled': ^11.3.0
+      '@mui/material': ^5.0.0
+      '@types/react': ^17.0.0 || ^18.0.0
+      react: ^17.0.0 || ^18.0.0
+      react-dom: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@emotion/react': 11.10.5_yxdp3dl3eazy3vwpbmv4fq727a
+      '@emotion/styled': 11.10.5_4erqsq3n444jecyuvaxwc5b3vi
+      '@mui/material': 5.11.6_rqh7qj4464ntrqrt6banhaqg4q
+      '@types/react': 18.0.27
+      libphonenumber-js: 1.10.24
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /nanoclone/0.2.1:
     resolution: {integrity: sha512-wynEP02LmIbLpcYw8uBKpcfF6dmg2vcpKqxeH5UcoKEYdExslsdUA4ugFauuaeYdTB76ez6gJW8XAZ6CgkXYxA==}

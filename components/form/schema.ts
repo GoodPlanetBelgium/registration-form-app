@@ -1,3 +1,4 @@
+import { parsePhoneNumber } from 'libphonenumber-js'
 import * as Yup from 'yup'
 import { Initiative, Workshop } from '../../lib/interfaces'
 import { TranslationType } from '../../lib/useTranslations'
@@ -74,7 +75,15 @@ const validationSchema = (t: TranslationType, initiative: Initiative) => {
     educationType: Yup.array().of(Yup.string()).min(1, t('field.required')),
     applicant: Yup.object({
       ...contactSchema(t),
-      phone: Yup.string().required(t('field.required'))
+      phone: Yup.string()
+        .required(t('field.required'))
+        .test('phone-test', t('field.invalid'), value => {
+          try {
+            return parsePhoneNumber(value || '').isValid()
+          } catch {
+            return false
+          }
+        })
     }),
     workshops: Yup.object().shape(
       workshopIds.reduce(

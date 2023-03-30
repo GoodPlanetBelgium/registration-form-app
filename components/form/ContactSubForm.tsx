@@ -1,6 +1,7 @@
 import { Field } from 'formik'
-import React, { FC, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import useTranslations from '../../lib/useTranslations'
+import PhoneField from '../fields/PhoneField'
 import RoleField from '../fields/RoleField'
 import TextField from '../fields/TextField'
 
@@ -40,7 +41,7 @@ const ContactSubForm = ({ nameSpace, fields }: Props) => {
       <Field
         name={`${nameSpace}.phone`}
         label={t('field.phone')}
-        component={TextField}
+        component={PhoneField}
       />
     ),
     role: (
