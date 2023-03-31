@@ -1,11 +1,18 @@
 import { Field } from 'formik'
 import React, { ReactElement } from 'react'
 import useTranslations from '../../lib/useTranslations'
+import CheckboxField from '../fields/CheckboxField'
 import PhoneField from '../fields/PhoneField'
 import RoleField from '../fields/RoleField'
 import TextField from '../fields/TextField'
 
-type FieldType = 'firstName' | 'lastName' | 'email' | 'phone' | 'role'
+type FieldType =
+  | 'firstName'
+  | 'lastName'
+  | 'email'
+  | 'phone'
+  | 'role'
+  | 'newsLetter'
 interface Props {
   nameSpace: string
   fields: FieldType[]
@@ -49,6 +56,13 @@ const ContactSubForm = ({ nameSpace, fields }: Props) => {
         name={`${nameSpace}.role`}
         label={t('field.role')}
         component={RoleField}
+      />
+    ),
+    newsLetter: (
+      <Field
+        name={`${nameSpace}.newsLetter`}
+        label={t('field.newsLetter')}
+        component={CheckboxField}
       />
     )
   }

@@ -9,6 +9,7 @@ interface Contact {
   email: string
   phone?: string
   role: string
+  newsLetter?: boolean
 }
 
 interface Registration {
@@ -27,6 +28,7 @@ interface FormValues {
   workshops: {
     [workshopId: string]: Registration[]
   }
+  agreed: boolean
 }
 
 const contactSchema = (t: TranslationType) => ({
@@ -97,7 +99,8 @@ const validationSchema = (t: TranslationType, initiative: Initiative) => {
       )
     ),
     remark: Yup.string(),
-    agreed: Yup.bool().oneOf([true], t('field.required'))
+    agreed: Yup.bool().oneOf([true], t('field.required')),
+    newsLetter: Yup.bool()
   })
 }
 
@@ -109,7 +112,8 @@ const initialValues = (initiative: Initiative) => ({
     lastName: '',
     email: '',
     phone: '',
-    role: ''
+    role: '',
+    newsLetter: false
   },
   workshops: initiative.Workshops__r.records.reduce(
     (obj, workshop) => ({

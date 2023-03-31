@@ -64,6 +64,8 @@ const translations: translationsType = {
       'field.role.Vice_Headmaster': 'Onderdirecteur',
       'field.role.Coordinator': 'Coördinator',
       'field.role.Other': 'Anders',
+      'field.newsLetter':
+        'Ik ontvang graag de nieuwsbrief van GoodPlanet om op te hoogte te zijn van het actuele aanbod',
       'sub.contact.title': 'Aanvrager',
       'sub.contact.subtitle':
         'De contactpersoon. Dit kan de leerkracht zijn van één van de aanvragende klassen, een coördinator of directie.',
@@ -86,7 +88,7 @@ const translations: translationsType = {
       'field.noPreference': 'Geen voorkeur',
       'field.remark': 'Opmerking bij de inschrijving',
       'field.agreed':
-        'Ik verklaar aan alle voorwaarden te voldoen om de inschrijvingen te kunnen voltooien.',
+        'Ik verklaar alle informatie rond deze inschrijvingen te hebben gelezen en begrepen.',
       submit: 'Verzenden'
     },
     Days: {
@@ -168,6 +170,8 @@ const translations: translationsType = {
       'field.role.Vice_Headmaster': 'Sous-directeur',
       'field.role.Coordinator': 'Coordinateur',
       'field.role.Other': 'Autre',
+      'field.newsLetter':
+        'Je souhaite recevoir la newsletter GoodPlanet pour être informé de la gamme actuelle.',
       'sub.contact.title': 'Demandeur',
       'sub.contact.subtitle':
         "La personne à contacter. Il peut s'agir de l'enseignant de l'une des classes demandant l'inscription, d'un coordinateur ou d'un directeur.",
@@ -191,7 +195,7 @@ const translations: translationsType = {
       'field.noPreference': 'Pas de préférence',
       'field.remark': "Remarque pour l'inscription",
       'field.agreed':
-        'Je déclare remplir toutes les conditions pour pouvoir finaliser les inscriptions.',
+        'Je déclare avoir lu et compris toutes les informations concernant ces inscriptions.',
       submit: 'Envoyer'
     },
     Days: {

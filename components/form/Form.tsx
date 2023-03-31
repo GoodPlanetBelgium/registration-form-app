@@ -60,7 +60,14 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
               </Typography>
               <ContactSubForm
                 nameSpace='applicant'
-                fields={['firstName', 'lastName', 'email', 'phone', 'role']}
+                fields={[
+                  'firstName',
+                  'lastName',
+                  'email',
+                  'phone',
+                  'role',
+                  'newsLetter'
+                ]}
               />
             </Paper>
             {Object.keys(values.workshops).map((workshopId, i) => (
