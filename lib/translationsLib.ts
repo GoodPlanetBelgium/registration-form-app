@@ -26,14 +26,15 @@ const translations: translationsType = {
       'field.school': 'School',
       'field.school.numberFound': '{n} scholen gevonden',
       'field.schoolType': 'Onderwijsniveau',
-      'field.schoolTypeList.Nursery_School': 'Kleuteronderwijs',
-      'field.schoolTypeList.Primary_School': 'Lageronderwijs',
+      'field.schoolTypeList.Nursery_School': 'Kleuter onderwijs',
+      'field.schoolTypeList.Primary_School': 'Lager onderwijs',
       'field.schoolTypeList.Nursery_And_Primary School':
         'Kleuter- en lageronderwijs',
-      'field.schoolTypeList.Secondary_School': 'Middelbaaronderwijs',
-      'field.schoolTypeList.Higher_Education': 'Hogeronderwijs',
-      'field.schoolTypeList.Adult_Education': 'Volwassenenonderwijs',
-      'field.educationType': 'Onderwijsvorm',
+      'field.schoolTypeList.Secondary_School': 'Secundair onderwijs',
+      'field.schoolTypeList.Higher_Education': 'Hoger onderwijs',
+      'field.schoolTypeList.Adult_Education': 'Volwassenen onderwijs',
+      'field.educationType':
+        'Welke onderwijsvormen worden aangeboden in deze school?',
       'field.schoolEducationType.A-Stroom': 'A-Stroom',
       'field.schoolEducationType.B-Stroom': 'B-Stroom',
       'field.schoolEducationType.General': 'ASO',
@@ -42,6 +43,7 @@ const translations: translationsType = {
       'field.schoolEducationType.Professional': 'BSO',
       'field.schoolEducationType.Parttime': 'Parttime',
       'field.schoolEducationType.Specialized': 'Bijzonder onderwijs',
+      'field.schoolEducationType.Non-native_Entrants_Education': 'OKAN',
       'field.address': 'Adres',
       'field.noAccountRecords':
         'Met deze postcode werden er geen scholen gevonden die voldoen aan de voorwaarden voor dit project.',
@@ -133,7 +135,8 @@ const translations: translationsType = {
       'field.schoolTypeList.Secondary_School': 'Enseignement secondaire',
       'field.schoolTypeList.Higher_Education': 'Enseignement supérieur',
       'field.schoolTypeList.Adult_Education': 'Formation pour adultes',
-      'field.educationType': "Type d'enseignement",
+      'field.educationType':
+        "Quels types d'enseignement sont proposés dans cette école?",
       'field.schoolEducationType.A-Stroom': 'A-Stroom',
       'field.schoolEducationType.B-Stroom': 'B-Stroom',
       'field.schoolEducationType.General': 'ASO',
@@ -142,6 +145,7 @@ const translations: translationsType = {
       'field.schoolEducationType.Professional': 'BSO',
       'field.schoolEducationType.Parttime': 'Parttime',
       'field.schoolEducationType.Specialized': 'Bijzonder onderwijs',
+      'field.schoolEducationType.Non-native_Entrants_Education': 'DASPA',
       'field.address': 'Adresse',
       'field.noAccountRecords':
         "Aucune école répondant aux critères de ce projet n'a été trouvée avec ce code postal.",

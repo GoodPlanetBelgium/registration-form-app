@@ -4,6 +4,7 @@ import {
   Box,
   Chip,
   FormHelperText,
+  Paper,
   TextField,
   Typography
 } from '@mui/material'
@@ -141,21 +142,21 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
       )}
       {!!account && (
         <Box sx={{ p: 2 }}>
-          <b>{t('field.school')}:</b> {account.Name}
-          <br />
-          <b>{t('field.address')}:</b> {account.ShippingStreet}{' '}
-          {account.ShippingPostalCode} {account.ShippingCity}
-          <br />
-          <b>{t('field.schoolType')}:</b>{' '}
-          {t(`field.schoolTypeList.${account.C_School_Type__c}`)}
-          <Box>
-            <Field
-              name='educationType'
-              label={t('field.educationType')}
-              account={account}
-              component={TypeOfEducationField}
-            />
-          </Box>
+          <Paper variant='outlined' sx={{ p: 2 }}>
+            <b>{t('field.school')}:</b> {account.Name}
+            <br />
+            <b>{t('field.address')}:</b> {account.ShippingStreet}{' '}
+            {account.ShippingPostalCode} {account.ShippingCity}
+            <br />
+            <b>{t('field.schoolType')}:</b>{' '}
+            {t(`field.schoolTypeList.${account.C_School_Type__c}`)}
+          </Paper>
+          <Field
+            name='educationType'
+            label={t('field.educationType')}
+            account={account}
+            component={TypeOfEducationField}
+          />
         </Box>
       )}
     </>
