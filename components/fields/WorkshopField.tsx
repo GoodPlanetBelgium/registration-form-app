@@ -101,7 +101,10 @@ const WorkshopField: FC<Props & FieldProps> = ({
                   key={i}
                   sx={{ display: activeTab !== i ? 'none' : 'block', mt: 2 }}
                 >
-                  <RegistrationSubForm nameSpace={`${name}[${i}]`} />
+                  <RegistrationSubForm
+                    nameSpace={`${name}[${i}]`}
+                    workshop={workshop}
+                  />
                   <Box sx={{ m: 2 }}>
                     <Button
                       onClick={removeRegistration(remove, i)}

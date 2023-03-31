@@ -16,7 +16,7 @@ interface Registration {
   groupSize: number
   copyApplicant: boolean
   groupContact: Contact
-  dayOfWeekPreference: string
+  dayOfWeekPreference: string[]
   monthPreference: string
 }
 
@@ -56,7 +56,9 @@ const registrationsSchema = (
           is: false,
           then: Yup.object(contactSchema(t))
         }),
-        dayOfWeekPreference: Yup.string().required(t('field.required')),
+        dayOfWeekPreference: Yup.array()
+          .of(Yup.string().required(t('field.required')))
+          .min(1, t('field.required')),
         monthPreference: Yup.string().required(t('field.required'))
       })
     )
@@ -125,7 +127,7 @@ const registrationInitialValues = {
   groupSize: '',
   copyApplicant: false,
   groupContact: { firstName: '', lastName: '', email: '', role: '' },
-  dayOfWeekPreference: '',
+  dayOfWeekPreference: [],
   monthPreference: ''
 }
 

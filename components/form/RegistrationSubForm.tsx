@@ -1,5 +1,5 @@
-import { Box, Divider } from '@mui/material'
 import { Field, getIn, useFormikContext } from 'formik'
+import { Workshop } from '../../lib/interfaces'
 import useTranslations, {
   useTranslationsCategory
 } from '../../lib/useTranslations'
@@ -11,9 +11,10 @@ import ContactSubForm from './ContactSubForm'
 
 interface Props {
   nameSpace: string
+  workshop: Workshop
 }
 
-const RegistrationSubForm = ({ nameSpace }: Props) => {
+const RegistrationSubForm = ({ nameSpace, workshop }: Props) => {
   const t = useTranslations('Form')
   const days = useTranslationsCategory('Days')
   const months = useTranslationsCategory('Months')
@@ -52,10 +53,16 @@ const RegistrationSubForm = ({ nameSpace }: Props) => {
           name={`${nameSpace}.dayOfWeekPreference`}
           label={t('sub.workshop.field.dayOfWeekPreference')}
           component={SelectField}
-          options={Object.keys(days).map(day => ({
-            value: day,
-            label: days[day]
-          }))}
+          options={workshop.C_Weekday_Preferences__c.split(';')
+            .filter(option => option !== 'No_Preference')
+            .map(day => ({
+              value: day,
+              label: days[day]
+            }))}
+          multiple
+          noPreferenceOption={workshop.C_Weekday_Preferences__c.split(
+            ';'
+          ).includes('No_Preference')}
         />
         <Field
           name={`${nameSpace}.monthPreference`}

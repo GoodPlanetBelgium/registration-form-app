@@ -79,17 +79,20 @@ const translations: translationsType = {
         'Minimum één inschrijving vereist voor deze workshop.',
       'sub.workshop.field.required':
         'Minimum één inschrijving in totaal vereist.',
+      'field.noPreference': 'Geen voorkeur',
       'field.remark': 'Opmerking bij de inschrijving',
       'field.agreed':
         'Ik verklaar aan alle voorwaarden te voldoen om de inschrijvingen te kunnen voltooien.',
       submit: 'Verzenden'
     },
     Days: {
-      monday: 'maandag',
-      tuesday: 'dinsdag',
-      wednesday: 'woensdag',
-      thursday: 'donderdag',
-      friday: 'vrijdag'
+      Monday: 'maandag',
+      Tuesday: 'dinsdag',
+      Wednesday: 'woensdag',
+      Thursday: 'donderdag',
+      Friday: 'vrijdag',
+      Saturday: 'zaterdag',
+      Sunday: 'zondag'
     },
     Months: {
       september: 'september',
@@ -177,17 +180,20 @@ const translations: translationsType = {
         'Au moins une inscription est requise pour cet atelier.',
       'sub.workshop.field.required':
         'Au moins une inscription totale est requise.',
+      'field.noPreference': 'Pas de préférence',
       'field.remark': "Remarque pour l'inscription",
       'field.agreed':
         'Je déclare remplir toutes les conditions pour pouvoir finaliser les inscriptions.',
       submit: 'Envoyer'
     },
     Days: {
-      monday: 'lundi',
-      tuesday: 'mardi',
-      wednesday: 'mercredi',
-      thursday: 'jeudi',
-      friday: 'vendredi'
+      Monday: 'lundi',
+      Tuesday: 'mardi',
+      Wednesday: 'mercredi',
+      Thursday: 'jeudi',
+      Friday: 'vendredi',
+      Saturday: 'samedi',
+      Sunday: 'dimanche'
     },
     Months: {
       september: 'septembre',
