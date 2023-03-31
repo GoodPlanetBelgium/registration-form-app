@@ -25,6 +25,8 @@ const translations: translationsType = {
       'field.invalidEmail': 'Dit is geen geldig emailadres',
       'field.school': 'School',
       'field.school.numberFound': '{n} scholen gevonden',
+      'field.school.notFoundInfo':
+        'Vind je jouw school niet in de lijst? Stuur een mailtje naar ict@goodplanet.be',
       'field.schoolType': 'Onderwijsniveau',
       'field.schoolTypeList.Nursery_School': 'Kleuter onderwijs',
       'field.schoolTypeList.Primary_School': 'Lager onderwijs',
@@ -127,6 +129,8 @@ const translations: translationsType = {
       'field.invalidEmail': "Cette adresse e-mail n'est pas valide.",
       'field.school': 'École',
       'field.school.numberFound': '{n} écoles trouvées',
+      'field.school.notFoundInfo':
+        'Vous ne trouvez pas votre école dans la liste ? Envoyez un email à ict@goodplanet.be',
       'field.schoolType': "Niveau d'enseignement",
       'field.schoolTypeList.Nursery_School': 'Enseignement maternel',
       'field.schoolTypeList.Primary_School': 'Enseignement primaire',
