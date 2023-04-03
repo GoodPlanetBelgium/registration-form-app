@@ -1,0 +1,53 @@
+{
+  "initiativeId": "a0p1n00000Jk7LEAAZ",
+  "accountId": "0011n00002cYkilAAC",
+  "educationType": [
+    "General",
+    "B-Stroom"
+  ],
+  "applicant": {
+    "firstName": "Tomas",
+    "lastName": "Vink",
+    "email": "t.vink@goodplanet.be",
+    "phone": "+32 484 16 57 34",
+    "role": "Headmaster",
+    "newsLetter": true
+  },
+  "registrations": [
+    {
+      "workshopId": "a001n00002iXIyFAAW",
+      "groupName": "1b",
+      "groupSize": 24,
+      "copyApplicant": true,
+      "groupContact": {
+        "firstName": "",
+        "lastName": "",
+        "email": "",
+        "role": ""
+      },
+      "dayOfWeekPreference": [
+        "Monday",
+        "Wednesday"
+      ],
+      "monthPreference": "november"
+    },
+    {
+      "workshopId": "a001n00002iXM0nAAG",
+      "groupName": "1a",
+      "groupSize": 33,
+      "copyApplicant": false,
+      "groupContact": {
+        "firstName": "andere ",
+        "lastName": "naam",
+        "email": "t@t.tt",
+        "role": "Teacher"
+      },
+      "dayOfWeekPreference": [
+        "No_Preference"
+      ],
+      "monthPreference": "october"
+    }
+  ],
+  "remark": "bla bla bla",
+  "agreed": true
+}

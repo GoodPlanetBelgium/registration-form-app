@@ -80,7 +80,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
               />
             ))}
             <Field
-              name='remarkByApplicant'
+              name='remark'
               label={t('field.remark')}
               component={TextField}
               multiline
