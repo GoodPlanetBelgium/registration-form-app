@@ -43,7 +43,7 @@ const translations: translationsType = {
       'field.schoolEducationType.Technical': 'TSO',
       'field.schoolEducationType.Art': 'KSO',
       'field.schoolEducationType.Professional': 'BSO',
-      'field.schoolEducationType.Parttime': 'Parttime',
+      'field.schoolEducationType.Parttime': 'DBSO',
       'field.schoolEducationType.Specialized': 'Bijzonder onderwijs',
       'field.schoolEducationType.Non-native_Entrants_Education': 'OKAN',
       'field.address': 'Adres',
@@ -59,7 +59,7 @@ const translations: translationsType = {
       'field.role': 'Functie',
       'field.role.Headmaster': 'Directeur',
       'field.role.Teacher': 'Leerkracht',
-      'field.role.Maintenance': '? tr Maintanance',
+      'field.role.Maintenance': 'Onderhoudsmedewerker',
       'field.role.Administration': 'Secretariaat',
       'field.role.Vice_Headmaster': 'Onderdirecteur',
       'field.role.Coordinator': 'Coördinator',
@@ -68,7 +68,7 @@ const translations: translationsType = {
         'Ik ontvang graag de nieuwsbrief van GoodPlanet om op te hoogte te zijn van het actuele aanbod',
       'sub.contact.title': 'Aanvrager',
       'sub.contact.subtitle':
-        'De contactpersoon. Dit kan de leerkracht zijn van één van de aanvragende klassen, een coördinator of directie.',
+        'De contactpersoon. Dit kan de leerkracht zijn van één van de aanvragende klassen, een coördinator, directie, ...',
       'sub.workshop.registrationsTitle': 'Inschrijvingen',
       'sub.workshop.remove': 'Verwijderen',
       'sub.workshop.add': 'Inschrijving toevoegen',
@@ -78,7 +78,7 @@ const translations: translationsType = {
       'sub.workshop.contactTitle': 'Leerkracht of contactpersoon voor de klas',
       'sub.workshop.field.copyApplicant':
         'Leerkracht is dezelfde persoon als de aanvrager.',
-      'sub.workshop.field.dayOfWeekPreference': 'Voorkeursdag',
+      'sub.workshop.field.dayOfWeekPreference': 'Voorkeursdag(en)',
       'sub.workshop.preferencesTitle': 'Voorkeuren',
       'sub.workshop.field.monthPreference': 'Voorkeursmaand',
       'sub.workshop.field.workshopRequired':
@@ -101,6 +101,7 @@ const translations: translationsType = {
       Sunday: 'zondag'
     },
     Months: {
+      august: 'augustus',
       september: 'september',
       october: 'oktober',
       november: 'november',
@@ -110,7 +111,8 @@ const translations: translationsType = {
       march: 'maart',
       april: 'april',
       may: 'mei',
-      june: 'juni'
+      june: 'juni',
+      july: 'juli'
     }
   },
   fr: {
@@ -143,14 +145,14 @@ const translations: translationsType = {
       'field.schoolTypeList.Adult_Education': 'Formation pour adultes',
       'field.educationType':
         "Quels types d'enseignement sont proposés dans cette école?",
-      'field.schoolEducationType.A-Stroom': 'A-Stroom',
-      'field.schoolEducationType.B-Stroom': 'B-Stroom',
-      'field.schoolEducationType.General': 'ASO',
-      'field.schoolEducationType.Technical': 'TSO',
-      'field.schoolEducationType.Art': 'KSO',
-      'field.schoolEducationType.Professional': 'BSO',
-      'field.schoolEducationType.Parttime': 'Parttime',
-      'field.schoolEducationType.Specialized': 'Bijzonder onderwijs',
+      'field.schoolEducationType.A-Stroom': '',
+      'field.schoolEducationType.B-Stroom': '',
+      'field.schoolEducationType.General': 'Enseignement général',
+      'field.schoolEducationType.Technical': 'Enseignement technique',
+      'field.schoolEducationType.Art': ' Enseignement artistique',
+      'field.schoolEducationType.Professional': 'Enseignement professionnel',
+      'field.schoolEducationType.Parttime': 'CEFA',
+      'field.schoolEducationType.Specialized': 'Enseignement spécialisé',
       'field.schoolEducationType.Non-native_Entrants_Education': 'DASPA',
       'field.address': 'Adresse',
       'field.noAccountRecords':
@@ -165,16 +167,16 @@ const translations: translationsType = {
       'field.role': 'Fonction',
       'field.role.Headmaster': 'Directeur',
       'field.role.Teacher': 'Enseignant',
-      'field.role.Maintenance': '? tr Maintenance',
+      'field.role.Maintenance': "Agent d'entretien",
       'field.role.Administration': 'Administration',
       'field.role.Vice_Headmaster': 'Sous-directeur',
       'field.role.Coordinator': 'Coordinateur',
       'field.role.Other': 'Autre',
       'field.newsLetter':
-        'Je souhaite recevoir la newsletter GoodPlanet pour être informé de la gamme actuelle.',
+        "Je souhaite recevoir la newsletter GoodPlanet pour être informé de l'offre actuelle.",
       'sub.contact.title': 'Demandeur',
       'sub.contact.subtitle':
-        "La personne à contacter. Il peut s'agir de l'enseignant de l'une des classes demandant l'inscription, d'un coordinateur ou d'un directeur.",
+        'Personne de contact. La personne peut être un enseignant, un coordinateur, un membre de la direction, ...',
       'sub.workshop.registrationsTitle': 'Inscriptions',
       'sub.workshop.remove': 'Supprimer',
       'sub.workshop.add': 'Ajouter une inscription',
@@ -182,16 +184,15 @@ const translations: translationsType = {
       'sub.workshop.field.groupName': 'Nom de la classe',
       'sub.workshop.field.groupSize': "Nombre d'élèves",
       'sub.workshop.contactTitle':
-        'Enseignant ou personne à contacter pour la classe',
+        'Enseignant ou personne à contacter pour cette classe',
       'sub.workshop.field.copyApplicant':
         "L'enseignant est la même personne que le demandeur.",
-      'sub.workshop.field.dayOfWeekPreference': 'Jour préféré',
+      'sub.workshop.field.dayOfWeekPreference': 'Jour de préférence',
       'sub.workshop.preferencesTitle': 'Préférences',
-      'sub.workshop.field.monthPreference': 'Mois préféré',
+      'sub.workshop.field.monthPreference': 'Mois de préférence',
       'sub.workshop.field.workshopRequired':
         'Au moins une inscription est requise pour cet atelier.',
-      'sub.workshop.field.required':
-        'Au moins une inscription totale est requise.',
+      'sub.workshop.field.required': 'Au moins une inscription est requise.',
       'field.noPreference': 'Pas de préférence',
       'field.remark': "Remarque pour l'inscription",
       'field.agreed':
@@ -208,6 +209,7 @@ const translations: translationsType = {
       Sunday: 'dimanche'
     },
     Months: {
+      august: 'août',
       september: 'septembre',
       october: 'octobre',
       november: 'novembre',
@@ -217,7 +219,8 @@ const translations: translationsType = {
       march: 'mars',
       april: 'avril',
       may: 'mai',
-      june: 'juin'
+      june: 'juin',
+      july: 'juillet'
     }
   }
 }

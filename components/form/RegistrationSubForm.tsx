@@ -38,7 +38,6 @@ const RegistrationSubForm = ({ nameSpace, workshop }: Props) => {
         <Field
           name={`${nameSpace}.copyApplicant`}
           label={t('sub.workshop.field.copyApplicant')}
-          onChange={console.log}
           component={CheckboxField}
         />
         {!getIn(values, `${nameSpace}.copyApplicant`) && (
