@@ -87,8 +87,6 @@ const ScheduleField: FC<SFProps & FieldProps> = ({
 
   const error = (getIn(touched, name) && getIn(errors, name)) || ''
 
-  console.log(value, error)
-
   return (
     <Section label={label} error={Boolean(error)}>
       <Box

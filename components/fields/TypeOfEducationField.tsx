@@ -46,12 +46,10 @@ const TypeOfEducationField: FC<TOEFieldProps & FieldProps> = ({
   )
   const onChange = (e: SelectChangeEvent<HTMLInputElement>) => {
     if (value.includes(e.target.name)) {
-      console.log('removing value')
       const newArr = [...value]
       newArr.splice(newArr.indexOf(e.target.name), 1)
       setFieldValue(name, newArr)
     } else {
-      console.log('adding')
       setFieldValue(name, [e.target.name, ...value])
     }
   }

@@ -21,7 +21,6 @@ export default async function handler (
   req: Request,
   res: NextApiResponse<{ data?: PickListValues; error?: string }>
 ) {
-  console.log(req.query)
   const { sObject, field } = req.query
   if (typeof sObject !== 'string' || typeof field !== 'string') {
     console.error('error')
