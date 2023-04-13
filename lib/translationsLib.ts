@@ -94,6 +94,7 @@ const translations: translationsType = {
       'field.remark': 'Opmerking bij de inschrijving',
       'field.agreed':
         'Ik verklaar alle informatie rond deze inschrijvingen te hebben gelezen en begrepen.',
+      errorsFound: 'Het formulier bevat fouten en kan niet verzonden worden.',
       submit: 'Verzenden'
     },
     Days: {

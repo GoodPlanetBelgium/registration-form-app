@@ -8,7 +8,7 @@ import {
   TextField,
   Typography
 } from '@mui/material'
-import { FieldProps } from 'formik'
+import { FieldProps, getIn } from 'formik'
 import { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from 'react'
 import { Account, Initiative } from '../../lib/interfaces'
 import useFetch from '../../lib/useFetch'
@@ -86,7 +86,7 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
 
   const error =
     (inputError && t('field.postcode.invalid')) ||
-    (touched[name] && errors[name])
+    (getIn(touched, name) && getIn(errors, name))
 
   return (
     <>

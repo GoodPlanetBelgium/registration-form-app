@@ -10,7 +10,6 @@ import WorkshopField from '../fields/WorkshopField'
 import ContactSubForm from './ContactSubForm'
 import { FormValues, initialValues, validationSchema } from './schema'
 import SendIcon from '@mui/icons-material/Send'
-import ScheduleField from '../fields/ScheduleField'
 
 interface FormProps {
   initiative: Initiative
@@ -30,7 +29,6 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
       onSubmit(values)
     } else {
       setCountError('sub.workshop.field.required')
-      setTimeout(() => setCountError(''), 5000)
     }
   }
 
@@ -41,7 +39,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
       onSubmit={beforeSubmit}
     >
       {({ isValid, values, errors }) => {
-        // console.log(values, errors)
+        console.log(values, errors)
         return (
           <Form noValidate>
             <Paper sx={{ p: '1rem 2rem', m: '2rem 0' }}>
@@ -102,6 +100,9 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
             </Button>
             {countError && (
               <FormHelperText error>{t(countError)}</FormHelperText>
+            )}
+            {Object.keys(errors).length > 0 && (
+              <FormHelperText error>{t('errorsFound')}</FormHelperText>
             )}
           </Form>
         )
