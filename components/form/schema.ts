@@ -21,9 +21,14 @@ interface Registration {
   monthPreference: string
 }
 
-interface FormValues {
-  accountId: string
+interface Account {
+  id: string
   educationType: string[]
+  schedule: string | null
+}
+
+interface FormValues {
+  account: Account
   applicant: Contact
   workshops: {
     [workshopId: string]: Registration[]
@@ -73,10 +78,20 @@ const registrationsSchema = (
 const validationSchema = (t: TranslationType, initiative: Initiative) => {
   const workshopIds = initiative.Workshops__r.records.map(w => w.Id)
   return Yup.object({
-    accountId: Yup.string()
-      .required(t('field.required'))
-      .matches(/[a-zA-Z0-9]{18}/, t('field.invalid')),
-    educationType: Yup.array().of(Yup.string()).min(1, t('field.required')),
+    account: Yup.object({
+      id: Yup.string()
+        .required(t('field.required'))
+        .matches(/[a-zA-Z0-9]{18}/, t('field.invalid')),
+      educationType: Yup.array().of(Yup.string()).min(1, t('field.required')),
+      schedule: Yup.string()
+        .test('is-schedule-required', t('field.required'), value =>
+          initiative.C_Registrations_Ask_for_school_hours__c ? !!value : true
+        )
+        .matches(
+          /^([01]?[0-9]|2[0-3]):[0-5][0-9]-([01]?[0-9]|2[0-3]):[0-5][0-9](\r\n([01]?[0-9]|2[0-3]):[0-5][0-9]-([01]?[0-9]|2[0-3]):[0-5][0-9])*$/,
+          { message: t('field.invalid'), excludeEmptyString: true }
+        )
+    }),
     applicant: Yup.object({
       ...contactSchema(t),
       phone: Yup.string()
@@ -105,8 +120,11 @@ const validationSchema = (t: TranslationType, initiative: Initiative) => {
 }
 
 const initialValues = (initiative: Initiative) => ({
-  accountId: '',
-  educationType: [],
+  account: {
+    id: '',
+    educationType: [],
+    schedule: null
+  },
   applicant: {
     firstName: '',
     lastName: '',

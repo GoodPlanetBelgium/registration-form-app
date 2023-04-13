@@ -8,13 +8,14 @@ import {
   TextField,
   Typography
 } from '@mui/material'
-import { Field, FieldProps } from 'formik'
+import { FieldProps } from 'formik'
 import { ChangeEvent, FC, SyntheticEvent, useEffect, useState } from 'react'
 import { Account, Initiative } from '../../lib/interfaces'
 import useFetch from '../../lib/useFetch'
 import useTranslations from '../../lib/useTranslations'
 import Loading from '../Loading'
-import TypeOfEducationField from './TypeOfEducationField'
+import SchoolSubform from '../form/SchoolSubform'
+import Section from '../Section'
 
 interface SFFieldProps {
   label: string
@@ -141,8 +142,8 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
         </FormHelperText>
       )}
       {!!account ? (
-        <Box sx={{ p: 2 }}>
-          <Paper variant='outlined' sx={{ p: 2 }}>
+        <>
+          <Paper variant='outlined' sx={{ p: 2, my: 2 }}>
             <b>{t('field.school')}:</b> {account.Name}
             <br />
             <b>{t('field.address')}:</b> {account.ShippingStreet}{' '}
@@ -151,13 +152,12 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
             <b>{t('field.schoolType')}:</b>{' '}
             {t(`field.schoolTypeList.${account.C_School_Type__c}`)}
           </Paper>
-          <Field
-            name='educationType'
-            label={t('field.educationType')}
+          <SchoolSubform
+            nameSpace='account'
+            initiative={initiative}
             account={account}
-            component={TypeOfEducationField}
           />
-        </Box>
+        </>
       ) : (
         <Typography sx={{ my: 2 }}>{t('field.school.notFoundInfo')}</Typography>
       )}

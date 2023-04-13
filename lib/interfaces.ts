@@ -45,6 +45,7 @@ export interface Initiative {
   C_Registrations_restrict_by_School_Type__c: string | undefined
   C_Registrations_Postcodes__c: string | undefined
   C_Registrations_Region__c: 'Flanders' | 'Wallonia' | 'Brussels' | undefined
+  C_Registrations_Ask_for_school_hours__c: boolean
   NL_Info__c: string
   FR_Info__c: string
   Workshops__r: {

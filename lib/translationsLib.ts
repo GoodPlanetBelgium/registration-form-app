@@ -52,6 +52,11 @@ const translations: translationsType = {
       'field.postcode': 'Postcode',
       'field.postcode.invalid':
         'Dit project is niet beschikbaar voor deze postcode.',
+      'field.schedule': 'Wat zijn de standaard schooluren?',
+      'field.schedule.start': 'start',
+      'field.schedule.end': 'einde',
+      'field.schedule.break': 'pauze {n}',
+      'field.schedule.addBreak': 'Pauze toevoegen',
       'field.firstName': 'Voornaam',
       'field.lastName': 'Achternaam',
       'field.email': 'Emailadres',

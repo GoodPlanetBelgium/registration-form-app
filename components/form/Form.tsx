@@ -10,6 +10,7 @@ import WorkshopField from '../fields/WorkshopField'
 import ContactSubForm from './ContactSubForm'
 import { FormValues, initialValues, validationSchema } from './schema'
 import SendIcon from '@mui/icons-material/Send'
+import ScheduleField from '../fields/ScheduleField'
 
 interface FormProps {
   initiative: Initiative
@@ -45,7 +46,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
           <Form noValidate>
             <Paper sx={{ p: '1rem 2rem', m: '2rem 0' }}>
               <Field
-                name='accountId'
+                name='account.id'
                 label={t('field.school')}
                 initiative={initiative}
                 component={SalesForceAccountField}

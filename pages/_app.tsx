@@ -4,6 +4,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { themeOptions } from '../lib/theme'
 import '@fontsource/lato/400.css'
 import Head from 'next/head'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 function App ({ Component, pageProps }: AppProps) {
   return (
@@ -12,10 +14,12 @@ function App ({ Component, pageProps }: AppProps) {
         <meta name='viewport' content='initial-scale=1, width=device-width' />
         <link rel='shortcut icon' href='/goodplanet_logo_blue.png' />
       </Head>
-      <ThemeProvider theme={createTheme(themeOptions)}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <ThemeProvider theme={createTheme(themeOptions)}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </LocalizationProvider>
     </>
   )
 }
