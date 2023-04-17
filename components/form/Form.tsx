@@ -1,18 +1,17 @@
 import { Button, FormHelperText, Paper, Typography } from '@mui/material'
 import { Field, Form, Formik } from 'formik'
 import { useState } from 'react'
-import { Initiative } from '../../lib/interfaces'
 import useTranslations from '../../lib/useTranslations'
 import CheckboxField from '../fields/CheckboxField'
 import SalesForceAccountField from '../fields/SalesForceAccountField'
 import TextField from '../fields/TextField'
 import WorkshopField from '../fields/WorkshopField'
 import ContactSubForm from './ContactSubForm'
-import { FormValues, initialValues, validationSchema } from './schema'
+import { initialValues, validationSchema } from './schema'
 import SendIcon from '@mui/icons-material/Send'
 
 interface FormProps {
-  initiative: Initiative
+  initiative: SFInitiative
   onSubmit(values: FormValues): Promise<Response>
 }
 
@@ -39,7 +38,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
       onSubmit={beforeSubmit}
     >
       {({ isValid, values, errors }) => {
-        console.log(values, errors)
+        // console.log(values, errors)
         return (
           <Form noValidate>
             <Paper sx={{ p: '1rem 2rem', m: '2rem 0' }}>

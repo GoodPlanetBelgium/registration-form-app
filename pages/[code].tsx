@@ -1,17 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import useFetch, { FetchResult } from '../lib/useFetch'
-import { Alert, Typography } from '@mui/material'
+import useFetch from '../lib/useFetch'
+import { Alert } from '@mui/material'
 
 import Loading from '../components/Loading'
 import Error from '../components/Error'
 import Layout from '../components/Layout'
 import useTranslations from '../lib/useTranslations'
 import Form from '../components/form/Form'
-import { Initiative, Locale } from '../lib/interfaces'
 import getStatus from '../lib/getStatus'
-import { FormValues } from '../components/form/schema'
 
 const InitiativePage: NextPage = () => {
   const router = useRouter()
@@ -22,10 +20,10 @@ const InitiativePage: NextPage = () => {
     result,
     isLoading,
     error
-  }: // error
-  { result: { data: Initiative }; isLoading: boolean; error?: any } = useFetch(
-    code ? `/api/initiative/${code}` : null
-  )
+  }: { result: { data: SFInitiative }; isLoading: boolean; error?: any } =
+    useFetch(code ? `/api/initiative/${code}` : null)
+
+  // const result = useState(null)
 
   if (!code || isLoading) return <Loading />
   if (error) return <Error message={error.message} />
@@ -33,10 +31,21 @@ const InitiativePage: NextPage = () => {
   const { data: initiative } = result
 
   const onSubmit = async (values: FormValues): Promise<Response> => {
-    console.log(values)
+    const registrations: (FormRegistration & { workshopId: string })[] = []
+    Object.keys(values.workshops).forEach(workshopId =>
+      values.workshops[workshopId].forEach(registration =>
+        registrations.push({ workshopId, ...registration })
+      )
+    )
+    const { workshops, ...restValues } = values
+    const data: FormResult = {
+      initiativeId: initiative.Id,
+      ...restValues,
+      registrations
+    }
     const result = await fetch('/api/initiative/sign-up', {
       method: 'POST',
-      body: JSON.stringify({ initiativeId: initiative.Id, ...values })
+      body: JSON.stringify(data)
     })
     return result
   }

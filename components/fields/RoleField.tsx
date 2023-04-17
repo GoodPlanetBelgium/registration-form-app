@@ -1,7 +1,6 @@
 import { CircularProgress } from '@mui/material'
 import { Field, FieldProps, getIn } from 'formik'
 import { FC } from 'react'
-import { PickListValues } from '../../lib/interfaces'
 import useFetch from '../../lib/useFetch'
 import useTranslations from '../../lib/useTranslations'
 import SelectField from './SelectField'
@@ -19,7 +18,7 @@ const RoleField: FC<RoleFieldProps & FieldProps> = ({
     result,
     isLoading
   }: {
-    result: { data: PickListValues }
+    result: { data: SFPickListValues }
     isLoading: boolean
   } = useFetch(`/api/picklist-values?sObject=Contact&field=GP_Level__c`)
 

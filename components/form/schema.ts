@@ -1,40 +1,6 @@
 import { parsePhoneNumber } from 'libphonenumber-js'
 import * as Yup from 'yup'
-import { Initiative, Workshop } from '../../lib/interfaces'
 import { TranslationType } from '../../lib/useTranslations'
-
-interface Contact {
-  firstName: string
-  lastName: string
-  email: string
-  phone?: string
-  role: string
-  newsLetter?: boolean
-}
-
-interface Registration {
-  groupName: string
-  groupSize: number
-  copyApplicant: boolean
-  groupContact: Contact
-  dayOfWeekPreference: string[]
-  monthPreference: string
-}
-
-interface Account {
-  id: string
-  educationType: string[]
-  schedule: string | null
-}
-
-interface FormValues {
-  account: Account
-  applicant: Contact
-  workshops: {
-    [workshopId: string]: Registration[]
-  }
-  agreed: boolean
-}
 
 const contactSchema = (t: TranslationType) => ({
   firstName: Yup.string().required(t('field.required')),
@@ -48,11 +14,11 @@ const contactSchema = (t: TranslationType) => ({
 const registrationsSchema = (
   t: TranslationType,
   id: string,
-  initiative: Initiative
+  initiative: SFInitiative
 ) => {
   const workshop = initiative.Workshops__r.records.find(
     w => w.Id === id
-  ) as Workshop
+  ) as SFWorkshop
   return Yup.array()
     .of(
       Yup.object().shape({
@@ -75,7 +41,7 @@ const registrationsSchema = (
     )
 }
 
-const validationSchema = (t: TranslationType, initiative: Initiative) => {
+const validationSchema = (t: TranslationType, initiative: SFInitiative) => {
   const workshopIds = initiative.Workshops__r.records.map(w => w.Id)
   return Yup.object({
     account: Yup.object({
@@ -119,7 +85,7 @@ const validationSchema = (t: TranslationType, initiative: Initiative) => {
   })
 }
 
-const initialValues = (initiative: Initiative) => ({
+const initialValues = (initiative: SFInitiative) => ({
   account: {
     id: '',
     educationType: [],
@@ -154,4 +120,3 @@ const registrationInitialValues = {
 }
 
 export { initialValues, registrationInitialValues, validationSchema }
-export type { FormValues, Contact, Registration }

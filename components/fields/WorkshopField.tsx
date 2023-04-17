@@ -16,13 +16,12 @@ import { FieldArray } from 'formik'
 import { FieldProps } from 'formik'
 import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
-import { Initiative, Workshop } from '../../lib/interfaces'
 import useTranslations from '../../lib/useTranslations'
 import RegistrationSubForm from '../form/RegistrationSubForm'
-import { Registration, registrationInitialValues } from '../form/schema'
+import { registrationInitialValues } from '../form/schema'
 
 interface Props {
-  initiative: Initiative
+  initiative: SFInitiative
   workshopId: string
 }
 
@@ -31,11 +30,11 @@ const WorkshopField: FC<Props & FieldProps> = ({
   initiative,
   workshopId
 }) => {
-  const registrations = field.value as Registration[]
+  const registrations = field.value as FormRegistration[]
   const { name } = field
   const workshop = initiative.Workshops__r.records.find(
     w => w.Id === workshopId
-  ) as Workshop
+  ) as SFWorkshop
   const t = useTranslations('Form')
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<number | false>(false)

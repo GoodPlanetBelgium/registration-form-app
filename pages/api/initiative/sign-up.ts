@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import salesforceAPI from '../../../lib/salesforceAPI'
 
 type SignUpResponse = {
   error?: string
@@ -12,8 +13,17 @@ export default async function handler (
   res: NextApiResponse<SignUpResponse>
 ) {
   if (req.method === 'POST') {
-    console.log(req.body)
-    res.status(200).json({ result: { message: 'succes!' } })
+    try {
+      console.log('Signing up...')
+      console.log(req.body)
+      const url = `/services/apexrest/InitiativeRegistration/`
+      const data = await salesforceAPI({ method: 'POST', url, data: req.body })
+      console.log(data)
+      res.status(200).json({ result: { message: 'succes!' } })
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ result: { message: 'Internal server error.' } })
+    }
   } else {
     res.status(405).json({ error: 'Method Not Allowed' })
   }

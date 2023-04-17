@@ -1,14 +1,12 @@
 import { Field } from 'formik'
-import { Account, Initiative } from '../../lib/interfaces'
 import TypeOfEducationField from '../fields/TypeOfEducationField'
 import ScheduleField from '../fields/ScheduleField'
 import useTranslations from '../../lib/useTranslations'
-import Section from '../Section'
 
 interface Props {
   nameSpace: string
-  initiative: Initiative
-  account: Account
+  initiative: SFInitiative
+  account: SFAccount
 }
 
 const SchoolSubform = ({ nameSpace, initiative, account }: Props) => {

@@ -1,10 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { Initiative } from '../../../lib/interfaces'
 import salesforceAPI from '../../../lib/salesforceAPI'
 
 type Data = {
   error?: string
-  data?: Initiative
+  data?: SFInitiative
 }
 
 export default async function handler (
@@ -21,7 +20,7 @@ export default async function handler (
     res.status(400).json({ error: 'code should be a string' })
     return
   }
-  const endpoint = `/services/apexrest/Initiative/${code.toUpperCase()}`
-  const data = await salesforceAPI('GET', endpoint)
+  const url = `/services/apexrest/Initiative/${code.toUpperCase()}`
+  const data = await salesforceAPI({ method: 'GET', url })
   res.status(200).json({ data })
 }

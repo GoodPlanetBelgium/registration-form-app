@@ -1,5 +1,4 @@
 import { Field, getIn, useFormikContext } from 'formik'
-import { Workshop } from '../../lib/interfaces'
 import useTranslations, {
   useTranslationsCategory
 } from '../../lib/useTranslations'
@@ -11,7 +10,7 @@ import ContactSubForm from './ContactSubForm'
 
 interface Props {
   nameSpace: string
-  workshop: Workshop
+  workshop: SFWorkshop
 }
 
 const RegistrationSubForm = ({ nameSpace, workshop }: Props) => {

@@ -1,10 +1,13 @@
 {
   "initiativeId": "a0p1n00000Jk7LEAAZ",
-  "accountId": "0011n00002cYkilAAC",
-  "educationType": [
-    "General",
-    "B-Stroom"
-  ],
+  "account": {
+    "id": "0011n00002cYkilAAC",
+    "educationType": [
+      "General",
+      "B-Stroom"
+    ],
+    "schedule": "08:30-12:00\r\n12:50-16:20"
+  },
   "applicant": {
     "firstName": "Tomas",
     "lastName": "Vink",

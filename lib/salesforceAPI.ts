@@ -7,7 +7,13 @@ const {
   SALESFORCE_CONSUMER_SECRET
 } = process.env
 
-const call = async (request, forceNew = false) => {
+interface Request {
+  method: 'GET' | 'POST'
+  url: string
+  data?: any
+}
+
+const call: any = async (request: Request, forceNew = false) => {
   if (forceNew) console.log('FORCING NEW TOKEN')
   let SALESFORCE_ACCESS_TOKEN = forceNew
     ? null
@@ -33,28 +39,28 @@ const call = async (request, forceNew = false) => {
       ...request
     })
     return result.data
-  } catch (error) {
+  } catch (error: any) {
     if (error.response.status === 401) {
       console.log('ERROR')
       return await call(request, true)
     }
+    console.error('API ERROR:', error)
   }
 }
 
-const salesforceAPI = async (method, endpoint, data) => {
-  if (method === 'GET') {
-    let result = await cache.get(endpoint)
-    if (!result) {
-      result = await call({
-        method,
-        url: endpoint,
-        data
-      })
-      await cache.set(endpoint, result)
-    }
-    return result
-  } else {
-    return new Error('Not found')
+const salesforceAPI = async (req: Request) => {
+  switch (req.method) {
+    case 'GET':
+      let result = await cache.get(req.url)
+      if (!result) {
+        result = await call(req)
+        await cache.set(req.url, result)
+      }
+      return result
+    case 'POST':
+      return await call(req)
+    default:
+      return new Error('Not found')
   }
 }
 

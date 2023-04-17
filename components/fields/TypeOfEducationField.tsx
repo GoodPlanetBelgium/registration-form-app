@@ -1,26 +1,21 @@
-import { CheckBox } from '@mui/icons-material'
 import {
-  Box,
   Checkbox,
-  Chip,
   CircularProgress,
   FormControl,
   FormControlLabel,
   FormGroup,
   FormHelperText,
-  FormLabel,
   SelectChangeEvent,
   Typography
 } from '@mui/material'
-import { FieldArray, FieldProps, getIn } from 'formik'
+import { FieldProps, getIn } from 'formik'
 import { FC } from 'react'
-import { Account, PickListValues } from '../../lib/interfaces'
 import useFetch from '../../lib/useFetch'
 import useTranslations from '../../lib/useTranslations'
 import Section from '../Section'
 
 interface TOEFieldProps {
-  account: Account
+  account: SFAccount
   label: string
 }
 
@@ -35,7 +30,7 @@ const TypeOfEducationField: FC<TOEFieldProps & FieldProps> = ({
     result,
     isLoading
   }: {
-    result: { data: PickListValues }
+    result: { data: SFPickListValues }
     isLoading: boolean
   } = useFetch(
     `/api/picklist-values?sObject=Account&field=C_Type_of_Education__c`

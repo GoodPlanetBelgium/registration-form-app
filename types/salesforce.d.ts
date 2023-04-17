@@ -1,8 +1,4 @@
-export type Locale = 'nl' | 'fr'
-
-export type Status = 'unavailable' | 'closed' | 'pending' | 'open'
-
-export interface Account {
+interface SFAccount {
   Id: string
   Name: string
   ShippingStreet: string
@@ -28,7 +24,7 @@ export interface Account {
   GP_Language__c: 'Dutch' | 'French' | 'German' | 'English'
 }
 
-export interface Workshop {
+interface SFWorkshop {
   Id: string
   Name: string
   C_Registrations_Status__c: Status
@@ -39,7 +35,7 @@ export interface Workshop {
   NL_Info__c: string
   FR_Info__c: string
 }
-export interface Initiative {
+interface SFInitiative {
   Id: string
   Name: string
   C_Registrations_restrict_by_School_Type__c: string | undefined
@@ -49,11 +45,11 @@ export interface Initiative {
   NL_Info__c: string
   FR_Info__c: string
   Workshops__r: {
-    records: Workshop[]
+    records: SFWorkshop[]
   }
 }
 
-export interface PickListValues {
+interface SFPickListValues {
   controllerValues: {
     [key: string]: number
   }

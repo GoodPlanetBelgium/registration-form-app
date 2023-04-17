@@ -1,12 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { Account } from '../../lib/interfaces'
 import salesforceAPI from '../../lib/salesforceAPI'
 
 export default async function handler (
   req: NextApiRequest,
-  res: NextApiResponse<{ data?: Account[]; error?: string }>
+  res: NextApiResponse<{ data?: SFAccount[]; error?: string }>
 ) {
-  console.log(req.query)
   const { postcode, schoolType } = req.query
   if (typeof postcode !== 'string') {
     res.status(400).send({
@@ -23,11 +21,11 @@ export default async function handler (
         ? `+AND+C_School_Type__c='${schoolType}'`
         : `+AND+C_School_Type__c+IN+('${schoolType.split(';').join(`','`)}')`
       : ''
-  const endpoint =
+  const url =
     '/services/data/v56.0/query/?q=SELECT+Id,name,ShippingStreet,ShippingCity,ShippingPostalCode,C_School_Type__c,GP_Language__c+FROM+Account+WHERE' +
     recordTypeQuery +
     postcodeQuery +
     schoolTypeQuery
-  const data = await salesforceAPI('GET', endpoint)
+  const data = await salesforceAPI({ method: 'GET', url })
   res.status(200).json({ data })
 }

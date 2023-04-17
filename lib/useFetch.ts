@@ -1,5 +1,4 @@
 import { useEffect, useRef, useReducer } from 'react'
-import { Initiative, Account } from './interfaces'
 
 export interface FetchResult {
   isLoading: boolean

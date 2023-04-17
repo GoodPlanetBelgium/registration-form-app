@@ -1,8 +1,7 @@
 import dayjs, { Dayjs } from 'dayjs'
-import { Initiative, Status } from './interfaces'
 
 const getStatus = (
-  initiative: Initiative
+  initiative: SFInitiative
 ): { status: Status; earliestOpen: Dayjs } => {
   let status: Status = 'unavailable'
   let earliestOpen = dayjs().add(99, 'years')
