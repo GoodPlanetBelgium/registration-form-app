@@ -139,7 +139,7 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
           {typeof error === 'string' ? error : null}
         </FormHelperText>
       )}
-      {!!account ? (
+      {!!account && (
         <>
           <Paper variant='outlined' sx={{ p: 2, my: 2 }}>
             <b>{t('field.school')}:</b> {account.Name}
@@ -156,7 +156,8 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
             account={account}
           />
         </>
-      ) : (
+      )}
+      {!!data && (
         <Typography sx={{ my: 2 }}>{t('field.school.notFoundInfo')}</Typography>
       )}
     </>
