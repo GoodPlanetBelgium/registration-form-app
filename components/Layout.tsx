@@ -18,16 +18,21 @@ const Layout = ({ title, children }: LayoutProps) => (
     </Head>
     <AppBar position='fixed' sx={{ m: 0, p: 0 }}>
       <Container maxWidth='md'>
-        <Toolbar sx={{ py: 2 }}>
+        <Toolbar
+          sx={{
+            py: 2,
+            justifyContent: 'space-between'
+          }}
+        >
           <Image src={logo} alt='GoodPlanet logo' width={48} />
-          <Typography variant='h1' component='div' sx={{ ml: 2, flexGrow: 1 }}>
-            {title}
-          </Typography>
           <LanguageSwitch />
         </Toolbar>
       </Container>
     </AppBar>
     <Container maxWidth='md' sx={{ py: 12 }}>
+      <Typography variant='h1' sx={{ my: 2 }}>
+        {title}
+      </Typography>
       {children}
     </Container>
   </>

@@ -5,6 +5,7 @@ import CheckboxField from '../fields/CheckboxField'
 import PhoneField from '../fields/PhoneField'
 import RoleField from '../fields/RoleField'
 import TextField from '../fields/TextField'
+import { Grid } from '@mui/material'
 
 type FieldType =
   | 'firstName'
@@ -67,13 +68,20 @@ const ContactSubForm = ({ nameSpace, fields }: Props) => {
     )
   }
   return (
-    <>
-      {fields.map((field, i) =>
-        React.cloneElement(FieldComponents[field], {
-          key: i
-        })
+    <Grid container spacing={2}>
+      {fields
+        .filter(field => field !== 'newsLetter')
+        .map((field, i) => (
+          <Grid item xs={12} sm={6} md={4} key={i} sx={{ width: '100%' }}>
+            {React.cloneElement(FieldComponents[field])}
+          </Grid>
+        ))}
+      {fields.includes('newsLetter') && (
+        <Grid item xs={12}>
+          {React.cloneElement(FieldComponents.newsLetter)}
+        </Grid>
       )}
-    </>
+    </Grid>
   )
 }
 

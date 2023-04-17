@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Section: FC<Props> = ({ label, children, error = false }) => (
-  <Box sx={{ p: 2, my: 2, borderBottom: 1, borderColor: 'divider' }}>
+  <Box sx={{ my: 3, borderBottom: 1, borderColor: 'divider' }}>
     {label && (
       <Typography
         variant='h4'

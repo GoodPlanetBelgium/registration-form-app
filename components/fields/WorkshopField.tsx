@@ -8,6 +8,7 @@ import {
   Alert,
   Box,
   Button,
+  Grid,
   Tab,
   Tabs,
   Typography
@@ -59,7 +60,7 @@ const WorkshopField: FC<Props & FieldProps> = ({
     <Accordion
       disableGutters
       defaultExpanded
-      sx={{ borderRadius: 1, p: '1rem 2rem', m: '2rem 0' }}
+      sx={{ borderRadius: 1, p: '1rem', m: '2rem 0' }}
     >
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography variant='h2'>{workshop?.Name}</Typography>
@@ -103,28 +104,33 @@ const WorkshopField: FC<Props & FieldProps> = ({
                     nameSpace={`${name}[${i}]`}
                     workshop={workshop}
                   />
-                  <Box sx={{ m: 2 }}>
-                    <Button
-                      onClick={removeRegistration(remove, i)}
-                      variant='outlined'
-                      color='warning'
-                      title={t('sub.workshop.remove')}
-                      size='large'
-                      sx={{ mr: 2 }}
-                    >
-                      <DeleteIcon sx={{ mr: 1 }} />
-                      <span>{t('sub.workshop.remove')}</span>
-                    </Button>
-                    <Button
-                      onClick={addRegistration(push)}
-                      variant='contained'
-                      color='success'
-                      size='large'
-                    >
-                      <AddIcon />
-                      <span>{t('sub.workshop.add')}</span>
-                    </Button>
-                  </Box>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6} md={4}>
+                      <Button
+                        onClick={removeRegistration(remove, i)}
+                        variant='outlined'
+                        color='warning'
+                        title={t('sub.workshop.remove')}
+                        size='large'
+                        fullWidth
+                      >
+                        <DeleteIcon sx={{ mr: 1 }} />
+                        <span>{t('sub.workshop.remove')}</span>
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={8}>
+                      <Button
+                        onClick={addRegistration(push)}
+                        variant='contained'
+                        color='success'
+                        size='large'
+                        fullWidth
+                      >
+                        <AddIcon />
+                        <span>{t('sub.workshop.add')}</span>
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </Box>
               ))}
               {!registrations.length && (

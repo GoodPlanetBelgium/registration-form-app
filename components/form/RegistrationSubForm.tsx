@@ -7,6 +7,7 @@ import SelectField from '../fields/SelectField'
 import TextField from '../fields/TextField'
 import Section from '../Section'
 import ContactSubForm from './ContactSubForm'
+import { Grid } from '@mui/material'
 
 interface Props {
   nameSpace: string
@@ -21,17 +22,23 @@ const RegistrationSubForm = ({ nameSpace, workshop }: Props) => {
   return (
     <>
       <Section label={t('sub.workshop.groupTitle')}>
-        <Field
-          name={`${nameSpace}.groupName`}
-          label={t('sub.workshop.field.groupName')}
-          component={TextField}
-        />
-        <Field
-          name={`${nameSpace}.groupSize`}
-          label={t('sub.workshop.field.groupSize')}
-          component={TextField}
-          type='number'
-        />
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} md={4} sx={{ width: '100%' }}>
+            <Field
+              name={`${nameSpace}.groupName`}
+              label={t('sub.workshop.field.groupName')}
+              component={TextField}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4} sx={{ width: '100%' }}>
+            <Field
+              name={`${nameSpace}.groupSize`}
+              label={t('sub.workshop.field.groupSize')}
+              component={TextField}
+              type='number'
+            />
+          </Grid>
+        </Grid>
       </Section>
       <Section label={t('sub.workshop.contactTitle')}>
         <Field
@@ -47,30 +54,36 @@ const RegistrationSubForm = ({ nameSpace, workshop }: Props) => {
         )}
       </Section>
       <Section label={t('sub.workshop.preferencesTitle')}>
-        <Field
-          name={`${nameSpace}.dayOfWeekPreference`}
-          label={t('sub.workshop.field.dayOfWeekPreference')}
-          component={SelectField}
-          options={workshop.C_Weekday_Preferences__c.split(';')
-            .filter(option => option !== 'No_Preference')
-            .map(day => ({
-              value: day,
-              label: days[day]
-            }))}
-          multiple
-          noPreferenceOption={workshop.C_Weekday_Preferences__c.split(
-            ';'
-          ).includes('No_Preference')}
-        />
-        <Field
-          name={`${nameSpace}.monthPreference`}
-          label={t('sub.workshop.field.monthPreference')}
-          component={SelectField}
-          options={Object.keys(months).map(day => ({
-            value: day,
-            label: months[day]
-          }))}
-        />
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6} md={4} sx={{ width: '100%' }}>
+            <Field
+              name={`${nameSpace}.dayOfWeekPreference`}
+              label={t('sub.workshop.field.dayOfWeekPreference')}
+              component={SelectField}
+              options={workshop.C_Weekday_Preferences__c.split(';')
+                .filter(option => option !== 'No_Preference')
+                .map(day => ({
+                  value: day,
+                  label: days[day]
+                }))}
+              multiple
+              noPreferenceOption={workshop.C_Weekday_Preferences__c.split(
+                ';'
+              ).includes('No_Preference')}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4} sx={{ width: '100%' }}>
+            <Field
+              name={`${nameSpace}.monthPreference`}
+              label={t('sub.workshop.field.monthPreference')}
+              component={SelectField}
+              options={Object.keys(months).map(day => ({
+                value: day,
+                label: months[day]
+              }))}
+            />
+          </Grid>
+        </Grid>
       </Section>
     </>
   )

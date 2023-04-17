@@ -4,6 +4,7 @@ import {
   Box,
   Chip,
   FormHelperText,
+  Grid,
   Paper,
   TextField,
   Typography
@@ -91,21 +92,32 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
       <Typography variant='h2' sx={{ mb: 2 }}>
         {label}
       </Typography>
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <TextField
-          label={t('field.postcode')}
-          onChange={onChangePostcode}
-          value={postcode}
-          error={Boolean(error)}
-          autoComplete='off'
-        />
-        {!!data?.records?.length && (
-          <Chip
-            sx={{ mx: 2 }}
-            label={t('field.school.numberFound', { n: data.totalSize })}
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6} md={4}>
+          <TextField
+            label={t('field.postcode')}
+            onChange={onChangePostcode}
+            value={postcode}
+            error={Boolean(error)}
+            autoComplete='off'
+            fullWidth
           />
-        )}
-      </Box>
+        </Grid>
+        <Grid
+          item
+          sx={{
+            display: 'flex',
+            alignItems: 'center'
+          }}
+        >
+          {!!data?.records?.length && (
+            <Chip
+              label={t('field.school.numberFound', { n: data.totalSize })}
+              color={data.totalSize > 0 ? 'success' : 'warning'}
+            />
+          )}
+        </Grid>
+      </Grid>
       {isLoading && <Loading />}
       {!!data &&
         (!!data?.records?.length ? (

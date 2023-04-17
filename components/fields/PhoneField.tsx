@@ -5,13 +5,15 @@ import { FC } from 'react'
 interface PhoneFieldProps {
   label: string
   helperText?: string
+  fullWidth?: boolean
 }
 
 const PhoneField: FC<PhoneFieldProps & FieldProps> = ({
   field: { name, value },
   form: { setFieldValue, touched, errors },
   label,
-  helperText = ''
+  helperText = '',
+  fullWidth = true
 }) => {
   const error = (getIn(touched, name) && getIn(errors, name)) || ''
 
@@ -30,7 +32,8 @@ const PhoneField: FC<PhoneFieldProps & FieldProps> = ({
       onChange={onChange}
       error={Boolean(error)}
       helperText={error || '' + helperText}
-      sx={{ mr: 2, mb: 2, width: 228 }}
+      fullWidth={fullWidth}
+      sx={{ mr: 2, mb: 2 }}
     />
   )
 }

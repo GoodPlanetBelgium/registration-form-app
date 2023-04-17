@@ -46,7 +46,7 @@ const SelectField: FC<SelectFieldProps & FieldProps> = ({
     }
   }
   return (
-    <FormControl sx={{ mr: 2, mb: 2, minWidth: 228 }}>
+    <FormControl sx={{ mr: 2, mb: 2, width: '100%' }}>
       <InputLabel id={`${name}-label`} error={Boolean(error)}>
         {label}
       </InputLabel>
@@ -67,6 +67,7 @@ const SelectField: FC<SelectFieldProps & FieldProps> = ({
         }
         autoWidth
         disabled={disabled}
+        fullWidth
       >
         {options.map((option, i) => (
           <MenuItem key={i} value={option.value}>

@@ -7,6 +7,7 @@ interface TextFieldProps {
   label: string
   helperText?: string
   multiline?: boolean
+  fullWidth?: boolean
 }
 
 const TextField: FC<TextFieldProps & FieldProps> = ({
@@ -15,7 +16,8 @@ const TextField: FC<TextFieldProps & FieldProps> = ({
   type = 'text',
   label,
   helperText = '',
-  multiline = false
+  multiline = false,
+  fullWidth = true
 }) => {
   const error = (getIn(touched, name) && getIn(errors, name)) || ''
   return (
@@ -31,7 +33,7 @@ const TextField: FC<TextFieldProps & FieldProps> = ({
       helperText={error || '' + helperText}
       sx={{ mr: 2, mb: 2 }}
       multiline={multiline}
-      fullWidth={multiline}
+      fullWidth={fullWidth}
     />
   )
 }

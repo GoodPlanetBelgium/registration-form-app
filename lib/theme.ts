@@ -52,6 +52,14 @@ export const themeOptions: ThemeOptions = {
           padding: 0
         }
       }
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          padding: '1rem',
+          margin: '2rem 0'
+        }
+      }
     }
   }
 }
