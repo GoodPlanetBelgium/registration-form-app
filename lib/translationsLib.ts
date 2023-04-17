@@ -97,6 +97,14 @@ const translations: translationsType = {
       errorsFound: 'Het formulier bevat fouten en kan niet verzonden worden.',
       submit: 'Verzenden'
     },
+    Result: {
+      title: 'Verzonden!',
+      subtitle:
+        'Onderstaande gegevens werden succesvol geregistreerd en worden verder verwerkt.',
+      registrations: 'Inschrijvingen',
+      activity: 'Activiteit',
+      contactName: 'Naam contactpersoon'
+    },
     Days: {
       Monday: 'maandag',
       Tuesday: 'dinsdag',
@@ -203,7 +211,16 @@ const translations: translationsType = {
       'field.remark': "Remarque pour l'inscription",
       'field.agreed':
         'Je déclare avoir lu et compris toutes les informations concernant ces inscriptions.',
+      errorsFound: 'Le formulaire contient des erreurs et ne peut être envoyé.',
       submit: 'Envoyer'
+    },
+    Result: {
+      title: 'Envoyé!',
+      subtitle:
+        'Les données ci-dessous ont été enregistrées avec succès et sont en cours de traitement.',
+      registrations: 'Enregistrements',
+      activity: 'Activité',
+      contactName: 'Nom du contact'
     },
     Days: {
       Monday: 'lundi',

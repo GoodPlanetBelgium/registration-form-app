@@ -10,25 +10,26 @@ import Layout from '../components/Layout'
 import useTranslations from '../lib/useTranslations'
 import Form from '../components/form/Form'
 import getStatus from '../lib/getStatus'
+import Result from '../components/Result'
 
 const InitiativePage: NextPage = () => {
   const router = useRouter()
   const { code } = router.query
   const t = useTranslations('Form')
 
-  const {
-    result,
-    isLoading,
-    error
-  }: { result: { data: SFInitiative }; isLoading: boolean; error?: any } =
-    useFetch(code ? `/api/initiative/${code}` : null)
+  const initiativeFetch: {
+    result: { data: SFInitiative }
+    isLoading: boolean
+    error?: any
+  } = useFetch(code ? `/api/initiative/${code}` : null)
 
-  // const result = useState(null)
+  const [sfResult, setSFResult] = useState<SFResult | null>(null)
 
-  if (!code || isLoading) return <Loading />
-  if (error) return <Error message={error.message} />
+  if (!code || initiativeFetch.isLoading) return <Loading />
+  if (initiativeFetch.error)
+    return <Error message={initiativeFetch.error.message} />
 
-  const { data: initiative } = result
+  const { data: initiative } = initiativeFetch.result
 
   const onSubmit = async (values: FormValues): Promise<Response> => {
     const registrations: (FormRegistration & { workshopId: string })[] = []
@@ -43,24 +44,34 @@ const InitiativePage: NextPage = () => {
       ...restValues,
       registrations
     }
-    const result = await fetch('/api/initiative/sign-up', {
-      method: 'POST',
-      body: JSON.stringify(data)
-    })
-    return result
+
+    try {
+      const response = await fetch('/api/initiative/sign-up', {
+        method: 'POST',
+        body: JSON.stringify(data)
+      })
+      if (response.ok) {
+        setSFResult(await response.json())
+      }
+      return response
+    } catch (error) {
+      throw new (Error as any)(error)
+    }
   }
 
   const { status, earliestOpen } = getStatus(initiative)
 
   return (
     <Layout title={t('title', { name: initiative.Name })}>
-      {status !== 'open' ? (
+      {status !== 'open' && (
         <Alert severity='warning'>
           {t(`status.${status}`, {
             date: earliestOpen.format('DD-MM-YYYY HH:mm')
           })}
         </Alert>
-      ) : (
+      )}
+      {!!sfResult && <Result {...sfResult} initiative={initiative} />}
+      {!sfResult && status === 'open' && (
         <>
           <Alert severity='info' icon={false}>
             <div

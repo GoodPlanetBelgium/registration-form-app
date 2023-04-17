@@ -18,7 +18,7 @@ export default async function handler (
       console.log(req.body)
       const url = `/services/apexrest/InitiativeRegistration/`
       const data = await salesforceAPI({ method: 'POST', url, data: req.body })
-      console.log(data)
+      console.log(JSON.stringify(data, null, 2))
       res.status(200).json({ result: { message: 'succes!' } })
     } catch (error) {
       console.error(error)

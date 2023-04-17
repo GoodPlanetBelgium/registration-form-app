@@ -37,8 +37,8 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
       validationSchema={validationSchema(t, initiative)}
       onSubmit={beforeSubmit}
     >
-      {({ isValid, values, errors }) => {
-        // console.log(values, errors)
+      {({ values, errors, touched }) => {
+        // console.log(values, errors, touched)
         return (
           <Form noValidate>
             <Paper sx={{ p: '1rem 2rem', m: '2rem 0' }}>
@@ -100,7 +100,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
             {countError && (
               <FormHelperText error>{t(countError)}</FormHelperText>
             )}
-            {Object.keys(errors).length > 0 && (
+            {!!Object.keys(errors).length && !!Object.keys(touched).length && (
               <FormHelperText error>{t('errorsFound')}</FormHelperText>
             )}
           </Form>

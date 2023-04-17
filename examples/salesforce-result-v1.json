@@ -1,0 +1,50 @@
+{
+  "registrations": [
+    {
+      "workshopId": "a001n00002iXIyFAAW",
+      "SalesForceId": "a0o1n00000IdWq0AAF",
+      "monthPreference": "august",
+      "groupSize": 24,
+      "groupName": "1b",
+      "groupContact": {
+        "SalesforceId": "0031n00002hg0NvAAI",
+        "role": "Teacher",
+        "lastName": "test",
+        "firstName": "test",
+        "email": "t@t.tt"
+      },
+      "dayOfWeekPreference": [
+        "No_Preference"
+      ],
+      "copyApplicant": true
+    }
+  ],
+  "errors": [],
+  "applicant": {
+    "SalesforceId": "0031n00002hg0NvAAI",
+    "role": "Teacher",
+    "phone": "+32 454 34 54 34",
+    "newsLetterDate": "2023-04-17",
+    "newsLetter": true,
+    "lastName": "test",
+    "firstName": "test",
+    "email": "t@t.tt"
+  },
+  "accountId": "0011n00002uwvvAAAQ",
+  "account": {
+    "schedule": "08:30-10:15\r\n10:30-15:30",
+    "Id": "0011n00002uwvvAAAQ",
+    "educationType": [
+      "Technical",
+      "General",
+      "B-Stroom",
+      "A-Stroom"
+    ]
+  },
+  "accInitiatives": [
+    {
+      "SalesforceId": "a0o1n00000IdWq0AAF",
+      "BeneficiaryId": "0011n00002uwvvAAAQ"
+    }
+  ]
+}
