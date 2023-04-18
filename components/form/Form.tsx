@@ -88,6 +88,10 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
               label={t('field.agreed')}
               component={CheckboxField}
             />
+            <Typography
+              variant='body1'
+              dangerouslySetInnerHTML={{ __html: t('privacyStatement') }}
+            />
             <Button
               color='primary'
               variant='contained'
