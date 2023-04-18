@@ -1,7 +1,6 @@
 import {
   Alert,
   Autocomplete,
-  Box,
   Chip,
   FormHelperText,
   Grid,
@@ -22,12 +21,13 @@ interface SFFieldProps {
 }
 
 const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
-  field: { name, value },
-  form: { touched, errors, setFieldValue, setFieldTouched },
+  field: { name },
+  form: { touched, errors, setFieldValue },
   label,
   initiative
 }) => {
   const t = useTranslations('Form')
+  const schoolTypes = useTranslations('SchoolTypes')
   const [postcode, setPostcode] = useState('')
   const [account, setAccount] = useState<SFAccount | null>(null)
   const [inputError, setInputError] = useState(false)
@@ -134,8 +134,8 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
               ShippingCity,
               C_School_Type__c
             }) =>
-              `${Name}, ${ShippingStreet} ${ShippingPostalCode} ${ShippingCity} - ${t(
-                `field.schoolTypeList.${C_School_Type__c}`
+              `${Name}, ${ShippingStreet} ${ShippingPostalCode} ${ShippingCity} - ${schoolTypes(
+                C_School_Type__c
               )}`
             }
             onChange={onChangeAccount}

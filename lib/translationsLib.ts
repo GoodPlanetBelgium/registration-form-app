@@ -28,13 +28,6 @@ const translations: translationsType = {
       'field.school.notFoundInfo':
         'Vind je jouw school niet in de lijst? Stuur een mailtje naar ict@goodplanet.be',
       'field.schoolType': 'Onderwijsniveau',
-      'field.schoolTypeList.Nursery_School': 'Kleuter onderwijs',
-      'field.schoolTypeList.Primary_School': 'Lager onderwijs',
-      'field.schoolTypeList.Nursery_And_Primary School':
-        'Kleuter- en lageronderwijs',
-      'field.schoolTypeList.Secondary_School': 'Secundair onderwijs',
-      'field.schoolTypeList.Higher_Education': 'Hoger onderwijs',
-      'field.schoolTypeList.Adult_Education': 'Volwassenen onderwijs',
       'field.educationType':
         'Welke onderwijsvormen worden aangeboden in deze school?',
       'field.schoolEducationType.A-Stroom': 'A-Stroom',
@@ -127,6 +120,14 @@ const translations: translationsType = {
       may: 'mei',
       june: 'juni',
       july: 'juli'
+    },
+    SchoolTypes: {
+      Nursery_School: 'Kleuter onderwijs',
+      Primary_School: 'Lager onderwijs',
+      Nursery_And_Primary_School: 'Kleuter- en lageronderwijs',
+      Secondary_School: 'Secundair onderwijs',
+      Higher_Education: 'Hoger onderwijs',
+      Adult_Education: 'Volwassenen onderwijs'
     }
   },
   fr: {
@@ -150,13 +151,6 @@ const translations: translationsType = {
       'field.school.notFoundInfo':
         'Vous ne trouvez pas votre école dans la liste ? Envoyez un email à ict@goodplanet.be',
       'field.schoolType': "Niveau d'enseignement",
-      'field.schoolTypeList.Nursery_School': 'Enseignement maternel',
-      'field.schoolTypeList.Primary_School': 'Enseignement primaire',
-      'field.schoolTypeList.Nursery_And_Primary School':
-        'Enseignement maternel et primaire',
-      'field.schoolTypeList.Secondary_School': 'Enseignement secondaire',
-      'field.schoolTypeList.Higher_Education': 'Enseignement supérieur',
-      'field.schoolTypeList.Adult_Education': 'Formation pour adultes',
       'field.educationType':
         "Quels types d'enseignement sont proposés dans cette école?",
       'field.schoolEducationType.A-Stroom': '',
@@ -244,6 +238,14 @@ const translations: translationsType = {
       may: 'mai',
       june: 'juin',
       july: 'juillet'
+    },
+    SchoolTypes: {
+      Nursery_School: 'Enseignement maternel',
+      Primary_School: 'Enseignement primaire',
+      Nursery_And_Primary_School: 'Enseignement maternel et primaire',
+      Secondary_School: 'Enseignement secondaire',
+      Higher_Education: 'Enseignement supérieur',
+      Adult_Education: 'Formation pour adultes'
     }
   }
 }
