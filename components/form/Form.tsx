@@ -41,7 +41,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
         // console.log(values, errors, touched)
         return (
           <Form noValidate>
-            <Paper>
+            <Paper sx={{ my: 3 }}>
               <Field
                 name='account.id'
                 label={t('field.school')}
@@ -49,7 +49,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
                 component={SalesForceAccountField}
               />
             </Paper>
-            <Paper>
+            <Paper sx={{ my: 3 }}>
               <Typography sx={{ py: 1 }} variant='h2'>
                 {t('sub.contact.title')}
               </Typography>
@@ -93,7 +93,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
               variant='contained'
               size='large'
               type='submit'
-              sx={{ my: 2, minWidth: '320px' }}
+              sx={{ my: 2, width: { xs: '100%', sm: '320px' } }}
             >
               <SendIcon sx={{ mr: 1 }} /> {t('submit')}
             </Button>

@@ -56,8 +56,7 @@ export const themeOptions: ThemeOptions = {
     MuiPaper: {
       styleOverrides: {
         root: {
-          padding: '1rem',
-          margin: '2rem 0'
+          padding: '1rem'
         }
       }
     }

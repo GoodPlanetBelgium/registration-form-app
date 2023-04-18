@@ -27,10 +27,10 @@ const Result = ({ registrations, applicant, account, initiative }: Props) => {
         <Typography variant='h2'>{tr('title')}</Typography>
         {tr('subtitle')}
       </Alert>
-      {/* <Paper>
+      {/* <Paper sx={{ my: 2}}>
         <Typography variant='h2'>{t('field.school')}</Typography>
       </Paper> */}
-      <Paper>
+      <Paper sx={{ my: 2 }}>
         <Typography variant='h2'>{t('sub.contact.title')}</Typography>
         <b>
           {applicant.firstName} {applicant.lastName}
@@ -40,7 +40,7 @@ const Result = ({ registrations, applicant, account, initiative }: Props) => {
         <br />
         <b>{applicant.phone}</b>
       </Paper>
-      <Paper>
+      <Paper sx={{ my: 2 }}>
         <Typography variant='h2'>{tr('registrations')}</Typography>
         <TableContainer component={Box}>
           <Table>
