@@ -43,7 +43,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
           <Form noValidate>
             <Paper sx={{ my: 3 }}>
               <Field
-                name='account.id'
+                name='account'
                 label={t('field.school')}
                 initiative={initiative}
                 component={SalesForceAccountField}

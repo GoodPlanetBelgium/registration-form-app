@@ -79,7 +79,12 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
     e: SyntheticEvent<Element>,
     account: SFAccount | null
   ) => {
-    setFieldValue(name, account?.Id, true)
+    setFieldValue(`${name}.id`, account?.Id)
+    setFieldValue(`${name}.schedule`, account?.C_School_Schedule__c || '')
+    setFieldValue(
+      `${name}.educationType`,
+      account?.C_Type_of_Education__c || []
+    )
     setAccount(account)
   }
 
@@ -160,7 +165,7 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
             {account.ShippingPostalCode} {account.ShippingCity}
             <br />
             <b>{t('field.schoolType')}:</b>{' '}
-            {t(`field.schoolTypeList.${account.C_School_Type__c}`)}
+            {schoolTypes(account.C_School_Type__c)}
           </Paper>
           <SchoolSubform
             nameSpace='account'

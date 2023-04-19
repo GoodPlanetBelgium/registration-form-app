@@ -32,18 +32,19 @@ const ScheduleField: FC<SFProps & FieldProps> = ({
 }) => {
   const t = useTranslations('Form')
 
-  const [periods] = useState<string[]>(!!value ? value.split('\r\n') : [])
+  const [periods] = useState<`${string}-${string}`[]>(
+    !!value ? value.split('\r\n') : []
+  )
   const [start, setStart] = useState(periods[0]?.split('-')[0] || '')
   const [end, setEnd] = useState(periods.slice(-1)[0]?.split('-')[1] || '')
   const [pauses, setPauses] = useState(
-    JSON.stringify(
-      periods.length > 1
-        ? periods.map((period, i) => [
-            period.split('-')[1],
-            periods[i + 1].split('-')[0]
-          ])
-        : []
-    )
+    (() => {
+      let result = []
+      for (let i = 0; i < periods.length - 1; i++) {
+        result.push([periods[i].split('-')[1], periods[i + 1].split('-')[0]])
+      }
+      return JSON.stringify(result)
+    })()
   )
 
   const addPause = () =>

@@ -22,6 +22,7 @@ interface SFAccount {
     | 'Specialized'
     | 'Non-native_Entrants_Education'
   GP_Language__c: 'Dutch' | 'French' | 'German' | 'English'
+  C_School_Schedule__c: string
 }
 
 interface SFWorkshop {
@@ -35,6 +36,7 @@ interface SFWorkshop {
   NL_Info__c: string
   FR_Info__c: string
 }
+
 interface SFInitiative {
   Id: string
   Name: string

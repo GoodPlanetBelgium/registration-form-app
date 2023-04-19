@@ -32,7 +32,7 @@
         "Monday",
         "Wednesday"
       ],
-      "monthPreference": "november"
+      "monthPreference": ["november"]
     },
     {
       "workshopId": "a001n00002iXM0nAAG",
