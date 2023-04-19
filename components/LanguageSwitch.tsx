@@ -1,23 +1,11 @@
-import { Flag } from '@mui/icons-material'
-import { IconButton, Menu, MenuItem } from '@mui/material'
+import { Button, ButtonGroup } from '@mui/material'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 
 const LanguageSwitch = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const router = useRouter()
 
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
-
-  const setLanguage = (language: 'nl' | 'fr') => {
+  const setLanguage = (language: Locale) => {
     router.push(router.asPath, undefined, { locale: language })
-    setAnchorEl(null)
   }
 
   return (
