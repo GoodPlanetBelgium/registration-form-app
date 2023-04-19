@@ -36,6 +36,8 @@ interface SFWorkshop {
   C_Month_Preferences__c?: string
   NL_Info__c: string
   FR_Info__c: string
+  NL_Title__c: string
+  FR_Title__c: string
 }
 
 interface SFInitiative {
@@ -47,6 +49,8 @@ interface SFInitiative {
   C_Registrations_Ask_for_school_hours__c: boolean
   NL_Info__c: string
   FR_Info__c: string
+  NL_Title__c: string
+  FR_Title__c: string
   Workshops__r: {
     records: SFWorkshop[]
   }

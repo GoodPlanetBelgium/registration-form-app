@@ -63,7 +63,15 @@ const WorkshopField: FC<Props & FieldProps> = ({
       sx={{ borderRadius: 1, p: '1rem', m: '2rem 0' }}
     >
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography variant='h2'>{workshop?.Name}</Typography>
+        <Typography variant='h2'>
+          {
+            workshop[
+              `${router.locale?.toUpperCase()}_Title__c` as
+                | 'NL_Title__c'
+                | 'FR_Title__c'
+            ]
+          }
+        </Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Alert severity='info' icon={false} variant='standard' sx={{ m: 0 }}>

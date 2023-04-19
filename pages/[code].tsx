@@ -62,7 +62,15 @@ const InitiativePage: NextPage = () => {
   const { status, earliestOpen } = getStatus(initiative)
 
   return (
-    <Layout title={t('title', { name: initiative.Name })}>
+    <Layout
+      title={t('title', {
+        name: initiative[
+          `${router.locale?.toUpperCase()}_Title__c` as
+            | 'NL_Info__c'
+            | 'FR_Info__c'
+        ]
+      })}
+    >
       {status !== 'open' && (
         <Alert severity='warning'>
           {t(`status.${status}`, {
