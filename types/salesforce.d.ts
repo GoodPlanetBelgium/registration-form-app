@@ -32,7 +32,8 @@ interface SFWorkshop {
   C_Registrations_Start__c: string
   C_Registrations_End__c: string
   C_Required_For_Registration__c: boolean
-  C_Weekday_Preferences__c: string
+  C_Weekday_Preferences__c?: string
+  C_Month_Preferences__c?: string
   NL_Info__c: string
   FR_Info__c: string
 }

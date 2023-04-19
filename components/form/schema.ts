@@ -29,10 +29,16 @@ const registrationsSchema = (
           is: false,
           then: Yup.object(contactSchema(t))
         }),
-        dayOfWeekPreference: Yup.array()
-          .of(Yup.string().required(t('field.required')))
-          .min(1, t('field.required')),
-        monthPreference: Yup.string().required(t('field.required'))
+        dayOfWeekPreference: Yup.array().test(
+          'is-weekday-pref-required',
+          t('field.required'),
+          value => !workshop.C_Weekday_Preferences__c || !!value?.length
+        ),
+        monthPreference: Yup.array().test(
+          'is-month-pref-required',
+          t('field.required'),
+          value => !workshop.C_Month_Preferences__c || !!value?.length
+        )
       })
     )
     .min(
@@ -116,7 +122,7 @@ const registrationInitialValues = {
   copyApplicant: false,
   groupContact: { firstName: '', lastName: '', email: '', role: '' },
   dayOfWeekPreference: [],
-  monthPreference: ''
+  monthPreference: []
 }
 
 export { initialValues, registrationInitialValues, validationSchema }

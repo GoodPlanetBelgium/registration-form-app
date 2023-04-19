@@ -132,7 +132,6 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
             sx={{ mt: 2 }}
             options={data.records}
             getOptionLabel={({
-              Id,
               Name,
               ShippingStreet,
               ShippingPostalCode,
