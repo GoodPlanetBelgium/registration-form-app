@@ -11,16 +11,25 @@ import {
   Typography
 } from '@mui/material'
 import useTranslations from '../lib/useTranslations'
+import getText from '../lib/getText'
+import { useRouter } from 'next/router'
 
 interface Props extends SFResult {
   initiative: SFInitiative
 }
 
 const Result = ({ registrations, applicant, account, initiative }: Props) => {
+  const { locale } = useRouter()
   const t = useTranslations('Form')
   const tr = useTranslations('Result')
   const workshopName = (id: string) =>
-    initiative.Workshops__r.records.find(workshop => workshop.Id === id)?.Name
+    getText(
+      locale,
+      'Title',
+      initiative.Workshops__r.records.find(
+        workshop => workshop.Id === id
+      ) as SFWorkshop
+    )
   return (
     <>
       <Alert severity='success'>

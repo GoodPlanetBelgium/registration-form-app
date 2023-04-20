@@ -11,10 +11,14 @@ import useTranslations from '../lib/useTranslations'
 import Form from '../components/form/Form'
 import getStatus from '../lib/getStatus'
 import Result from '../components/Result'
+import DataGuard from '../components/DataGuard'
+import getText from '../lib/getText'
 
 const InitiativePage: NextPage = () => {
-  const router = useRouter()
-  const { code } = router.query
+  const {
+    query: { code },
+    locale
+  } = useRouter()
   const t = useTranslations('Form')
 
   const initiativeFetch: {
@@ -32,10 +36,14 @@ const InitiativePage: NextPage = () => {
   const { data: initiative } = initiativeFetch.result
 
   const onSubmit = async (values: FormValues): Promise<Response> => {
-    const registrations: (FormRegistration & { workshopId: string })[] = []
+    const registrations: TransformedRegistration[] = []
     Object.keys(values.workshops).forEach(workshopId =>
       values.workshops[workshopId].forEach(registration =>
-        registrations.push({ workshopId, ...registration })
+        registrations.push({
+          workshopId,
+          ...registration,
+          monthPreference: [registration.monthPreference]
+        })
       )
     )
     const { workshops, ...restValues } = values
@@ -51,7 +59,9 @@ const InitiativePage: NextPage = () => {
         body: JSON.stringify(data)
       })
       if (response.ok) {
-        setSFResult(await response.json())
+        const result = await response.json()
+        console.log(result)
+        setSFResult(result)
       }
       return response
     } catch (error) {
@@ -61,41 +71,39 @@ const InitiativePage: NextPage = () => {
 
   const { status, earliestOpen } = getStatus(initiative)
 
+  const info = getText(locale, 'Info', initiative)
+
   return (
-    <Layout
-      title={t('title', {
-        name: initiative[
-          `${router.locale?.toUpperCase()}_Title__c` as
-            | 'NL_Info__c'
-            | 'FR_Info__c'
-        ]
-      })}
-    >
-      {status !== 'open' && (
-        <Alert severity='warning'>
-          {t(`status.${status}`, {
-            date: earliestOpen.format('DD-MM-YYYY HH:mm')
-          })}
-        </Alert>
-      )}
-      {!!sfResult && <Result {...sfResult} initiative={initiative} />}
-      {!sfResult && status === 'open' && (
-        <>
-          <Alert severity='info' icon={false}>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: initiative[
-                  `${router.locale?.toUpperCase()}_Info__c` as
-                    | 'NL_Info__c'
-                    | 'FR_Info__c'
-                ].replace('<br>', '')
-              }}
-            />
+    <DataGuard initiative={initiative}>
+      <Layout
+        title={t('title', {
+          name: getText(locale, 'Title', initiative)
+        })}
+      >
+        {status !== 'open' && (
+          <Alert severity='warning'>
+            {t(`status.${status}`, {
+              date: earliestOpen.format('DD-MM-YYYY HH:mm')
+            })}
           </Alert>
-          <Form onSubmit={onSubmit} initiative={initiative} />
-        </>
-      )}
-    </Layout>
+        )}
+        {!!sfResult && <Result {...sfResult} initiative={initiative} />}
+        {!sfResult && status === 'open' && (
+          <>
+            {!!info && (
+              <Alert severity='info' icon={false}>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: info
+                  }}
+                />
+              </Alert>
+            )}
+            <Form onSubmit={onSubmit} initiative={initiative} />
+          </>
+        )}
+      </Layout>
+    </DataGuard>
   )
 }
 

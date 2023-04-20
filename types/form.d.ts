@@ -35,7 +35,12 @@ interface FormValues extends Form {
   }
 }
 
+type TransformedRegistration = Omit<FormRegistration, 'monthPreference'> & {
+  workshopId: string
+  monthPreference: string[]
+}
+
 interface FormResult extends Form {
   initiativeId: string
-  registrations: (Registration & { workshopId: string })[]
+  registrations: TransformedRegistration[]
 }

@@ -34,10 +34,10 @@ const registrationsSchema = (
           t('field.required'),
           value => !workshop.C_Weekday_Preferences__c || !!value?.length
         ),
-        monthPreference: Yup.array().test(
+        monthPreference: Yup.string().test(
           'is-month-pref-required',
           t('field.required'),
-          value => !workshop.C_Month_Preferences__c || !!value?.length
+          value => !workshop.C_Month_Preferences__c || !!value
         )
       })
     )
@@ -122,7 +122,7 @@ const registrationInitialValues = {
   copyApplicant: false,
   groupContact: { firstName: '', lastName: '', email: '', role: '' },
   dayOfWeekPreference: [],
-  monthPreference: []
+  monthPreference: ''
 }
 
 export { initialValues, registrationInitialValues, validationSchema }

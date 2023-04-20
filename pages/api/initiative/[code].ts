@@ -6,7 +6,7 @@ type Data = {
   data?: SFInitiative
 }
 
-export default async function handler (
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
@@ -16,10 +16,6 @@ export default async function handler (
     return
   }
   console.log('Calling API: initiative/', code)
-  if (typeof code !== 'string') {
-    res.status(400).json({ error: 'code should be a string' })
-    return
-  }
   const url = `/services/apexrest/Initiative/${code.toUpperCase()}`
   const data = await salesforceAPI({ method: 'GET', url })
   res.status(200).json({ data })

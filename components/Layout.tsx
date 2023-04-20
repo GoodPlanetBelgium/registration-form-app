@@ -1,11 +1,11 @@
 import Head from 'next/head'
-import { AppBar, Box, Container, Toolbar, Typography } from '@mui/material'
+import { AppBar, Container, Toolbar, Typography } from '@mui/material'
 import { ReactNode } from 'react'
 import Image from 'next/image'
 import logo from '../public/goodplanet_logo_white.svg'
 import LanguageSwitch from './LanguageSwitch'
 
-type LayoutProps = {
+interface LayoutProps {
   title: string
   children: ReactNode
 }

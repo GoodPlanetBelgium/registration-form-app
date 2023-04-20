@@ -11,7 +11,7 @@ interface SFAccount {
     | 'Secondary_School'
     | 'Higher_Education'
     | 'Adult_Education'
-  C_Type_of_Education__c:
+  C_Type_of_Education__c?:
     | 'A-Stroom'
     | 'B-Stroom'
     | 'General'
@@ -21,8 +21,8 @@ interface SFAccount {
     | 'Parttime'
     | 'Specialized'
     | 'Non-native_Entrants_Education'
-  GP_Language__c: 'Dutch' | 'French' | 'German' | 'English'
-  C_School_Schedule__c: string
+  GP_Language__c?: 'Dutch' | 'French' | 'German' | 'English'
+  C_School_Schedule__c?: string
 }
 
 interface SFWorkshop {
@@ -34,10 +34,10 @@ interface SFWorkshop {
   C_Required_For_Registration__c: boolean
   C_Weekday_Preferences__c?: string
   C_Month_Preferences__c?: string
-  NL_Info__c: string
-  FR_Info__c: string
-  NL_Title__c: string
-  FR_Title__c: string
+  NL_Info__c?: string
+  FR_Info__c?: string
+  NL_Title__c?: string
+  FR_Title__c?: string
 }
 
 interface SFInitiative {
@@ -47,10 +47,10 @@ interface SFInitiative {
   C_Registrations_Postcodes__c: string | undefined
   C_Registrations_Region__c: 'Flanders' | 'Wallonia' | 'Brussels' | undefined
   C_Registrations_Ask_for_school_hours__c: boolean
-  NL_Info__c: string
-  FR_Info__c: string
-  NL_Title__c: string
-  FR_Title__c: string
+  NL_Info__c?: string
+  FR_Info__c?: string
+  NL_Title__c?: string
+  FR_Title__c?: string
   Workshops__r: {
     records: SFWorkshop[]
   }

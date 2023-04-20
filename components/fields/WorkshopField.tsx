@@ -20,6 +20,7 @@ import { FC, useState } from 'react'
 import useTranslations from '../../lib/useTranslations'
 import RegistrationSubForm from '../form/RegistrationSubForm'
 import { registrationInitialValues } from '../form/schema'
+import getText from '../../lib/getText'
 
 interface Props {
   initiative: SFInitiative
@@ -37,7 +38,7 @@ const WorkshopField: FC<Props & FieldProps> = ({
     w => w.Id === workshopId
   ) as SFWorkshop
   const t = useTranslations('Form')
-  const router = useRouter()
+  const { locale } = useRouter()
   const [activeTab, setActiveTab] = useState<number | false>(false)
 
   const addRegistration = (push: (obj: any) => void) => () => {
@@ -56,6 +57,8 @@ const WorkshopField: FC<Props & FieldProps> = ({
     remove(i)
   }
 
+  const info = getText(locale, 'Info', workshop)
+
   return (
     <Accordion
       disableGutters
@@ -64,27 +67,19 @@ const WorkshopField: FC<Props & FieldProps> = ({
     >
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography variant='h2'>
-          {
-            workshop[
-              `${router.locale?.toUpperCase()}_Title__c` as
-                | 'NL_Title__c'
-                | 'FR_Title__c'
-            ]
-          }
+          {getText(locale, 'Title', workshop)}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Alert severity='info' icon={false} variant='standard' sx={{ m: 0 }}>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: workshop[
-                `${router.locale?.toUpperCase()}_Info__c` as
-                  | 'NL_Info__c'
-                  | 'FR_Info__c'
-              ].replace('<br>', '')
-            }}
-          />
-        </Alert>
+        {!!info && (
+          <Alert severity='info' icon={false} variant='standard' sx={{ m: 0 }}>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: info
+              }}
+            />
+          </Alert>
+        )}
         <h3>{t('sub.workshop.registrationsTitle')}</h3>
         <FieldArray name={field.name}>
           {({ push, remove }) => (

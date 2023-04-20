@@ -8,7 +8,7 @@ type SignUpResponse = {
   }
 }
 
-export default async function handler (
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<SignUpResponse>
 ) {
@@ -19,7 +19,7 @@ export default async function handler (
       const url = `/services/apexrest/InitiativeRegistration/`
       const data = await salesforceAPI({ method: 'POST', url, data: req.body })
       console.log(JSON.stringify(data, null, 2))
-      res.status(200).json({ result: { message: 'succes!' } })
+      res.status(200).json(data)
     } catch (error) {
       console.error(error)
       res.status(500).json({ result: { message: 'Internal server error.' } })

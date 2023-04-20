@@ -1,5 +1,5 @@
 import React from 'react'
-import { GetStaticProps, NextPage } from 'next'
+import { NextPage } from 'next'
 
 import Layout from '../components/Layout'
 import useTranslations from '../lib/useTranslations'
