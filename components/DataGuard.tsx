@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { useRouter } from 'next/router'
 import Layout from './Layout'
-import { Typography } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import getText from '../lib/getText'
 
 interface Props {
@@ -10,18 +10,25 @@ interface Props {
 }
 
 const DataGuard = ({ initiative, children }: Props) => {
-  const router = useRouter()
-
-  const lang = router.locale as Locale
+  const {
+    query: { code },
+    locale
+  } = useRouter()
 
   const hasContent =
-    !!getText(lang, 'Title', initiative) &&
+    !!getText(locale, 'Title', initiative) &&
     initiative.Workshops__r.records.every(
-      workshop => !!getText(lang, 'Title', workshop)
+      workshop => !!getText(locale, 'Title', workshop)
     )
 
   if (hasContent) {
     return <>{children}</>
+  }
+
+  const refreshCache = async () => {
+    const result = await fetch(`/api/initiative/${code}/refresh`)
+    console.log(await result.json())
+    location.reload()
   }
 
   return (
@@ -32,6 +39,9 @@ const DataGuard = ({ initiative, children }: Props) => {
       <pre style={{ fontSize: '0.6rem', whiteSpace: 'pre-wrap' }}>
         {JSON.stringify(initiative, null, 2)}
       </pre>
+      <Button color={'warning'} variant={'contained'} onClick={refreshCache}>
+        Refresh cache
+      </Button>
     </Layout>
   )
 }

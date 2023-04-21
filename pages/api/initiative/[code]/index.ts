@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import salesforceAPI from '../../../lib/salesforceAPI'
+import salesforceAPI from '../../../../lib/salesforceAPI'
 
 type Data = {
   error?: string
