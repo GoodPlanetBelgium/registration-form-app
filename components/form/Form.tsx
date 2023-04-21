@@ -9,9 +9,11 @@ import WorkshopField from '../fields/WorkshopField'
 import ContactSubForm from './ContactSubForm'
 import { initialValues, validationSchema } from './schema'
 import SendIcon from '@mui/icons-material/Send'
+import Loading from '../Loading'
 
 interface FormProps {
   initiative: SFInitiative
+
   onSubmit(values: FormValues): Promise<Response>
 }
 
@@ -19,13 +21,16 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
   const t = useTranslations('Form')
 
   const [countError, setCountError] = useState('')
-  const beforeSubmit = (values: FormValues) => {
+  const [submitting, setSubmitting] = useState(false)
+  const beforeSubmit = async (values: FormValues) => {
     let count = 0
     initiative.Workshops__r.records.forEach(
       w => (count = count + values.workshops[w.Id].length)
     )
     if (count > 0) {
-      onSubmit(values)
+      setSubmitting(true)
+      await onSubmit(values)
+      setSubmitting(false)
     } else {
       setCountError('sub.workshop.field.required')
     }
@@ -38,7 +43,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
       onSubmit={beforeSubmit}
     >
       {({ values, errors, touched }) => {
-        // console.log(values, errors, touched)
+        console.log(values, errors)
         return (
           <Form noValidate>
             <Paper sx={{ my: 3 }}>
@@ -92,15 +97,19 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
               variant='body1'
               dangerouslySetInnerHTML={{ __html: t('privacyStatement') }}
             />
-            <Button
-              color='primary'
-              variant='contained'
-              size='large'
-              type='submit'
-              sx={{ my: 2, width: { xs: '100%', sm: '320px' } }}
-            >
-              <SendIcon sx={{ mr: 1 }} /> {t('submit')}
-            </Button>
+            {submitting ? (
+              <Loading />
+            ) : (
+              <Button
+                color='primary'
+                variant='contained'
+                size='large'
+                type='submit'
+                sx={{ my: 2, width: { xs: '100%', sm: '320px' } }}
+              >
+                <SendIcon sx={{ mr: 1 }} /> {t('submit')}
+              </Button>
+            )}
             {countError && (
               <FormHelperText error>{t(countError)}</FormHelperText>
             )}
