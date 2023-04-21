@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import useFetch from '../lib/useFetch'
-import { Alert } from '@mui/material'
+import { Alert, Box } from '@mui/material'
 
 import Loading from '../components/Loading'
 import Error from '../components/Error'
@@ -29,7 +29,22 @@ const InitiativePage: NextPage = () => {
 
   const [sfResult, setSFResult] = useState<SFResult | null>(null)
 
-  if (!code || initiativeFetch.isLoading) return <Loading />
+  if (!code || initiativeFetch.isLoading)
+    return (
+      <Layout title=''>
+        <Box
+          sx={{
+            height: 'calc(100vh - 120px)',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <Loading />
+        </Box>
+      </Layout>
+    )
   if (initiativeFetch.error)
     return <Error message={initiativeFetch.error.message} />
 
