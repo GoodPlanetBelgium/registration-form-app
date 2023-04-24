@@ -54,7 +54,7 @@ const validationSchema = (t: TranslationType, initiative: SFInitiative) => {
       id: Yup.string()
         .required(t('field.required'))
         .matches(/[a-zA-Z0-9]{18}/, t('field.invalid')),
-      educationType: Yup.array().of(Yup.string()).min(1, t('field.required')),
+      // educationType: Yup.array().of(Yup.string()).min(1, t('field.required')),
       schedule: Yup.string()
         .test('is-schedule-required', t('field.required'), value =>
           initiative.C_Registrations_Ask_for_school_hours__c ? !!value : true
@@ -94,7 +94,7 @@ const validationSchema = (t: TranslationType, initiative: SFInitiative) => {
 const initialValues = (initiative: SFInitiative) => ({
   account: {
     id: '',
-    educationType: [],
+    // educationType: [],
     schedule: null
   },
   applicant: {

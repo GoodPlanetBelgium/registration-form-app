@@ -81,10 +81,10 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
   ) => {
     setFieldValue(`${name}.id`, account?.Id)
     setFieldValue(`${name}.schedule`, account?.C_School_Schedule__c || '')
-    setFieldValue(
-      `${name}.educationType`,
-      account?.C_Type_of_Education__c?.split(';') || []
-    )
+    // setFieldValue(
+    //   `${name}.educationType`,
+    //   account?.C_Type_of_Education__c?.split(';') || []
+    // )
     setAccount(account)
   }
 

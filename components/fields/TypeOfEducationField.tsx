@@ -36,8 +36,11 @@ const TypeOfEducationField: FC<TOEFieldProps & FieldProps> = ({
     `/api/picklist-values?sObject=Account&field=C_Type_of_Education__c`
   )
   if (!result || isLoading) return <CircularProgress />
+
   const picklist = result.data?.values.filter(({ validFor }) =>
-    validFor.includes(result.data.controllerValues[account.GP_Language__c])
+    account.GP_Language__c
+      ? validFor.includes(result.data.controllerValues[account.GP_Language__c])
+      : false
   )
   const onChange = (e: SelectChangeEvent<HTMLInputElement>) => {
     if (value.includes(e.target.name)) {
@@ -58,7 +61,6 @@ const TypeOfEducationField: FC<TOEFieldProps & FieldProps> = ({
         variant='standard'
         error={Boolean(error)}
       >
-        {/* <FormLabel component='legend'>{label}</FormLabel> */}
         <FormGroup row>
           {picklist.map((option, i) => (
             <FormControlLabel
