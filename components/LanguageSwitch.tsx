@@ -9,35 +9,17 @@ const LanguageSwitch = () => {
   }
 
   return (
-    <div>
-      <IconButton
-        size='large'
-        aria-controls='menu-appbar'
-        aria-haspopup='true'
-        onClick={handleMenu}
-        color='inherit'
-      >
-        <Flag />
-      </IconButton>
-      <Menu
-        id='menu-appbar'
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <MenuItem onClick={() => setLanguage('nl')}>NL</MenuItem>
-        <MenuItem onClick={() => setLanguage('fr')}>FR</MenuItem>
-      </Menu>
-    </div>
+    <ButtonGroup variant='text' color={'inherit'}>
+      {(['nl', 'fr'] as Locale[]).map((lang, i) => (
+        <Button
+          key={i}
+          disabled={router.locale === lang}
+          onClick={() => setLanguage(lang)}
+        >
+          {lang.toUpperCase()}
+        </Button>
+      ))}
+    </ButtonGroup>
   )
 }
 
