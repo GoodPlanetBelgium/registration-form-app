@@ -20,28 +20,34 @@ interface SelectFieldProps {
     value: string
   }[]
   multiple?: boolean
-  noPreferenceOption?: boolean
 }
+
+const NO_PREFERENCE = 'No_Preference'
 
 const SelectField: FC<SelectFieldProps & FieldProps> = ({
   field: { name, value },
   form: { handleChange, touched, errors, setFieldValue },
   label,
   options,
-  multiple = false,
-  noPreferenceOption = false
+  multiple = false
 }) => {
   const t = useTranslations('Form')
   const error = getIn(touched, name) && getIn(errors, name)
   const getLabel = (optionValue: string) =>
     options.find(option => option.value === optionValue)?.label
   const [disabled, setDisabled] = useState(false)
+
+  const noPreferenceOption = !!options.find(
+    ({ value }) => value === NO_PREFERENCE
+  )
+
+  const filteredOptions = options.filter(({ value }) => value !== NO_PREFERENCE)
   const toggleNoPreference = () => {
-    if (value.includes('No_Preference')) {
-      setFieldValue(name, [])
+    if (value === NO_PREFERENCE || value.includes(NO_PREFERENCE)) {
+      setFieldValue(name, multiple ? [] : '')
       setDisabled(false)
     } else {
-      setFieldValue(name, ['No_Preference'])
+      setFieldValue(name, multiple ? [NO_PREFERENCE] : NO_PREFERENCE)
       setDisabled(true)
     }
   }
@@ -69,7 +75,7 @@ const SelectField: FC<SelectFieldProps & FieldProps> = ({
         disabled={disabled}
         fullWidth
       >
-        {options.map((option, i) => (
+        {filteredOptions.map((option, i) => (
           <MenuItem key={i} value={option.value}>
             {multiple && <Checkbox checked={value.includes(option.value)} />}
             <ListItemText primary={option.label} />
@@ -78,7 +84,7 @@ const SelectField: FC<SelectFieldProps & FieldProps> = ({
       </Select>
       {noPreferenceOption && (
         <FormControlLabel
-          control={<Checkbox checked={value.includes('No_Preference')} />}
+          control={<Checkbox checked={value.includes(NO_PREFERENCE)} />}
           label={
             <Typography color={Boolean(error) ? 'error' : 'text.primary'}>
               {t('field.noPreference')}

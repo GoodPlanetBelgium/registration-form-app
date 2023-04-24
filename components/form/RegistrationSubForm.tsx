@@ -63,16 +63,13 @@ const RegistrationSubForm = ({ nameSpace, workshop }: Props) => {
                   name={`${nameSpace}.dayOfWeekPreference`}
                   label={t('sub.workshop.field.dayOfWeekPreference')}
                   component={SelectField}
-                  options={workshop.C_Weekday_Preferences__c.split(';')
-                    .filter(option => option !== 'No_Preference')
-                    .map(day => ({
+                  options={workshop.C_Weekday_Preferences__c.split(';').map(
+                    day => ({
                       value: day,
                       label: days[day]
-                    }))}
+                    })
+                  )}
                   multiple
-                  noPreferenceOption={workshop.C_Weekday_Preferences__c.split(
-                    ';'
-                  ).includes('No_Preference')}
                 />
               </Grid>
             )}
@@ -82,10 +79,12 @@ const RegistrationSubForm = ({ nameSpace, workshop }: Props) => {
                   name={`${nameSpace}.monthPreference`}
                   label={t('sub.workshop.field.monthPreference')}
                   component={SelectField}
-                  options={Object.keys(months).map(day => ({
-                    value: day,
-                    label: months[day]
-                  }))}
+                  options={workshop.C_Month_Preferences__c.split(';').map(
+                    month => ({
+                      value: month,
+                      label: months[month]
+                    })
+                  )}
                 />
               </Grid>
             )}
