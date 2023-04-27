@@ -5,7 +5,7 @@ import useFetch from '../lib/useFetch'
 import { Alert, Box } from '@mui/material'
 
 import Loading from '../components/Loading'
-import Error from '../components/Error'
+import ErrorComponent from '../components/Error'
 import Layout from '../components/Layout'
 import useTranslations from '../lib/useTranslations'
 import Form from '../components/form/Form'
@@ -13,6 +13,7 @@ import getStatus from '../lib/getStatus'
 import Result from '../components/Result'
 import DataGuard from '../components/DataGuard'
 import getText from '../lib/getText'
+import { useErrorBoundary } from 'react-error-boundary'
 
 const InitiativePage: NextPage = () => {
   const {
@@ -20,6 +21,8 @@ const InitiativePage: NextPage = () => {
     locale
   } = useRouter()
   const t = useTranslations('Form')
+
+  const { showBoundary } = useErrorBoundary()
 
   const initiativeFetch: {
     result: { data: SFInitiative }
@@ -46,7 +49,7 @@ const InitiativePage: NextPage = () => {
       </Layout>
     )
   if (initiativeFetch.error)
-    return <Error message={initiativeFetch.error.message} />
+    return <ErrorComponent message={initiativeFetch.error.message} />
 
   const { data: initiative } = initiativeFetch.result
 
@@ -68,20 +71,18 @@ const InitiativePage: NextPage = () => {
       registrations
     }
 
-    try {
-      const response = await fetch('/api/initiative/sign-up', {
-        method: 'POST',
-        body: JSON.stringify(data)
-      })
-      if (response.ok) {
-        const result = await response.json()
-        console.log(result)
-        setSFResult(result)
-      }
-      return response
-    } catch (error) {
-      throw new (Error as any)(error)
+    const response = await fetch('/api/initiative/sign-up', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    if (response.ok) {
+      const result = await response.json()
+      console.log(result)
+      setSFResult(result)
+    } else {
+      showBoundary(await response.json())
     }
+    return response
   }
 
   const { status, earliestOpen } = getStatus(initiative)

@@ -44,7 +44,7 @@ const call: any = async (request: Request, forceNew = false) => {
       console.log('ERROR')
       return await call(request, true)
     }
-    console.error('API ERROR:', error)
+    throw new Error(error)
   }
 }
 

@@ -24,7 +24,7 @@ const useTranslations = (category: string) => {
     }
     if (!result) {
       throw new Error(
-        `Translations: Not found, ID: ${locale}.${category}.${id} `
+        `Translations: Not found, ID: ${locale}.${category}.${id}`
       )
     }
     return result

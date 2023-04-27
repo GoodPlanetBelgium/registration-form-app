@@ -21,6 +21,7 @@ export default async function handler(
       console.log(JSON.stringify(data, null, 2))
       res.status(200).json(data)
     } catch (error) {
+      console.error('ERROR IN: /api/initiative/sign-up')
       console.error(error)
       res.status(500).json({ result: { message: 'Internal server error.' } })
     }

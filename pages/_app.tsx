@@ -6,8 +6,10 @@ import '@fontsource/lato/400.css'
 import Head from 'next/head'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { ErrorBoundary } from 'react-error-boundary'
+import ErrorFallback from '../components/ErrorFallback'
 
-function App ({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -17,7 +19,9 @@ function App ({ Component, pageProps }: AppProps) {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <ThemeProvider theme={createTheme(themeOptions)}>
           <CssBaseline />
-          <Component {...pageProps} />
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Component {...pageProps} />
+          </ErrorBoundary>
         </ThemeProvider>
       </LocalizationProvider>
     </>

@@ -43,7 +43,7 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
       onSubmit={beforeSubmit}
     >
       {({ values, errors, touched }) => {
-        console.log(values, errors)
+        // console.log(values, errors)
         return (
           <Form noValidate>
             <Paper sx={{ my: 3 }}>
