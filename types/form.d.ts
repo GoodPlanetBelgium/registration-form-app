@@ -18,7 +18,7 @@ interface FormRegistration {
 
 interface FormAccount {
   id: string
-  // educationType: string[]
+  educationType: string[]
   schedule: string | null
 }
 

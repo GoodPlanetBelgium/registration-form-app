@@ -94,7 +94,7 @@ const validationSchema = (t: TranslationType, initiative: SFInitiative) => {
 const initialValues = (initiative: SFInitiative) => ({
   account: {
     id: '',
-    // educationType: [],
+    educationType: [],
     schedule: null
   },
   applicant: {
