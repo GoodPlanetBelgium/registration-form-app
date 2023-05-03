@@ -105,13 +105,15 @@ const initialValues = (initiative: SFInitiative) => ({
     role: '',
     newsLetter: false
   },
-  workshops: initiative.Workshops__r.records.reduce(
-    (obj, workshop) => ({
-      ...obj,
-      [workshop.Id]: []
-    }),
-    {}
-  ),
+  workshops: initiative.Workshops__r.records
+    .sort((a, b) => (a.Name > b.Name ? 1 : -1))
+    .reduce(
+      (obj, workshop) => ({
+        ...obj,
+        [workshop.Id]: []
+      }),
+      {}
+    ),
   remark: '',
   agreed: false
 })

@@ -1,6 +1,6 @@
-import { Button, FormHelperText, Paper, Typography } from '@mui/material'
+import { Alert, Button, FormHelperText, Paper, Typography } from '@mui/material'
 import { Field, Form, Formik } from 'formik'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import useTranslations from '../../lib/useTranslations'
 import CheckboxField from '../fields/CheckboxField'
 import SalesForceAccountField from '../fields/SalesForceAccountField'
@@ -10,6 +10,8 @@ import ContactSubForm from './ContactSubForm'
 import { initialValues, validationSchema } from './schema'
 import SendIcon from '@mui/icons-material/Send'
 import Loading from '../Loading'
+import getText from '../../lib/getText'
+import { useRouter } from 'next/router'
 
 interface FormProps {
   initiative: SFInitiative
@@ -19,6 +21,7 @@ interface FormProps {
 
 const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
   const t = useTranslations('Form')
+  const { locale } = useRouter()
 
   const [countError, setCountError] = useState('')
   const [submitting, setSubmitting] = useState(false)
@@ -35,6 +38,8 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
       setCountError('sub.workshop.field.required')
     }
   }
+
+  const requirements = getText(locale, 'Requirements', initiative)
 
   return (
     <Formik
@@ -88,6 +93,15 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
               component={TextField}
               multiline
             />
+            {!!requirements && (
+              <Alert severity='info' icon={false}>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: requirements
+                  }}
+                />
+              </Alert>
+            )}
             <Field
               name='agreed'
               label={t('field.agreed')}

@@ -86,7 +86,7 @@ const translations: translationsType = {
       'field.noPreference': 'Geen voorkeur',
       'field.remark': 'Opmerking bij de inschrijving',
       'field.agreed':
-        'Ik verklaar alle informatie rond deze inschrijvingen te hebben gelezen en begrepen.',
+        'Ik verklaar alle informatie rond de inschrijving te hebben gelezen en begrepen.',
       privacyStatement:
         "GoodPlanet gaat zorgvuldig met uw persoonsgegevens om - <a target='_blank' href='https://www.goodplanet.be/docs/gpb/05_Privacyverklaring-GoodPlanet-NL_20181017.pdf'>lees hier onze privacyverklaring.</a>",
       errorsFound: 'Het formulier bevat fouten en kan niet verzonden worden.',
@@ -206,7 +206,7 @@ const translations: translationsType = {
       'field.noPreference': 'Pas de préférence',
       'field.remark': "Remarque pour l'inscription",
       'field.agreed':
-        'Je déclare avoir lu et compris toutes les informations concernant ces inscriptions.',
+        "Je déclare avoir lu et compris toutes les informations concernant l'inscription.",
       privacyStatement:
         "GoodPlanet traite vos données personnelles avec soin - <a target='_blank' href='https://www.goodplanet.be/docs/gpb/09_Privacyverklaring-GoodPlanet-FR_20181017.pdf'>lisez notre déclaration de confidentialité ici</a>.",
       errorsFound: 'Le formulaire contient des erreurs et ne peut être envoyé.',

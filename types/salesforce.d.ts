@@ -38,6 +38,8 @@ interface SFWorkshop {
   FR_Info__c?: string
   NL_Title__c?: string
   FR_Title__c?: string
+  NL_Requirements__c?: string
+  FR_Requirements__c?: string
 }
 
 interface SFInitiative {
@@ -51,6 +53,8 @@ interface SFInitiative {
   FR_Info__c?: string
   NL_Title__c?: string
   FR_Title__c?: string
+  NL_Requirements__c?: string
+  FR_Requirements__c?: string
   Workshops__r: {
     records: SFWorkshop[]
   }
