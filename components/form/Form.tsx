@@ -87,14 +87,8 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
                 component={WorkshopField}
               />
             ))}
-            <Field
-              name='remark'
-              label={t('field.remark')}
-              component={TextField}
-              multiline
-            />
             {!!requirements && (
-              <Alert severity='info' icon={false}>
+              <Alert severity='info' icon={false} sx={{ my: 3 }}>
                 <div
                   dangerouslySetInnerHTML={{
                     __html: requirements
@@ -102,6 +96,12 @@ const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
                 />
               </Alert>
             )}
+            <Field
+              name='remark'
+              label={t('field.remark')}
+              component={TextField}
+              multiline
+            />
             <Field
               name='agreed'
               label={t('field.agreed')}

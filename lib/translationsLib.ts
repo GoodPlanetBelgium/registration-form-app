@@ -22,7 +22,7 @@ const translations: translationsType = {
         'Inschrijven voor dit project is niet mogelijk of de startdatum is nog niet ingesteld.',
       'field.required': 'Verplicht veld.',
       'field.invalid': 'Dit is geen geldige waarde',
-      'field.invalidEmail': 'Dit is geen geldig emailadres',
+      'field.invalidEmail': 'Dit is geen geldig e-mailadres',
       'field.school': 'School',
       'field.school.numberFound': '{n} scholen gevonden',
       'field.school.notFoundInfo':
@@ -52,7 +52,7 @@ const translations: translationsType = {
       'field.schedule.addBreak': 'Pauze toevoegen',
       'field.firstName': 'Voornaam',
       'field.lastName': 'Achternaam',
-      'field.email': 'Emailadres',
+      'field.email': 'E-mailadres',
       'field.phone': 'Telefoonnummer',
       'field.role': 'Functie',
       'field.role.Headmaster': 'Directeur',
@@ -126,7 +126,7 @@ const translations: translationsType = {
     SchoolTypes: {
       Nursery_School: 'Kleuter onderwijs',
       Primary_School: 'Lager onderwijs',
-      Nursery_And_Primary_School: 'Kleuter- en lageronderwijs',
+      Nursery_And_Primary_School: 'Kleuter- en lager onderwijs',
       Secondary_School: 'Secundair onderwijs',
       Higher_Education: 'Hoger onderwijs',
       Adult_Education: 'Volwassenen onderwijs'
@@ -151,7 +151,7 @@ const translations: translationsType = {
       'field.school': 'École',
       'field.school.numberFound': '{n} écoles trouvées',
       'field.school.notFoundInfo':
-        'Vous ne trouvez pas votre école dans la liste ? Envoyez un email à ict@goodplanet.be',
+        'Vous ne trouvez pas votre école dans la liste ? Envoyez un e-mail à ict@goodplanet.be',
       'field.schoolType': "Niveau d'enseignement",
       'field.educationType':
         "Quels types d'enseignement sont proposés dans cette école?",
@@ -207,6 +207,7 @@ const translations: translationsType = {
       'field.remark': "Remarque pour l'inscription",
       'field.agreed':
         "Je déclare avoir lu et compris toutes les informations concernant l'inscription.",
+
       privacyStatement:
         "GoodPlanet traite vos données personnelles avec soin - <a target='_blank' href='https://www.goodplanet.be/docs/gpb/09_Privacyverklaring-GoodPlanet-FR_20181017.pdf'>lisez notre déclaration de confidentialité ici</a>.",
       errorsFound: 'Le formulaire contient des erreurs et ne peut être envoyé.',
