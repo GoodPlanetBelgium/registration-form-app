@@ -3,24 +3,27 @@
     "Id": "0011n00002cYiFTAA0",
     "URL": "https://goodplanetbelgium.lightning.force.com/lightning/r/Account/0011n00002cYiFTAA0/view",
     "Name": "CEFA - INSTITUT NOTRE-DAME - SEMINAIRE",
-    "ShippingStreet": "Rue Piconrue 6",
+    "ShippingStreet": "Rue Piconrue 6", // nummer niet apart mogelijk
     "ShippingCity": "BASTOGNE",
     "ShippingState": "Luxembourg",
     "ShippingPostalCode": "6600",
-    "ShippingCountry": "Belgium",
+    "ShippingCountry": "BE", // ISO 3166-1 alpha-2
     "Phone": "+32 61/24.06.30",
-    "Language": "French"
+    "Language": "French" // Opties: Dutch French German English
   },
   "Contact": {
+    "AccountId": "0011n00002cYiFTAA0", // contact kan gelinkt zijn aan meerdere Accounts -> niet relevant in Planpoint
     "Id": "0031n00002T3ucSAAR",
     "URL": "https://goodplanetbelgium.lightning.force.com/lightning/r/Contact/0031n00002T3ucSAAR/view",
-    "Name": "Adam",
+    "FirstName": "Adam",
+    "LastName": "Pauline",
     "Phone": "+32 61/24.06.30",
     "Email": "email@example.com",
-    "Function": "Headmaster"
+    "Function": "Headmaster" // Opties: Headmaster Teacher Maintenance Administration Vice_Headmaster Coordinator Other
   },
   "Workshops": [
     {
+      "AccoundId": "0011n00002cYiFTAA0",
       "Id": "0011n00002cYiFTAA1",
       "Werktijd_Code": 999,
       "Workshop_Duration": 120,
@@ -32,10 +35,11 @@
       "Contact": {
         "Id": "0031n00002T3ucSAAR",
         "URL": "https://goodplanetbelgium.lightning.force.com/lightning/r/Contact/0031n00002T3ucSAAR/view",
-        "Name": "Paul",
+        "FirstName": "Paul",
+        "LastName": "Paulson",
         "Email": "email@example.com"
       },
-      "Remarks": ""
+      "Remarks": "January,February" // Arbitraire info voor de planner, bv. voorkeursmaanden
     }
   ]
 }

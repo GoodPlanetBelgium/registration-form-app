@@ -42,8 +42,6 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
     ? initiative.C_Registrations_Postcodes__c.replace(/[^\d,*]/g, '').split(',')
     : null
 
-  console.log(initiative.C_Registrations_Postcodes__c, validPostcodes)
-
   useEffect(() => {
     if (postcode && postcode.length === 4 && !!validPostcodes) {
       setInputError(
