@@ -16,7 +16,7 @@ export default async function handler(
     return
   }
   console.log('Calling API: initiative/', code)
-  const url = `/services/apexrest/Initiative/${code.toUpperCase()}`
+  const url = `/services/apexrest/DevInitiative/${code.toUpperCase()}`
   const data = await salesforceAPI({ method: 'GET', url })
   res.status(200).json({ data })
 }

@@ -8,13 +8,17 @@ import TextField from '../fields/TextField'
 import Section from '../Section'
 import ContactSubForm from './ContactSubForm'
 import { Grid } from '@mui/material'
+import getText from '../../lib/getText'
+import { useRouter } from 'next/router'
 
 interface Props {
   nameSpace: string
   workshop: SFWorkshop
+  questions: SFQuestion[]
 }
 
-const RegistrationSubForm = ({ nameSpace, workshop }: Props) => {
+const RegistrationSubForm = ({ nameSpace, workshop, questions }: Props) => {
+  const { locale } = useRouter()
   const t = useTranslations('Form')
   const days = useTranslationsCategory('Days')
   const months = useTranslationsCategory('Months')
@@ -88,6 +92,22 @@ const RegistrationSubForm = ({ nameSpace, workshop }: Props) => {
                 />
               </Grid>
             )}
+          </Grid>
+        </Section>
+      )}
+      {!!questions.length && (
+        <Section label='questions'>
+          <Grid container spacing={2}>
+            {questions.map((q, i) => (
+              <Grid key={i} item xs={12} sm={6} md={4} sx={{ width: '100%' }}>
+                <Field
+                  name={`${nameSpace}.${q.Name}`}
+                  label={getText(locale, 'Title', q)}
+                  type={q.C_Type__c}
+                  component={TextField}
+                />
+              </Grid>
+            ))}
           </Grid>
         </Section>
       )}

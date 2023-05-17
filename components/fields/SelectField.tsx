@@ -51,6 +51,9 @@ const SelectField: FC<SelectFieldProps & FieldProps> = ({
       setDisabled(true)
     }
   }
+
+  console.log(options, filteredOptions)
+
   return (
     <FormControl sx={{ mr: 2, mb: 2, width: '100%' }}>
       <InputLabel id={`${name}-label`} error={Boolean(error)}>

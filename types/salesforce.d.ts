@@ -1,5 +1,7 @@
+type SFId = string
+
 interface SFAccount {
-  Id: string
+  Id: SFId
   Name: string
   ShippingStreet: string
   ShippingCity: string
@@ -26,7 +28,7 @@ interface SFAccount {
 }
 
 interface SFWorkshop {
-  Id: string
+  Id: SFId
   Name: string
   C_Registrations_Status__c: Status
   C_Registrations_Start__c: string
@@ -43,7 +45,7 @@ interface SFWorkshop {
 }
 
 interface SFInitiative {
-  Id: string
+  Id: SFId
   Name: string
   C_Registrations_restrict_by_School_Type__c: string | undefined
   C_Registrations_Postcodes__c: string | undefined
@@ -58,6 +60,20 @@ interface SFInitiative {
   Workshops__r: {
     records: SFWorkshop[]
   }
+}
+
+interface SFQuestion {
+  Id: SFId
+  Name: string
+  C_Type__c: 'number' | 'text'
+  C_Required__c: boolean
+  NL_Info__c?: string
+  FR_Info__c?: string
+  NL_Title__c: string
+  FR_Title__c: string
+  NL_Requirements__c?: string
+  FR_Requirements__c?: string
+  C_Initiative_Element__c: string
 }
 
 interface SFPickListValues {

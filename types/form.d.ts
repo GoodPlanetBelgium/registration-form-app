@@ -14,6 +14,9 @@ interface FormRegistration {
   groupContact: Contact
   dayOfWeekPreference: string[]
   monthPreference: string
+  questions: {
+    [name: string]: string | number
+  }[]
 }
 
 interface FormAccount {

@@ -9,7 +9,7 @@ type Text =
 const getText = (
   lang: string | undefined,
   type: 'Title' | 'Info' | 'Requirements',
-  obj: SFInitiative | SFWorkshop
+  obj: SFInitiative | SFWorkshop | SFQuestion
 ) => obj[`${lang?.toUpperCase()}_${type}__c` as Text]?.replace('<br>', '') || ''
 
 export default getText

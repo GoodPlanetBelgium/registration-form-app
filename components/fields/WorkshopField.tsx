@@ -24,12 +24,14 @@ import getText from '../../lib/getText'
 
 interface Props {
   initiative: SFInitiative
+  questions: SFQuestion[]
   workshopId: string
 }
 
 const WorkshopField: FC<Props & FieldProps> = ({
   field,
   initiative,
+  questions,
   workshopId
 }) => {
   const registrations = field.value as FormRegistration[]
@@ -106,6 +108,7 @@ const WorkshopField: FC<Props & FieldProps> = ({
                   <RegistrationSubForm
                     nameSpace={`${name}[${i}]`}
                     workshop={workshop}
+                    questions={questions}
                   />
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6} md={4}>
