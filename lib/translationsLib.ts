@@ -61,6 +61,7 @@ const translations: translationsType = {
       'field.role.Administration': 'Secretariaat',
       'field.role.Vice_Headmaster': 'Onderdirecteur',
       'field.role.Coordinator': 'Coördinator',
+      'field.role.Care_Assistant': 'Zorg ondersteuner',
       'field.role.Other': 'Anders',
       'field.newsLetter':
         'Ik ontvang graag de nieuwsbrief van GoodPlanet om op te hoogte te zijn van het actuele aanbod',
@@ -181,6 +182,7 @@ const translations: translationsType = {
       'field.role.Administration': 'Administration',
       'field.role.Vice_Headmaster': 'Sous-directeur',
       'field.role.Coordinator': 'Coordinateur',
+      'field.role.Care_Assistant': 'Aide-soignant',
       'field.role.Other': 'Autre',
       'field.newsLetter':
         "Je souhaite recevoir la newsletter GoodPlanet pour être informé de l'offre actuelle.",
