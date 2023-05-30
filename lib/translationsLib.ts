@@ -171,6 +171,11 @@ const translations: translationsType = {
       'field.postcode': 'Code postal',
       'field.postcode.invalid':
         "Ce projet n'est pas disponible pour ce code postal.",
+      'field.schedule': 'Quelles sont les heures de cours normales ?',
+      'field.schedule.start': 'début',
+      'field.schedule.end': 'fin',
+      'field.schedule.break': 'pause {n}',
+      'field.schedule.addBreak': 'ajouter une pause',
       'field.firstName': 'Prénom',
       'field.lastName': 'Nom de famille',
       'field.email': 'Adresse e-mail',
