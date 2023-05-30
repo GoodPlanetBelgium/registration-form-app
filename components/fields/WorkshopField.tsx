@@ -8,12 +8,13 @@ import {
   Alert,
   Box,
   Button,
+  FormHelperText,
   Grid,
   Tab,
   Tabs,
   Typography
 } from '@mui/material'
-import { FieldArray } from 'formik'
+import { FieldArray, getIn } from 'formik'
 import { FieldProps } from 'formik'
 import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
@@ -30,10 +31,12 @@ interface Props {
 const WorkshopField: FC<Props & FieldProps> = ({
   field,
   initiative,
-  workshopId
+  workshopId,
+  form: { touched, errors }
 }) => {
   const registrations = field.value as FormRegistration[]
   const { name } = field
+  const error = (getIn(touched, name) && getIn(errors, name)) || ''
   const workshop = initiative.Workshops__r.records.find(
     w => w.Id === workshopId
   ) as SFWorkshop
@@ -127,11 +130,23 @@ const WorkshopField: FC<Props & FieldProps> = ({
                         variant='contained'
                         color='success'
                         size='large'
+                        disabled={
+                          registrations.length ===
+                          workshop.C_Max_Registrations_Per_School__c
+                        }
                         fullWidth
                       >
                         <AddIcon />
                         <span>{t('sub.workshop.add')}</span>
                       </Button>
+                      {registrations.length ===
+                        workshop.C_Max_Registrations_Per_School__c && (
+                        <FormHelperText>
+                          {t('sub.workshop.field.maxRegistrations', {
+                            max: workshop.C_Max_Registrations_Per_School__c
+                          })}
+                        </FormHelperText>
+                      )}
                     </Grid>
                   </Grid>
                 </Box>
@@ -151,6 +166,11 @@ const WorkshopField: FC<Props & FieldProps> = ({
             </Box>
           )}
         </FieldArray>
+        {Boolean(error) && (
+          <FormHelperText error sx={{ ml: 2, mt: 0 }}>
+            {typeof error === 'string' ? error : null}
+          </FormHelperText>
+        )}
       </AccordionDetails>
     </Accordion>
   )

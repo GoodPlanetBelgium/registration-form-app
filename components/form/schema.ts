@@ -45,6 +45,14 @@ const registrationsSchema = (
       workshop.C_Required_For_Registration__c ? 1 : 0,
       t('sub.workshop.field.workshopRequired')
     )
+    .max(
+      workshop.C_Max_Registrations_Per_School__c
+        ? workshop.C_Max_Registrations_Per_School__c
+        : 999,
+      t('sub.workshop.field.maxRegistrations', {
+        max: workshop.C_Max_Registrations_Per_School__c
+      })
+    )
 }
 
 const validationSchema = (t: TranslationType, initiative: SFInitiative) => {

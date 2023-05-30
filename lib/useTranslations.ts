@@ -3,12 +3,15 @@ import translations from './translationsLib'
 
 type TranslationType = (
   id: string,
-  params?: { [key: string]: string }
+  params?: { [key: string]: string | number | undefined }
 ) => string
 
 const useTranslations = (category: string) => {
   const { locale } = useRouter()
-  return (id: string, params?: { [param: string]: string | number }) => {
+  return (
+    id: string,
+    params?: { [param: string]: string | number | undefined }
+  ) => {
     if (!locale || !category || !id) {
       throw new Error(
         'Translations: Make sure locale, category and id are defined.'
@@ -17,9 +20,7 @@ const useTranslations = (category: string) => {
     let result = translations[locale][category][id]
     if (params) {
       translations[locale][category][id].split(/[{}]/).forEach(param => {
-        if (params[param]) {
-          result = result.replace(`{${param}}`, params[param].toString())
-        }
+        result = result.replace(`{${param}}`, (params[param] || '').toString())
       })
     }
     if (!result) {
