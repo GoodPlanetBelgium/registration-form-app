@@ -61,6 +61,7 @@ const translations: translationsType = {
       'field.role.Administration': 'Secretariaat',
       'field.role.Vice_Headmaster': 'Onderdirecteur',
       'field.role.Coordinator': 'Coördinator',
+      'field.role.Care_Assistant': 'Zorg ondersteuner',
       'field.role.Other': 'Anders',
       'field.newsLetter':
         'Ik ontvang graag de nieuwsbrief van GoodPlanet om op te hoogte te zijn van het actuele aanbod',
@@ -81,6 +82,8 @@ const translations: translationsType = {
       'sub.workshop.field.monthPreference': 'Voorkeursmaand',
       'sub.workshop.field.workshopRequired':
         'Minimum één inschrijving vereist voor deze workshop.',
+      'sub.workshop.field.maxRegistrations':
+        'Per school kan er voor maximum {max} klas(sen) worden ingeschreven',
       'sub.workshop.field.required':
         'Minimum één inschrijving in totaal vereist.',
       'field.noPreference': 'Geen voorkeur',
@@ -170,6 +173,11 @@ const translations: translationsType = {
       'field.postcode': 'Code postal',
       'field.postcode.invalid':
         "Ce projet n'est pas disponible pour ce code postal.",
+      'field.schedule': 'Quelles sont les heures de cours normales ?',
+      'field.schedule.start': 'début',
+      'field.schedule.end': 'fin',
+      'field.schedule.break': 'pause {n}',
+      'field.schedule.addBreak': 'ajouter une pause',
       'field.firstName': 'Prénom',
       'field.lastName': 'Nom de famille',
       'field.email': 'Adresse e-mail',
@@ -181,6 +189,7 @@ const translations: translationsType = {
       'field.role.Administration': 'Administration',
       'field.role.Vice_Headmaster': 'Sous-directeur',
       'field.role.Coordinator': 'Coordinateur',
+      'field.role.Care_Assistant': 'Aide-soignant',
       'field.role.Other': 'Autre',
       'field.newsLetter':
         "Je souhaite recevoir la newsletter GoodPlanet pour être informé de l'offre actuelle.",
@@ -202,6 +211,8 @@ const translations: translationsType = {
       'sub.workshop.field.monthPreference': 'Mois de préférence',
       'sub.workshop.field.workshopRequired':
         'Au moins une inscription est requise pour cet atelier.',
+      'sub.workshop.field.maxRegistrations':
+        'Par école, un maximum de {max} classe(s) peut être inscrit.',
       'sub.workshop.field.required': 'Au moins une inscription est requise.',
       'field.noPreference': 'Pas de préférence',
       'field.remark': "Remarque pour l'inscription",
