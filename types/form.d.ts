@@ -7,16 +7,18 @@ interface FormContact {
   newsLetter?: boolean
 }
 
+interface FormQuestion {
+  [key: string]: string | number | string[]
+}
+
 interface FormRegistration {
   groupName: string
-  groupSize: number
+  groupSize: string
   copyApplicant: boolean
   groupContact: Contact
   dayOfWeekPreference: string[]
-  monthPreference: string
-  questions: {
-    [name: string]: string | number
-  }[]
+  monthPreference: string[]
+  questions: FormQuestion
 }
 
 interface FormAccount {
@@ -25,25 +27,17 @@ interface FormAccount {
   schedule: string | null
 }
 
-interface Form {
+interface FormWorkshop {
+  questions: FormQuestion
+  registrations: FormRegistration[]
+}
+
+interface FormValues {
   account: FormAccount
   applicant: FormContact
   remark?: string
   agreed: boolean
-}
-
-interface FormValues extends Form {
   workshops: {
-    [workshopId: string]: Registration[]
+    [workshopId: string]: FormWorkshop
   }
-}
-
-type TransformedRegistration = Omit<FormRegistration, 'monthPreference'> & {
-  workshopId: string
-  monthPreference: string[]
-}
-
-interface FormResult extends Form {
-  initiativeId: string
-  registrations: TransformedRegistration[]
 }

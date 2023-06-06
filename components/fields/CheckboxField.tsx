@@ -10,6 +10,11 @@ import { FC } from 'react'
 
 interface CheckboxFieldProps {
   label: string
+  options?: {
+    label: string
+    value: string
+  }[]
+  multiple?: boolean
 }
 
 const CheckboxField: FC<CheckboxFieldProps & FieldProps> = ({

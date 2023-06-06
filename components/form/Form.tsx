@@ -28,7 +28,7 @@ const SignUpForm = ({ onSubmit, initiative, questions }: FormProps) => {
   const beforeSubmit = async (values: FormValues) => {
     let count = 0
     initiative.Workshops__r.records.forEach(
-      w => (count = count + values.workshops[w.Id].length)
+      w => (count = count + values.workshops[w.Id].registrations.length)
     )
     if (count > 0) {
       setSubmitting(true)
@@ -41,14 +41,16 @@ const SignUpForm = ({ onSubmit, initiative, questions }: FormProps) => {
 
   const requirements = getText(locale, 'Requirements', initiative)
 
+  console.log(validationSchema(t, initiative, questions))
+
   return (
     <Formik
-      initialValues={initialValues(initiative)}
+      initialValues={initialValues(initiative, questions)}
       validationSchema={validationSchema(t, initiative, questions)}
       onSubmit={beforeSubmit}
     >
       {({ values, errors, touched }) => {
-        // console.log(values, errors)
+        console.log(values, errors)
         return (
           <Form noValidate>
             <Paper sx={{ my: 3 }}>

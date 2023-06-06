@@ -86,6 +86,7 @@ const translations: translationsType = {
         'Per school kan er voor maximum {max} klas(sen) worden ingeschreven',
       'sub.workshop.field.required':
         'Minimum één inschrijving in totaal vereist.',
+      'questions.title': 'Extra vragen',
       'field.noPreference': 'Geen voorkeur',
       'field.remark': 'Opmerking bij de inschrijving',
       'field.agreed':
@@ -214,6 +215,7 @@ const translations: translationsType = {
       'sub.workshop.field.maxRegistrations':
         'Par école, un maximum de {max} classe(s) peut être inscrit.',
       'sub.workshop.field.required': 'Au moins une inscription est requise.',
+      'questions.title': 'Questions supplémentaires',
       'field.noPreference': 'Pas de préférence',
       'field.remark': "Remarque pour l'inscription",
       'field.agreed':

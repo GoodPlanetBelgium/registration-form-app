@@ -13,6 +13,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@fontsource/lato": "^4.5.10",
+    "@microsoft/microsoft-graph-client": "^3.0.5",
     "@mui/icons-material": "^5.11.11",
     "@mui/material": "^5.11.6",
     "@mui/x-date-pickers": "^6.1.0",

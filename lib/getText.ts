@@ -9,7 +9,9 @@ type Text =
 const getText = (
   lang: string | undefined,
   type: 'Title' | 'Info' | 'Requirements',
-  obj: SFInitiative | SFWorkshop | SFQuestion
-) => obj[`${lang?.toUpperCase()}_${type}__c` as Text]?.replace('<br>', '') || ''
+  obj: SFInitiative | SFWorkshop | SFQuestion | SFQuestionOption
+) =>
+  obj[`${lang?.toUpperCase()}_${type}__c` as Text]?.replace('<br>', '') ||
+  `Error: ${type} not found`
 
 export default getText

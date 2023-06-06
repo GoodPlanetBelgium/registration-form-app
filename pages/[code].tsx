@@ -56,26 +56,9 @@ const InitiativePage: NextPage = () => {
   } = initiativeFetch.result
 
   const onSubmit = async (values: FormValues): Promise<Response> => {
-    const registrations: TransformedRegistration[] = []
-    Object.keys(values.workshops).forEach(workshopId =>
-      values.workshops[workshopId].forEach(registration =>
-        registrations.push({
-          workshopId,
-          ...registration,
-          monthPreference: [registration.monthPreference]
-        })
-      )
-    )
-    const { workshops, ...restValues } = values
-    const data: FormResult = {
-      initiativeId: initiative.Id,
-      ...restValues,
-      registrations
-    }
-
     const response = await fetch('/api/initiative/sign-up', {
       method: 'POST',
-      body: JSON.stringify(data)
+      body: JSON.stringify(values)
     })
     if (response.ok) {
       const result = await response.json()

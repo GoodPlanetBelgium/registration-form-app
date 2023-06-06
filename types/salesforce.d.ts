@@ -1,5 +1,14 @@
 type SFId = string
 
+interface SFTextFields {
+  NL_Info__c?: string
+  FR_Info__c?: string
+  NL_Title__c?: string
+  FR_Title__c?: string
+  NL_Requirements__c?: string
+  FR_Requirements__c?: string
+}
+
 interface SFAccount {
   Id: SFId
   Name: string
@@ -27,7 +36,7 @@ interface SFAccount {
   C_School_Schedule__c?: string
 }
 
-interface SFWorkshop {
+interface SFWorkshop extends SFTextFields {
   Id: SFId
   Name: string
   C_Registrations_Status__c: Status
@@ -37,44 +46,37 @@ interface SFWorkshop {
   C_Max_Registrations_Per_School__c?: number
   C_Weekday_Preferences__c?: string
   C_Month_Preferences__c?: string
-  NL_Info__c?: string
-  FR_Info__c?: string
-  NL_Title__c?: string
-  FR_Title__c?: string
-  NL_Requirements__c?: string
-  FR_Requirements__c?: string
 }
 
-interface SFInitiative {
+interface SFInitiative extends SFTextFields {
   Id: SFId
   Name: string
   C_Registrations_restrict_by_School_Type__c: string | undefined
   C_Registrations_Postcodes__c: string | undefined
   C_Registrations_Region__c: 'Flanders' | 'Wallonia' | 'Brussels' | undefined
   C_Registrations_Ask_for_school_hours__c: boolean
-  NL_Info__c?: string
-  FR_Info__c?: string
-  NL_Title__c?: string
-  FR_Title__c?: string
-  NL_Requirements__c?: string
-  FR_Requirements__c?: string
   Workshops__r: {
     records: SFWorkshop[]
   }
 }
 
-interface SFQuestion {
+interface SFQuestionOption extends SFTextFields {
   Id: SFId
   Name: string
-  C_Type__c: 'number' | 'text'
+  C_Order__c: number
+}
+
+interface SFQuestion extends SFTextFields {
+  Id: SFId
+  Name: string
+  C_Type__c: 'number' | 'text' | 'choice'
   C_Required__c: boolean
-  NL_Info__c?: string
-  FR_Info__c?: string
-  NL_Title__c: string
-  FR_Title__c: string
-  NL_Requirements__c?: string
-  FR_Requirements__c?: string
-  C_Initiative_Element__c: string
+  C_Multiple__c: boolean
+  C_One_For_All__c: boolean
+  C_Initiative_Element__c: SFId
+  Question_Options__r: {
+    records: SFQuestionOption[]
+  }
 }
 
 interface SFPickListValues {

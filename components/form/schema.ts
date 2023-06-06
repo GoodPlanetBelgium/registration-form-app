@@ -11,6 +11,31 @@ const contactSchema = (t: TranslationType) => ({
     .required(t('field.required'))
 })
 
+const questionSchema = (t: TranslationType, questions: SFQuestion[]) =>
+  Yup.object(
+    questions.reduce((obj, q) => {
+      let schema
+      switch (q.C_Type__c) {
+        case 'number':
+          schema = Yup.number()
+        case 'text':
+          schema = Yup.string()
+        case 'choice':
+          if (q.C_Multiple__c) {
+            schema = Yup.array().of(Yup.string())
+          } else {
+            schema = Yup.string()
+          }
+      }
+      return {
+        ...obj,
+        [q.Name]: q.C_Required__c
+          ? schema?.required(t('field.required'))
+          : schema
+      }
+    }, {})
+  )
+
 const registrationsSchema = (
   t: TranslationType,
   id: string,
@@ -22,7 +47,7 @@ const registrationsSchema = (
   ) as SFWorkshop
   return Yup.array()
     .of(
-      Yup.object().shape({
+      Yup.object({
         groupName: Yup.string().required(t('field.required')),
         groupSize: Yup.number().required(t('field.required')),
         copyApplicant: Yup.boolean(),
@@ -40,23 +65,7 @@ const registrationsSchema = (
           t('field.required'),
           value => !workshop.C_Month_Preferences__c || !!value
         ),
-        questions: Yup.object(
-          questions.reduce((obj, q) => {
-            let schema
-            switch (q.C_Type__c) {
-              case 'number':
-                schema = Yup.number()
-              case 'text':
-                schema = Yup.string()
-            }
-            return {
-              ...obj,
-              [q.Name]: q.C_Required__c
-                ? schema?.required(t('field.required'))
-                : schema
-            }
-          }, {})
-        )
+        questions: questionSchema(t, questions)
       })
     )
     .min(
@@ -106,11 +115,26 @@ const validationSchema = (
           }
         })
     }),
-    workshops: Yup.object().shape(
+    workshops: Yup.object(
       workshopIds.reduce(
         (obj, id) => ({
           ...obj,
-          [id]: registrationsSchema(t, id, initiative, questions)
+          [id]: Yup.object({
+            registrations: registrationsSchema(
+              t,
+              id,
+              initiative,
+              questions.filter(
+                q => !q.C_One_For_All__c && q.C_Initiative_Element__c === id
+              )
+            ),
+            questions: questionSchema(
+              t,
+              questions.filter(
+                q => q.C_One_For_All__c && q.C_Initiative_Element__c === id
+              )
+            )
+          })
         }),
         {}
       )
@@ -121,7 +145,10 @@ const validationSchema = (
   })
 }
 
-const initialValues = (initiative: SFInitiative) => ({
+const initialValues = (
+  initiative: SFInitiative,
+  questions: SFQuestion[]
+): FormValues => ({
   account: {
     id: '',
     educationType: [],
@@ -140,7 +167,15 @@ const initialValues = (initiative: SFInitiative) => ({
     .reduce(
       (obj, workshop) => ({
         ...obj,
-        [workshop.Id]: []
+        [workshop.Id]: {
+          questions: questions
+            .filter(
+              q =>
+                q.C_One_For_All__c && q.C_Initiative_Element__c === workshop.Id
+            )
+            .reduce((obj, q) => ({ ...obj, [q.Name]: '' }), {}),
+          registrations: []
+        }
       }),
       {}
     ),
@@ -148,14 +183,18 @@ const initialValues = (initiative: SFInitiative) => ({
   agreed: false
 })
 
-const registrationInitialValues = (questions: SFQuestion[]) => ({
+const registrationInitialValues = (
+  questions: SFQuestion[]
+): FormRegistration => ({
   groupName: '',
   groupSize: '',
   copyApplicant: false,
   groupContact: { firstName: '', lastName: '', email: '', role: '' },
-  dayOfWeekPreference: [],
-  monthPreference: '',
-  questions: questions.reduce((obj, q) => ({ ...obj, [q.Name]: '' }), {})
+  dayOfWeekPreference: [] as string[],
+  monthPreference: [] as string[],
+  questions: questions
+    .filter(q => !q.C_One_For_All__c)
+    .reduce((obj, q) => ({ ...obj, [q.Name]: '' }), {})
 })
 
 export { initialValues, registrationInitialValues, validationSchema }
