@@ -72,6 +72,7 @@ interface SFQuestion extends SFTextFields {
   C_Type__c: 'number' | 'text' | 'choice'
   C_Required__c: boolean
   C_Multiple__c: boolean
+  C_Question_Order__c: number
   C_One_For_All__c: boolean
   C_Initiative_Element__c: SFId
   Question_Options__r: {

@@ -7,7 +7,7 @@ import SelectField from '../fields/SelectField'
 import TextField from '../fields/TextField'
 import Section from '../Section'
 import ContactSubForm from './ContactSubForm'
-import { Grid } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 import FieldSwitch from '../fields/FieldSwitch'
 
 interface Props {
@@ -21,7 +21,7 @@ const RegistrationSubForm = ({ nameSpace, workshop, questions }: Props) => {
   const days = useTranslationsCategory('Days')
   const months = useTranslationsCategory('Months')
   const { values } = useFormikContext()
-  console.log(nameSpace)
+
   return (
     <>
       <Section label={t('sub.workshop.groupTitle')}>
@@ -88,17 +88,20 @@ const RegistrationSubForm = ({ nameSpace, workshop, questions }: Props) => {
                       label: months[month]
                     })
                   )}
+                  multiple
                 />
               </Grid>
             )}
           </Grid>
         </Section>
       )}
-      {questions.map((q, i) => (
-        <Section key={i}>
-          <FieldSwitch nameSpace={`${nameSpace}.questions`} question={q} />
-        </Section>
-      ))}
+      {questions
+        .sort((a, b) => a.C_Question_Order__c - b.C_Question_Order__c)
+        .map((q, i) => (
+          <Box sx={{ my: 2 }} key={i}>
+            <FieldSwitch nameSpace={`${nameSpace}.questions`} question={q} />
+          </Box>
+        ))}
     </>
   )
 }

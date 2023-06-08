@@ -39,7 +39,6 @@ const WorkshopField: FC<Props & FieldProps> = ({
   workshopId,
   form: { touched, errors }
 }) => {
-  // const registrations = field.value.registrations as FormRegistration[]
   const {
     name,
     value: { registrations }
@@ -194,10 +193,11 @@ const WorkshopField: FC<Props & FieldProps> = ({
           <Typography variant='h2'>{t('questions.title')}</Typography>
           {questions
             .filter(q => q.C_One_For_All__c)
+            .sort((a, b) => a.C_Question_Order__c - b.C_Question_Order__c)
             .map((q, i) => (
-              <Section key={i}>
+              <Box sx={{ my: 2 }} key={i}>
                 <FieldSwitch nameSpace={`${name}.questions`} question={q} />
-              </Section>
+              </Box>
             ))}
         </Paper>
       )}

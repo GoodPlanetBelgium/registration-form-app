@@ -7,7 +7,7 @@ import {
   RadioGroup,
   Typography
 } from '@mui/material'
-import { FieldProps } from 'formik'
+import { FieldProps, getIn } from 'formik'
 import { FC } from 'react'
 
 interface RadioFieldProps {
@@ -24,7 +24,7 @@ const RadioField: FC<RadioFieldProps & FieldProps> = ({
   label,
   options
 }) => {
-  const error = touched[name] && errors[name]
+  const error = (getIn(touched, name) && getIn(errors, name)) || ''
   return (
     <FormControl>
       <FormLabel>

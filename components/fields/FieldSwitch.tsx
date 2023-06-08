@@ -1,9 +1,10 @@
-import { Alert, TextField } from '@mui/material'
+import { Alert } from '@mui/material'
 import { Field } from 'formik'
 import { FC } from 'react'
 import getText from '../../lib/getText'
 import { useRouter } from 'next/router'
 import RadioField from './RadioField'
+import TextField from './TextField'
 
 interface FieldSwitchProps {
   nameSpace: string
@@ -16,6 +17,7 @@ const FieldSwitch: FC<FieldSwitchProps> = ({ nameSpace, question }) => {
     name: `${nameSpace}.${question.Name}`,
     label: getText(locale, 'Title', question)
   }
+
   switch (question.C_Type__c) {
     case 'text':
     case 'number':

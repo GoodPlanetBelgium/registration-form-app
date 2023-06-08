@@ -60,10 +60,10 @@ const registrationsSchema = (
           t('field.required'),
           value => !workshop.C_Weekday_Preferences__c || !!value?.length
         ),
-        monthPreference: Yup.string().test(
+        monthPreference: Yup.array().test(
           'is-month-pref-required',
           t('field.required'),
-          value => !workshop.C_Month_Preferences__c || !!value
+          value => !workshop.C_Month_Preferences__c || !!value?.length
         ),
         questions: questionSchema(t, questions)
       })
