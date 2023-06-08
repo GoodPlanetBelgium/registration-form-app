@@ -10,6 +10,13 @@ const getText = (
   lang: string | undefined,
   type: 'Title' | 'Info' | 'Requirements',
   obj: SFInitiative | SFWorkshop
-) => obj[`${lang?.toUpperCase()}_${type}__c` as Text]?.replace('<br>', '') || ''
+) => {
+  console.log(obj[`${lang?.toUpperCase()}_${type}__c` as Text])
+  return (
+    obj[`${lang?.toUpperCase()}_${type}__c` as Text]
+      ?.replaceAll('<br>', '')
+      .replaceAll(/<[^/>][^>]*><\/[^>]+>/g, '') || ''
+  )
+}
 
 export default getText
