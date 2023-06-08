@@ -11,7 +11,8 @@ const getText = (
   type: 'Title' | 'Info' | 'Requirements',
   obj: SFInitiative | SFWorkshop | SFQuestion | SFQuestionOption
 ) =>
-  obj[`${lang?.toUpperCase()}_${type}__c` as Text]?.replace('<br>', '') ||
-  `Error: ${type} not found`
+  obj[`${lang?.toUpperCase()}_${type}__c` as Text]
+    ?.replace('<br>', '')
+    .replaceAll(/<[^/>][^>]*><\/[^>]+>/g, '') || `Error: ${type} not found`
 
 export default getText
