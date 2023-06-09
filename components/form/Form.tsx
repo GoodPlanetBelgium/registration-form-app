@@ -41,8 +41,6 @@ const SignUpForm = ({ onSubmit, initiative, questions }: FormProps) => {
 
   const requirements = getText(locale, 'Requirements', initiative)
 
-  console.log(validationSchema(t, initiative, questions))
-
   return (
     <Formik
       initialValues={initialValues(initiative, questions)}

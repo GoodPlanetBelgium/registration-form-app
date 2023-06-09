@@ -14,6 +14,7 @@ import Result from '../components/Result'
 import DataGuard from '../components/DataGuard'
 import getText from '../lib/getText'
 import { useErrorBoundary } from 'react-error-boundary'
+import filterWorkshops from '../lib/filterWorkshops'
 
 const InitiativePage: NextPage = () => {
   const {
@@ -74,11 +75,13 @@ const InitiativePage: NextPage = () => {
 
   const info = getText(locale, 'Info', initiative)
 
+  const filteredInitiative = filterWorkshops(initiative)
+
   return (
-    <DataGuard initiative={initiative}>
+    <DataGuard initiative={filteredInitiative}>
       <Layout
         title={t('title', {
-          name: getText(locale, 'Title', initiative)
+          name: getText(locale, 'Title', filteredInitiative)
         })}
       >
         {status !== 'open' && (
@@ -88,7 +91,7 @@ const InitiativePage: NextPage = () => {
             })}
           </Alert>
         )}
-        {!!sfResult && <Result {...sfResult} initiative={initiative} />}
+        {!!sfResult && <Result {...sfResult} initiative={filteredInitiative} />}
         {!sfResult && status === 'open' && (
           <>
             {!!info && (
@@ -102,7 +105,7 @@ const InitiativePage: NextPage = () => {
             )}
             <Form
               onSubmit={onSubmit}
-              initiative={initiative}
+              initiative={filteredInitiative}
               questions={questions}
             />
           </>
