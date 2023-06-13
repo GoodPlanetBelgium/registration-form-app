@@ -174,7 +174,9 @@ const initialValues = (
                 q.C_One_For_All__c && q.C_Initiative_Element__c === workshop.Id
             )
             .reduce((obj, q) => ({ ...obj, [q.Name]: '' }), {}),
-          registrations: []
+          registrations: [],
+          spSiteId: workshop.C_SharePoint_Site_Id__c,
+          spListId: workshop.C_SharePoint_List_Id__c
         }
       }),
       {}

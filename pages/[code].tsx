@@ -57,9 +57,13 @@ const InitiativePage: NextPage = () => {
   } = initiativeFetch.result
 
   const onSubmit = async (values: FormValues): Promise<Response> => {
+    const data: ExtendedFormValues = {
+      initiativeId: initiative.Id,
+      ...values
+    }
     const response = await fetch('/api/initiative/sign-up', {
       method: 'POST',
-      body: JSON.stringify(values)
+      body: JSON.stringify(data)
     })
     if (response.ok) {
       const result = await response.json()

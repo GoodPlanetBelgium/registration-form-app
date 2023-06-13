@@ -9,14 +9,6 @@ const {
   MICROSOFT_CLIENT_SECRET
 } = process.env
 
-interface Params {
-  siteId: string
-  listId: string
-  fields: {
-    [key: string]: string | number | string[]
-  }
-}
-
 const MICROSOFT_ACCESS_TOKEN = 'MICROSOFT_ACCESS_TOKEN'
 
 const getHeaders: () => Promise<{
@@ -46,59 +38,48 @@ const getHeaders: () => Promise<{
 }
 
 const sharePoint = (siteId: string) => {
-  let url = `${MICROSOFT_GRAPH_HOST}/sites/${siteId}`
+  let url = `/sites/${siteId}`
   return {
     list: (listId: string) => {
       url += `/lists/${listId}`
       return {
-        createItem: async (fields: {
-          [key: string]: string | number | string[]
-        }) => {
+        createItems: async (items: SPListItem[]) => {
+          url += '/items'
           try {
+            const headers = await getHeaders()
             return await axios.post(
-              `${url}/items`,
-              { fields },
+              `${MICROSOFT_GRAPH_HOST}/$batch`,
               {
-                headers: await getHeaders()
-              }
+                requests: items.map((item, i) => {
+                  const fields: SPListItem = {}
+                  Object.keys(item).forEach(fieldKey => {
+                    const safeFieldKey = fieldKey.replace('-', '_x002d_')
+                    if (Array.isArray(item[fieldKey])) {
+                      fields[`${safeFieldKey}@odata.type`] =
+                        'Collection(Edm.String)'
+                    }
+                    fields[safeFieldKey] = item[fieldKey]
+                  })
+                  return {
+                    id: i,
+                    method: 'POST',
+                    url,
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: { fields }
+                  }
+                })
+              },
+              { headers }
             )
           } catch (error: any) {
-            throw new Error(JSON.stringify(error.response.data, null, 2))
+            console.error(error)
           }
         }
       }
     }
   }
 }
-
-// const createListItem: () => Promise<any> = async (
-//   params: Params,
-//   token: string
-// ) => {
-//   if (!token) token = await getToken()
-//   console.log(
-//     'Calling Microsoft Graph API at: ',
-//     `${MICROSOFT_GRAPH_HOST}/sites/${params.siteId}/lists/${params.listId}/items`
-//   )
-//   let result
-//   try {
-//     return (result = await axios.post(
-//       `${MICROSOFT_GRAPH_HOST}/sites/${params.siteId}/lists/${params.listId}/items`,
-//       { fields: params.fields },
-//       {
-//         headers: {
-//           'Content-Type': 'application/json',
-//           Authorization: `Bearer ${token}`
-//         }
-//       }
-//     ))
-//   } catch (error: any) {
-//     if (error.response.status === 401) {
-//       console.log('ERROR')
-//       return await createListItem(params, true)
-//     }
-//     throw new Error(JSON.stringify(error.response.data, null, 2))
-//   }
-// }
 
 export default sharePoint

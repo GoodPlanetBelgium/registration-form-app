@@ -46,6 +46,8 @@ interface SFWorkshop extends SFTextFields {
   C_Max_Registrations_Per_School__c?: number
   C_Weekday_Preferences__c?: string
   C_Month_Preferences__c?: string
+  C_SharePoint_Site_Id__c?: string
+  C_SharePoint_List_Id__c?: string
 }
 
 interface SFInitiative extends SFTextFields {
@@ -91,3 +93,38 @@ interface SFPickListValues {
     value: string
   }[]
 }
+
+// interface SFResult {
+//   registrations: {
+//     SalesForceId: SFId
+//     workshopId: SFId
+//     monthPreference: string
+//     groupSize: number
+//     groupName: string
+//     groupContact: {
+//       SalesforceId: SFId
+//       role: string
+//       lastName: string
+//       firstName: string
+//       email: string
+//     }
+//     dayOfWeekPreference: string[]
+//     copyApplicant: boolean
+//   }[]
+//   errors: string[]
+//   applicant: {
+//     SalesforceId: SFId
+//     role: string
+//     phone: string
+//     newsLetterDate: string
+//     newsLetter: boolean
+//     lastName: string
+//     firstName: string
+//     email: string
+//   }
+//   account: {
+//     Id: SFId
+//     schedule: string
+//     educationType: string[]
+//   }
+// }

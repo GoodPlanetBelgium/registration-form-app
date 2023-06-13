@@ -30,14 +30,25 @@ interface FormAccount {
 interface FormWorkshop {
   questions: FormQuestion
   registrations: FormRegistration[]
+  spSiteId?: string
+  spListId?: string
 }
 
 interface FormValues {
   account: FormAccount
   applicant: FormContact
-  remark?: string
+  remark: string
   agreed: boolean
   workshops: {
     [workshopId: string]: FormWorkshop
   }
+}
+
+interface ExtendedFormValues extends FormValues {
+  initiativeId: SFId
+}
+
+interface FormResultForSF extends Omit<FormValues, 'workshops'> {
+  initiativeId: string
+  registrations: (FormRegistration & { workshopId: SFId })[]
 }
