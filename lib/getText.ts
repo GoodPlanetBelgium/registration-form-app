@@ -13,6 +13,5 @@ const getText = (
 ) =>
   obj[`${lang?.toUpperCase()}_${type}__c` as Text]
     ?.replace('<br>', '')
-    .replaceAll(/<[^/>][^>]*><\/[^>]+>/g, '') || `Error: ${type} not found`
-
+    .replaceAll(/<[^/>][^>]*><\/[^>]+>/g, '') || ''
 export default getText

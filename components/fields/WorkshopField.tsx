@@ -189,7 +189,7 @@ const WorkshopField: FC<Props & FieldProps> = ({
         </AccordionDetails>
       </Accordion>
       {!!questions.length && (
-        <Paper>
+        <Paper sx={{ my: 4 }}>
           <Typography variant='h2'>{t('questions.title')}</Typography>
           {questions
             .filter(q => q.C_One_For_All__c)
