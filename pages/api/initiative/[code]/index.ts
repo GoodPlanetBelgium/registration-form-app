@@ -15,7 +15,7 @@ export default async function handler (
     res.status(400).send({ error: 'Please provide valid code value.' })
     return
   }
-  console.log('Calling API: initiative/', code)
+  console.log(`Calling API: initiative/${code}`)
   const url = `/services/apexrest/Initiative/${code.toUpperCase()}`
   const data = await salesforceAPI({ method: 'GET', url })
   res.status(200).json({ data })

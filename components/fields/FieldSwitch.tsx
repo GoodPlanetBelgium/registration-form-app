@@ -40,6 +40,7 @@ const FieldSwitch: FC<FieldSwitchProps> = ({ nameSpace, question }) => {
               label: getText(locale, 'Title', option)
             }))}
           multiple={question.C_Multiple__c}
+          info={getText(locale, 'Info', question)}
         />
       )
     default:

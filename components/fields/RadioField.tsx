@@ -1,4 +1,5 @@
 import {
+  Alert,
   FormControl,
   FormControlLabel,
   FormHelperText,
@@ -16,13 +17,15 @@ interface RadioFieldProps {
     label: string
     value: string
   }[]
+  info?: string
 }
 
 const RadioField: FC<RadioFieldProps & FieldProps> = ({
   field: { name, value },
   form: { handleChange, touched, errors },
   label,
-  options
+  options,
+  info
 }) => {
   const error = (getIn(touched, name) && getIn(errors, name)) || ''
   return (
@@ -36,6 +39,15 @@ const RadioField: FC<RadioFieldProps & FieldProps> = ({
           {label}
         </Typography>
       </FormLabel>
+      {!!info && (
+        <Alert severity='info' sx={{ '& p': { m: 0 } }}>
+          <span
+            dangerouslySetInnerHTML={{
+              __html: info
+            }}
+          />
+        </Alert>
+      )}
       <RadioGroup name={name} value={value} onChange={handleChange}>
         {options.map((option, i) => (
           <FormControlLabel
