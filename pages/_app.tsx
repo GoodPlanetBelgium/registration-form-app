@@ -8,8 +8,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorFallback from '../components/ErrorFallback'
+import { Analytics } from '@vercel/analytics/react'
 
-function App({ Component, pageProps }: AppProps) {
+function App ({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -24,6 +25,7 @@ function App({ Component, pageProps }: AppProps) {
           </ErrorBoundary>
         </ThemeProvider>
       </LocalizationProvider>
+      <Analytics />
     </>
   )
 }
