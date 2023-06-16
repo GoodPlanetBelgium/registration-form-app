@@ -14,6 +14,7 @@ import useFetch from '../../lib/useFetch'
 import useTranslations from '../../lib/useTranslations'
 import Loading from '../Loading'
 import SchoolSubform from '../form/SchoolSubform'
+import { useRouter } from 'next/router'
 
 interface SFFieldProps {
   label: string
@@ -27,6 +28,7 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
   initiative
 }) => {
   const t = useTranslations('Form')
+  const { locale } = useRouter()
   const schoolTypes = useTranslations('SchoolTypes')
   const [postcode, setPostcode] = useState('')
   const [account, setAccount] = useState<SFAccount | null>(null)
@@ -57,6 +59,12 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
     }
   }, [postcode, validPostcodes])
 
+  const lang = (l: string) =>
+    ({
+      nl: 'Dutch',
+      fr: 'French'
+    }[l] || null)
+
   const {
     result,
     isLoading
@@ -73,7 +81,7 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
           initiative.C_Registrations_Region__c
             ? `&region=${initiative.C_Registrations_Region__c}`
             : ''
-        }`
+        }${lang ? `&language='${lang(locale || '')}'` : ''}`
       : null
   )
 
