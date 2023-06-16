@@ -134,6 +134,12 @@ const translations: translationsType = {
       Secondary_School: 'Secundair onderwijs',
       Higher_Education: 'Hoger onderwijs',
       Adult_Education: 'Volwassenen onderwijs'
+    },
+    Language: {
+      'error.title': 'Taal niet gevonden',
+      'error.text':
+        'Dit project is niet beschikbaar in de geselecteerde taal. Gelieve een andere taal te kiezen.',
+      'button.switch': 'Verander de taal naar {locale}'
     }
   },
   fr: {
@@ -264,6 +270,12 @@ const translations: translationsType = {
       Secondary_School: 'Enseignement secondaire',
       Higher_Education: 'Enseignement supérieur',
       Adult_Education: 'Formation pour adultes'
+    },
+    Language: {
+      'error.title': 'Langue non trouvée',
+      'error.text':
+        "Ce projet n'est pas disponible dans la langue sélectionnée. Veuillez sélectionner une autre langue.",
+      'button.switch': 'Changer la langue en {locale}'
     }
   }
 }

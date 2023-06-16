@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Layout from './Layout'
 import { Button, Typography } from '@mui/material'
 import getText from '../lib/getText'
+import useTranslations from '../lib/useTranslations'
 
 interface Props {
   initiative: SFInitiative
@@ -12,8 +13,12 @@ interface Props {
 const DataGuard = ({ initiative, children }: Props) => {
   const {
     query: { code },
-    locale
+    locale,
+    locales,
+    ...router
   } = useRouter()
+
+  const t = useTranslations('Language')
 
   const hasContent =
     !!getText(locale, 'Title', initiative) &&
@@ -25,6 +30,8 @@ const DataGuard = ({ initiative, children }: Props) => {
     return <>{children}</>
   }
 
+  console.log(locales?.filter(l => l !== locale || l === 'default'))
+
   const refreshCache = async () => {
     const result = await fetch(`/api/initiative/${code}/refresh`)
     console.log(await result.json())
@@ -32,14 +39,27 @@ const DataGuard = ({ initiative, children }: Props) => {
   }
 
   return (
-    <Layout title={'Language Error'}>
-      <Typography variant='body1'>
-        This project is not available in the currently selected language.
-      </Typography>
-      <pre style={{ fontSize: '0.6rem', whiteSpace: 'pre-wrap' }}>
-        {JSON.stringify(initiative, null, 2)}
-      </pre>
-      <Button color={'warning'} variant={'contained'} onClick={refreshCache}>
+    <Layout title={t('error.title')}>
+      <Typography variant='body1'>{t('error.text')}</Typography>
+      {locales
+        ?.filter(l => l !== locale && l !== 'default')
+        .map((l, i) => (
+          <Button
+            key={i}
+            variant='contained'
+            color='info'
+            onClick={() => router.push(router.asPath, undefined, { locale: l })}
+            sx={{ display: 'block', my: 3 }}
+          >
+            {t('button.switch', { locale: l })}
+          </Button>
+        ))}
+      <Button
+        color={'warning'}
+        size='small'
+        onClick={refreshCache}
+        sx={{ display: 'block', my: 3 }}
+      >
         Refresh cache
       </Button>
     </Layout>
