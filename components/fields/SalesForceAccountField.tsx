@@ -69,6 +69,10 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
           initiative.C_Registrations_restrict_by_School_Type__c
             ? `&schoolType=${initiative.C_Registrations_restrict_by_School_Type__c}`
             : ''
+        }${
+          initiative.C_Registrations_Region__c
+            ? `&region=${initiative.C_Registrations_Region__c}`
+            : ''
         }`
       : null
   )
