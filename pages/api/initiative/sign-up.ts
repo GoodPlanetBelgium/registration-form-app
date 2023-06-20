@@ -1,6 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import salesforceAPI from '../../../lib/salesforceAPI'
 import sharePoint from '../../../lib/sharePoint'
+import pino from 'pino'
+
+const logger = pino()
 
 export default async function handler (
   req: NextApiRequest,
@@ -10,6 +13,11 @@ export default async function handler (
     try {
       console.log('Signing up...')
       const formResult: ExtendedFormValues = JSON.parse(req.body)
+
+      logger.info({
+        event: { type: 'formValues', tag: 'signup' },
+        data: formResult
+      })
 
       // Transform data for SF endpoint
       const registrations: (FormRegistration & { workshopId: SFId })[] = []
@@ -33,6 +41,11 @@ export default async function handler (
         method: 'POST',
         url,
         data
+      })
+
+      logger.info({
+        event: { type: 'sfResult', tag: 'signup' },
+        data: sfResult
       })
 
       // Create SharePoint list items if applicable
@@ -59,6 +72,10 @@ export default async function handler (
           const spResult = await sharePoint(workshop.spSiteId)
             .list(workshop.spListId)
             .createItems(listItems)
+          logger.info({
+            event: { type: 'spResult', tag: 'signup' },
+            data: spResult?.data
+          })
           // console.log(JSON.stringify(spResult?.data, null, 2))
         })
       )
@@ -67,6 +84,7 @@ export default async function handler (
     } catch (error) {
       console.error('ERROR IN: /api/initiative/sign-up')
       console.error(error)
+      logger.error({ event: { type: 'error', tag: 'signup' }, data: error })
       res.status(500).json({ result: { message: 'Internal server error.' } })
     }
   } else {
