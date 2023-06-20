@@ -151,8 +151,7 @@ const WorkshopField: FC<Props & FieldProps> = ({
                           }
                           fullWidth
                         >
-                          <AddIcon />
-                          <span>{t('sub.workshop.add')}</span>
+                          <span>{t('sub.workshop.addAnother')}</span>
                         </Button>
                         {registrations.length ===
                           workshop.C_Max_Registrations_Per_School__c && (
@@ -174,7 +173,6 @@ const WorkshopField: FC<Props & FieldProps> = ({
                     size='large'
                     sx={{ m: 2 }}
                   >
-                    <AddIcon />
                     <span>{t('sub.workshop.add')}</span>
                   </Button>
                 )}
