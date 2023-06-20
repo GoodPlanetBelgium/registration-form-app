@@ -3,6 +3,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import useFetch from '../lib/useFetch'
 import { Alert, Box } from '@mui/material'
+import va from '@vercel/analytics'
 
 import Loading from '../components/Loading'
 import ErrorComponent from '../components/Error'
@@ -57,6 +58,7 @@ const InitiativePage: NextPage = () => {
   } = initiativeFetch.result
 
   const onSubmit = async (values: FormValues): Promise<Response> => {
+    va.track('SignUpEvent', { values: JSON.stringify(values) })
     const data: ExtendedFormValues = {
       initiativeId: initiative.Id,
       ...values
@@ -67,10 +69,12 @@ const InitiativePage: NextPage = () => {
     })
     if (response.ok) {
       const result = await response.json()
-      console.log(result)
+      va.track('SignUpResult', { values: JSON.stringify(result) })
       setSFResult(result)
     } else {
-      showBoundary(await response.json())
+      const error = await response.text()
+      va.track('SignUpError', { error: JSON.stringify(error) })
+      showBoundary(error)
     }
     return response
   }
