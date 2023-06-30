@@ -1,4 +1,4 @@
-import { Alert, Button, FormHelperText, Paper, Typography } from '@mui/material'
+import { Alert, Button, Paper, Typography } from '@mui/material'
 import { Field, Form, Formik } from 'formik'
 import React, { useState } from 'react'
 import useTranslations from '../../lib/useTranslations'
@@ -127,11 +127,9 @@ const SignUpForm = ({ onSubmit, initiative, questions }: FormProps) => {
                 <SendIcon sx={{ mr: 1 }} /> {t('submit')}
               </Button>
             )}
-            {countError && (
-              <FormHelperText error>{t(countError)}</FormHelperText>
-            )}
+            {countError && <Alert severity='error'>{t(countError)}</Alert>}
             {!!Object.keys(errors).length && !!Object.keys(touched).length && (
-              <FormHelperText error>{t('errorsFound')}</FormHelperText>
+              <Alert severity='error'>{t('errorsFound')}</Alert>
             )}
           </Form>
         )
