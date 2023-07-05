@@ -39,6 +39,8 @@ const TimeField = (props: {
   />
 )
 
+const SPLIT = ' / '
+
 const ScheduleField: FC<SFProps & FieldProps> = ({
   field,
   form: { setFieldValue, touched, errors },
@@ -47,7 +49,7 @@ const ScheduleField: FC<SFProps & FieldProps> = ({
   const t = useTranslations('Form')
 
   const initState = (value: string) => {
-    const periods = !!value ? value.split('\r\n') : []
+    const periods = !!value ? value.split(SPLIT) : []
     let pauses = []
     for (let i = 0; i < periods.length - 1; i++) {
       pauses.push([periods[i].split('-')[1], periods[i + 1].split('-')[0]])
@@ -109,7 +111,7 @@ const ScheduleField: FC<SFProps & FieldProps> = ({
     setFieldValue(
       field.name,
       `${state.start || ''}-${parsedPauses
-        .map(pause => pause.join('\r\n'))
+        .map(pause => pause.join(SPLIT))
         .join('-')}${parsedPauses.length > 0 ? '-' : ''}${state.end || ''}`
     )
   }, [field.name, setFieldValue, ...Object.values(state)])
