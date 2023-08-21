@@ -135,7 +135,10 @@ const translations: translationsType = {
       Nursery_And_Primary_School: 'Kleuter- en lager onderwijs',
       Secondary_School: 'Secundair onderwijs',
       Higher_Education: 'Hoger onderwijs',
-      Adult_Education: 'Volwassenen onderwijs'
+      Adult_Education: 'Volwassenen onderwijs',
+      Secondary_School_Specialized: 'Bijzonder secundair onderwijs',
+      Nursery_School_Specialized: 'Bijzonder kleuter onderwijs',
+      Primary_School_Specialized: 'Bijzonder lager onderwijs'
     },
     Language: {
       'error.title': 'Taal niet gevonden',
@@ -273,7 +276,10 @@ const translations: translationsType = {
       Nursery_And_Primary_School: 'Enseignement maternel et primaire',
       Secondary_School: 'Enseignement secondaire',
       Higher_Education: 'Enseignement supérieur',
-      Adult_Education: 'Formation pour adultes'
+      Adult_Education: 'Formation pour adultes',
+      Secondary_School_Specialized: 'Enseignement secondaire spécialisé',
+      Nursery_School_Specialized: 'Enseignement maternel spécialisé',
+      Primary_School_Specialized: 'Enseignement primaire spécialisé'
     },
     Language: {
       'error.title': 'Langue non trouvée',
