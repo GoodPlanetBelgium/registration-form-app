@@ -143,7 +143,9 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
             disablePortal
             fullWidth
             sx={{ mt: 2 }}
-            options={data.records}
+            options={data.records.filter(
+              ({ C_School_Type__c }) => !!C_School_Type__c
+            )}
             getOptionLabel={({
               Name,
               ShippingStreet,
@@ -151,9 +153,11 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
               ShippingCity,
               C_School_Type__c
             }) =>
-              `${Name}, ${ShippingStreet} ${ShippingPostalCode} ${ShippingCity} - ${schoolTypes(
-                C_School_Type__c
-              )}`
+              `${Name}, ${ShippingStreet} ${ShippingPostalCode} ${ShippingCity} - ${C_School_Type__c.split(
+                ';'
+              )
+                .map(t => schoolTypes(t))
+                .join(', ')}`
             }
             onChange={onChangeAccount}
             renderInput={params => <TextField {...params} label={label} />}

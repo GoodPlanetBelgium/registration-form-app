@@ -22,6 +22,9 @@ interface SFAccount {
     | 'Secondary_School'
     | 'Higher_Education'
     | 'Adult_Education'
+    | 'Secondary_School_Specialized'
+    | 'Nursery_School_Specialized'
+    | 'Primary_School_Specialized'
   C_Type_of_Education__c?:
     | 'A-Stroom'
     | 'B-Stroom'
