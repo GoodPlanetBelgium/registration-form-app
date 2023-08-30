@@ -20,7 +20,9 @@ export default async function handler (
 
   const schoolTypeQ =
     typeof schoolType === 'string'
-      ? `+AND+C_School_Type__c+IN+('${schoolType.split(';').join(`','`)}')`
+      ? `+AND+C_School_Type__c+INCLUDES+('${schoolType
+          .split(';')
+          .join(`','`)}')`
       : ''
 
   const regionQ =
