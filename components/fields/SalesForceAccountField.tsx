@@ -181,7 +181,9 @@ const SalesForceAccountField: FC<SFFieldProps & FieldProps> = ({
             {account.ShippingPostalCode} {account.ShippingCity}
             <br />
             <b>{t('field.schoolType')}:</b>{' '}
-            {schoolTypes(account.C_School_Type__c)}
+            {account.C_School_Type__c.split(';')
+              .map(t => schoolTypes(t))
+              .join(', ')}
           </Paper>
           <SchoolSubform
             nameSpace='account'
