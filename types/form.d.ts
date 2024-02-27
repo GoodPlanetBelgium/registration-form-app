@@ -18,7 +18,6 @@ interface FormRegistration {
   groupContact: Contact
   dayOfWeekPreference: string[]
   monthPreference: string[]
-  questions: FormQuestion
 }
 
 interface FormAccount {
@@ -28,10 +27,7 @@ interface FormAccount {
 }
 
 interface FormWorkshop {
-  questions: FormQuestion
   registrations: FormRegistration[]
-  spSiteId?: string
-  spListId?: string
 }
 
 interface FormValues {

@@ -49,8 +49,6 @@ interface SFWorkshop extends SFTextFields {
   C_Max_Registrations_Per_School__c?: number
   C_Weekday_Preferences__c?: string
   C_Month_Preferences__c?: string
-  C_SharePoint_Site_Id__c?: string
-  C_SharePoint_List_Id__c?: string
 }
 
 interface SFInitiative extends SFTextFields {
@@ -65,26 +63,6 @@ interface SFInitiative extends SFTextFields {
   }
 }
 
-interface SFQuestionOption extends SFTextFields {
-  Id: SFId
-  Name: string
-  C_Order__c: number
-}
-
-interface SFQuestion extends SFTextFields {
-  Id: SFId
-  Name: string
-  C_Type__c: 'number' | 'text' | 'choice'
-  C_Required__c: boolean
-  C_Multiple__c: boolean
-  C_Question_Order__c: number
-  C_One_For_All__c: boolean
-  C_Initiative_Element__c: SFId
-  Question_Options__r: {
-    records: SFQuestionOption[]
-  }
-}
-
 interface SFPickListValues {
   controllerValues: {
     [key: string]: number
@@ -96,38 +74,3 @@ interface SFPickListValues {
     value: string
   }[]
 }
-
-// interface SFResult {
-//   registrations: {
-//     SalesForceId: SFId
-//     workshopId: SFId
-//     monthPreference: string
-//     groupSize: number
-//     groupName: string
-//     groupContact: {
-//       SalesforceId: SFId
-//       role: string
-//       lastName: string
-//       firstName: string
-//       email: string
-//     }
-//     dayOfWeekPreference: string[]
-//     copyApplicant: boolean
-//   }[]
-//   errors: string[]
-//   applicant: {
-//     SalesforceId: SFId
-//     role: string
-//     phone: string
-//     newsLetterDate: string
-//     newsLetter: boolean
-//     lastName: string
-//     firstName: string
-//     email: string
-//   }
-//   account: {
-//     Id: SFId
-//     schedule: string
-//     educationType: string[]
-//   }
-// }

@@ -17,10 +17,6 @@ declare global {
       REDIS_EXPIRY: number
       SCHOOL_CONTACT_RECORD_TYPE_ID: string
       SCHOOL_ACCOUNT_RECORD_TYPE_ID: string
-      MICROSOFT_GRAPH_HOST: string
-      MICROSOFT_TENANT_ID: string
-      MICROSOFT_CLIENT_ID: string
-      MICROSOFT_CLIENT_SECRET: string
     }
   }
 }

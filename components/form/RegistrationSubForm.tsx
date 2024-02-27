@@ -7,16 +7,14 @@ import SelectField from '../fields/SelectField'
 import TextField from '../fields/TextField'
 import Section from '../Section'
 import ContactSubForm from './ContactSubForm'
-import { Box, Grid } from '@mui/material'
-import FieldSwitch from '../fields/FieldSwitch'
+import { Grid } from '@mui/material'
 
 interface Props {
   nameSpace: string
   workshop: SFWorkshop
-  questions: SFQuestion[]
 }
 
-const RegistrationSubForm = ({ nameSpace, workshop, questions }: Props) => {
+const RegistrationSubForm = ({ nameSpace, workshop }: Props) => {
   const t = useTranslations('Form')
   const days = useTranslationsCategory('Days')
   const months = useTranslationsCategory('Months')
@@ -95,13 +93,6 @@ const RegistrationSubForm = ({ nameSpace, workshop, questions }: Props) => {
           </Grid>
         </Section>
       )}
-      {questions
-        .sort((a, b) => a.C_Question_Order__c - b.C_Question_Order__c)
-        .map((q, i) => (
-          <Box sx={{ my: 2 }} key={i}>
-            <FieldSwitch nameSpace={`${nameSpace}.questions`} question={q} />
-          </Box>
-        ))}
     </>
   )
 }

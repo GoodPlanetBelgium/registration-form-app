@@ -15,11 +15,10 @@ import { useRouter } from 'next/router'
 
 interface FormProps {
   initiative: SFInitiative
-  questions: SFQuestion[]
   onSubmit(values: FormValues): Promise<Response>
 }
 
-const SignUpForm = ({ onSubmit, initiative, questions }: FormProps) => {
+const SignUpForm = ({ onSubmit, initiative }: FormProps) => {
   const t = useTranslations('Form')
   const { locale } = useRouter()
 
@@ -43,8 +42,8 @@ const SignUpForm = ({ onSubmit, initiative, questions }: FormProps) => {
 
   return (
     <Formik
-      initialValues={initialValues(initiative, questions)}
-      validationSchema={validationSchema(t, initiative, questions)}
+      initialValues={initialValues(initiative)}
+      validationSchema={validationSchema(t, initiative)}
       onSubmit={beforeSubmit}
     >
       {({ values, errors, touched }) => {
@@ -84,9 +83,6 @@ const SignUpForm = ({ onSubmit, initiative, questions }: FormProps) => {
                 name={`workshops.${workshopId}`}
                 initiative={initiative}
                 workshopId={workshopId}
-                questions={questions.filter(
-                  q => q.C_Initiative_Element__c === workshopId
-                )}
                 component={WorkshopField}
               />
             ))}

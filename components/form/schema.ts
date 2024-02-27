@@ -11,36 +11,10 @@ const contactSchema = (t: TranslationType) => ({
     .required(t('field.required'))
 })
 
-const questionSchema = (t: TranslationType, questions: SFQuestion[]) =>
-  Yup.object(
-    questions.reduce((obj, q) => {
-      let schema
-      switch (q.C_Type__c) {
-        case 'number':
-          schema = Yup.number()
-        case 'text':
-          schema = Yup.string()
-        case 'choice':
-          if (q.C_Multiple__c) {
-            schema = Yup.array().of(Yup.string())
-          } else {
-            schema = Yup.string()
-          }
-      }
-      return {
-        ...obj,
-        [q.Name]: q.C_Required__c
-          ? schema?.required(t('field.required'))
-          : schema
-      }
-    }, {})
-  )
-
 const registrationsSchema = (
   t: TranslationType,
   id: string,
-  initiative: SFInitiative,
-  questions: SFQuestion[]
+  initiative: SFInitiative
 ) => {
   const workshop = initiative.Workshops__r.records.find(
     w => w.Id === id
@@ -64,8 +38,7 @@ const registrationsSchema = (
           'is-month-pref-required',
           t('field.required'),
           value => !workshop.C_Month_Preferences__c || !!value?.length
-        ),
-        questions: questionSchema(t, questions)
+        )
       })
     )
     .min(
@@ -82,11 +55,7 @@ const registrationsSchema = (
     )
 }
 
-const validationSchema = (
-  t: TranslationType,
-  initiative: SFInitiative,
-  questions: SFQuestion[]
-) => {
+const validationSchema = (t: TranslationType, initiative: SFInitiative) => {
   const workshopIds = initiative.Workshops__r.records.map(w => w.Id)
   return Yup.object({
     account: Yup.object({
@@ -120,20 +89,7 @@ const validationSchema = (
         (obj, id) => ({
           ...obj,
           [id]: Yup.object({
-            registrations: registrationsSchema(
-              t,
-              id,
-              initiative,
-              questions.filter(
-                q => !q.C_One_For_All__c && q.C_Initiative_Element__c === id
-              )
-            ),
-            questions: questionSchema(
-              t,
-              questions.filter(
-                q => q.C_One_For_All__c && q.C_Initiative_Element__c === id
-              )
-            )
+            registrations: registrationsSchema(t, id, initiative)
           })
         }),
         {}
@@ -145,10 +101,7 @@ const validationSchema = (
   })
 }
 
-const initialValues = (
-  initiative: SFInitiative,
-  questions: SFQuestion[]
-): FormValues => ({
+const initialValues = (initiative: SFInitiative): FormValues => ({
   account: {
     id: '',
     educationType: [],
@@ -168,15 +121,7 @@ const initialValues = (
       (obj, workshop) => ({
         ...obj,
         [workshop.Id]: {
-          questions: questions
-            .filter(
-              q =>
-                q.C_One_For_All__c && q.C_Initiative_Element__c === workshop.Id
-            )
-            .reduce((obj, q) => ({ ...obj, [q.Name]: '' }), {}),
-          registrations: [],
-          spSiteId: workshop.C_SharePoint_Site_Id__c,
-          spListId: workshop.C_SharePoint_List_Id__c
+          registrations: []
         }
       }),
       {}
@@ -185,18 +130,13 @@ const initialValues = (
   agreed: false
 })
 
-const registrationInitialValues = (
-  questions: SFQuestion[]
-): FormRegistration => ({
+const registrationInitialValues: FormRegistration = {
   groupName: '',
   groupSize: '',
   copyApplicant: false,
   groupContact: { firstName: '', lastName: '', email: '', role: '' },
   dayOfWeekPreference: [] as string[],
-  monthPreference: [] as string[],
-  questions: questions
-    .filter(q => !q.C_One_For_All__c)
-    .reduce((obj, q) => ({ ...obj, [q.Name]: '' }), {})
-})
+  monthPreference: [] as string[]
+}
 
 export { initialValues, registrationInitialValues, validationSchema }

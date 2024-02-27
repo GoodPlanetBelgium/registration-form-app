@@ -1,5 +1,4 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import AddIcon from '@mui/icons-material/Add'
 import DeleteIcon from '@mui/icons-material/Delete'
 import {
   Accordion,
@@ -23,19 +22,16 @@ import useTranslations from '../../lib/useTranslations'
 import RegistrationSubForm from '../form/RegistrationSubForm'
 import { registrationInitialValues } from '../form/schema'
 import getText from '../../lib/getText'
-import Section from '../Section'
 import FieldSwitch from './FieldSwitch'
 
 interface Props {
   initiative: SFInitiative
-  questions: SFQuestion[]
   workshopId: string
 }
 
 const WorkshopField: FC<Props & FieldProps> = ({
   field,
   initiative,
-  questions,
   workshopId,
   form: { touched, errors }
 }) => {
@@ -53,7 +49,7 @@ const WorkshopField: FC<Props & FieldProps> = ({
   const [activeTab, setActiveTab] = useState<number | false>(false)
 
   const addRegistration = (push: (obj: any) => void) => () => {
-    push(registrationInitialValues(questions))
+    push(registrationInitialValues)
     setActiveTab(registrations.length)
   }
 
@@ -123,7 +119,6 @@ const WorkshopField: FC<Props & FieldProps> = ({
                     <RegistrationSubForm
                       nameSpace={`${name}.registrations[${i}]`}
                       workshop={workshop}
-                      questions={questions.filter(q => !q.C_One_For_All__c)}
                     />
                     <Grid container spacing={2}>
                       <Grid item xs={12} sm={6} md={4}>
@@ -186,19 +181,6 @@ const WorkshopField: FC<Props & FieldProps> = ({
           )}
         </AccordionDetails>
       </Accordion>
-      {!!questions.length && (
-        <Paper sx={{ my: 4 }}>
-          <Typography variant='h2'>{t('questions.title')}</Typography>
-          {questions
-            .filter(q => q.C_One_For_All__c)
-            .sort((a, b) => a.C_Question_Order__c - b.C_Question_Order__c)
-            .map((q, i) => (
-              <Box sx={{ my: 2 }} key={i}>
-                <FieldSwitch nameSpace={`${name}.questions`} question={q} />
-              </Box>
-            ))}
-        </Paper>
-      )}
     </>
   )
 }

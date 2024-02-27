@@ -27,7 +27,7 @@ const InitiativePage: NextPage = () => {
   const { showBoundary } = useErrorBoundary()
 
   const initiativeFetch: {
-    result: { data: { questions: SFQuestion[]; initiative: SFInitiative } }
+    result: { data: { initiative: SFInitiative } }
     isLoading: boolean
     error?: any
   } = useFetch(code ? `/api/initiative/${code}` : null)
@@ -54,7 +54,7 @@ const InitiativePage: NextPage = () => {
     return <ErrorComponent message={initiativeFetch.error.message} />
 
   const {
-    data: { initiative, questions }
+    data: { initiative }
   } = initiativeFetch.result
 
   const onSubmit = async (values: FormValues): Promise<Response> => {
@@ -111,11 +111,7 @@ const InitiativePage: NextPage = () => {
                 />
               </Alert>
             )}
-            <Form
-              onSubmit={onSubmit}
-              initiative={filteredInitiative}
-              questions={questions}
-            />
+            <Form onSubmit={onSubmit} initiative={filteredInitiative} />
           </>
         )}
       </Layout>
