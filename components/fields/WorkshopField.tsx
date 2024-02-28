@@ -22,7 +22,6 @@ import useTranslations from '../../lib/useTranslations'
 import RegistrationSubForm from '../form/RegistrationSubForm'
 import { registrationInitialValues } from '../form/schema'
 import getText from '../../lib/getText'
-import FieldSwitch from './FieldSwitch'
 
 interface Props {
   initiative: SFInitiative
